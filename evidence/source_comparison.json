@@ -1,0 +1,263 @@
+{
+  "checked_at": "2026-10-13",
+  "portfolio_version": "0.1.0",
+  "source_repository": "https://github.com/Kimyubin357/Batteryflow-ML-Platform",
+  "source_commit": "8753ffd187f8fc9b465755e670efca7b3ab09ba4",
+  "sources": [
+    {
+      "path": "portfolio_notes/01_포트폴리오_핵심내용.md",
+      "file": "core_notes.md",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/01_%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4_%ED%95%B5%EC%8B%AC%EB%82%B4%EC%9A%A9.md",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/01_%ED%8F%AC%ED%8A%B8%ED%8F%B4%EB%A6%AC%EC%98%A4_%ED%95%B5%EC%8B%AC%EB%82%B4%EC%9A%A9.md",
+      "sha256": "1e7a5d333846a0699a078a1367b072ec030cb1e439612d64acebf874028887fb",
+      "git_blob_sha1": "64e421b646494048bbbfb4fe0c9efe1287390c47",
+      "bytes": 8769
+    },
+    {
+      "path": "portfolio_notes/evidence/baseline_comparison.json",
+      "file": "baseline_comparison.json",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/evidence/baseline_comparison.json",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/evidence/baseline_comparison.json",
+      "sha256": "c4c0782683bbc091ccd8cc2fd5afd4d42b3d50e6a08aebc4cc7ea373444ea245",
+      "git_blob_sha1": "1df091ecf6f67925521445eccb8ed36ac70a7d08",
+      "bytes": 4667
+    },
+    {
+      "path": "portfolio_notes/evidence/daily_error_sums.csv",
+      "file": "daily_error_sums.csv",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/evidence/daily_error_sums.csv",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/evidence/daily_error_sums.csv",
+      "sha256": "9f4780d99351a0d3745ce30a73ad0046dcdb1198fb84fae31a82f2405f9d5ccc",
+      "git_blob_sha1": "26370df74265b95199ffb1d1bfc0f0f36cd1f031",
+      "bytes": 533
+    },
+    {
+      "path": "portfolio_notes/evidence/ranking_audit.json",
+      "file": "ranking_audit.json",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/evidence/ranking_audit.json",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/evidence/ranking_audit.json",
+      "sha256": "278faf5b7d4bb481a3a9c63aa73f4a4e62e33785e7b85612ccb8fd0ac3b8df54",
+      "git_blob_sha1": "c45a1f5615e655afd260d53b510fd4b958418500",
+      "bytes": 2707
+    },
+    {
+      "path": "portfolio_notes/evidence/review_portfolio_evidence.py",
+      "file": "review_portfolio_evidence.py",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/evidence/review_portfolio_evidence.py",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/portfolio_notes/evidence/review_portfolio_evidence.py",
+      "sha256": "0f8f6c0c50499a01a7ff3274c23ada4bc5121bd7fb7f4798f6fa80f01d0abc70",
+      "git_blob_sha1": "8bfcfb1859e0e77169f2772f903b986060c94351",
+      "bytes": 6110
+    },
+    {
+      "path": "발주량 예측 모델/outputs/audited_v2/source_total/cv_metrics_by_fold.csv",
+      "file": "cv_metrics_by_fold.csv",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/cv_metrics_by_fold.csv",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/cv_metrics_by_fold.csv",
+      "sha256": "dfd671f883e8bd344acece7ebd413a9493dcb64a894c0fa3eb986ffadaf2e9d0",
+      "git_blob_sha1": "5e39bb62fc9405e3bb422402c84120ef361d82e4",
+      "bytes": 3926
+    },
+    {
+      "path": "발주량 예측 모델/outputs/audited_v2/source_total/cv_metrics_pooled.csv",
+      "file": "cv_metrics_pooled.csv",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/cv_metrics_pooled.csv",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/cv_metrics_pooled.csv",
+      "sha256": "9f2f0aece40261193fe43d2d5182cf215c815ef7930f45db490ebcc81c72374f",
+      "git_blob_sha1": "255cf41a7163659866c32724dfe56de4ce267dce",
+      "bytes": 1239
+    },
+    {
+      "path": "발주량 예측 모델/outputs/audited_v2/source_total/cv_predictions.csv",
+      "file": "cv_predictions.csv",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/cv_predictions.csv",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/cv_predictions.csv",
+      "sha256": "85b64ae20307305433a1786ff4c67317fe5ca35a12ad0c6dd9e52ff0620504f6",
+      "git_blob_sha1": "1e2ee6c2ce96df719a5249f72ac3b2b442f817f8",
+      "bytes": 229163
+    },
+    {
+      "path": "발주량 예측 모델/outputs/audited_v2/source_total/frozen_configurations.json",
+      "file": "frozen_configurations.json",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/frozen_configurations.json",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/frozen_configurations.json",
+      "sha256": "ea55e480d4493dda4036825a31ba7eb7336703b2992cdfc92e0ed717539d1e2a",
+      "git_blob_sha1": "255794fb2319759c3c9d6335c14e0156855665e8",
+      "bytes": 2855
+    },
+    {
+      "path": "발주량 예측 모델/outputs/audited_v2/source_total/split_audit.csv",
+      "file": "split_audit.csv",
+      "url": "https://raw.githubusercontent.com/Kimyubin357/Batteryflow-ML-Platform/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/split_audit.csv",
+      "github_url": "https://github.com/Kimyubin357/Batteryflow-ML-Platform/blob/8753ffd187f8fc9b465755e670efca7b3ab09ba4/%EB%B0%9C%EC%A3%BC%EB%9F%89%20%EC%98%88%EC%B8%A1%20%EB%AA%A8%EB%8D%B8/outputs/audited_v2/source_total/split_audit.csv",
+      "sha256": "ab48bcc236f70bf9eebc585e96c5ba3213f815967772bd148b4500ec23d14cc4",
+      "git_blob_sha1": "03acf7265c43dac30ef354ca2125661e390455ab",
+      "bytes": 757
+    }
+  ],
+  "method": "Recalculate nine pooled model metrics from saved CV forecasts; repeat paired target-day cluster bootstrap; no model training or service calls.",
+  "runtime": {
+    "numpy": "2.3.5"
+  },
+  "population": {
+    "rows": 1289,
+    "parts": 112,
+    "target_days": 12,
+    "folds": 3
+  },
+  "models": [
+    {
+      "model": "7-day Moving Average",
+      "N": 1289,
+      "Parts": 112,
+      "MAE": 34.660423362518,
+      "RMSE": 69.70488685341088,
+      "WAPE_pct": 35.70184250781981,
+      "prediction_precision": "float64",
+      "raw_csv_mae_delta": 0.0,
+      "eligible_for_ml_ranking": false,
+      "recalculated_metrics_match": true
+    },
+    {
+      "model": "LSTM",
+      "N": 1289,
+      "Parts": 112,
+      "MAE": 35.19420337531343,
+      "RMSE": 70.29744632581468,
+      "WAPE_pct": 36.25166066068324,
+      "prediction_precision": "float32 restored from CSV",
+      "raw_csv_mae_delta": -4.021645594320944e-08,
+      "eligible_for_ml_ranking": true,
+      "recalculated_metrics_match": true
+    },
+    {
+      "model": "3-day Moving Average",
+      "N": 1289,
+      "Parts": 112,
+      "MAE": 35.35065942591156,
+      "RMSE": 79.75789209606546,
+      "WAPE_pct": 36.41281764423845,
+      "prediction_precision": "float64",
+      "raw_csv_mae_delta": 0.0,
+      "eligible_for_ml_ranking": false,
+      "recalculated_metrics_match": true
+    },
+    {
+      "model": "Last Value",
+      "N": 1289,
+      "Parts": 112,
+      "MAE": 37.58494957331265,
+      "RMSE": 89.19208532031237,
+      "WAPE_pct": 38.71424005114272,
+      "prediction_precision": "float64",
+      "raw_csv_mae_delta": 0.0,
+      "eligible_for_ml_ranking": false,
+      "recalculated_metrics_match": true
+    },
+    {
+      "model": "XGBoost",
+      "N": 1289,
+      "Parts": 112,
+      "MAE": 40.99951851129809,
+      "RMSE": 91.83646918451807,
+      "WAPE_pct": 42.23140431601666,
+      "prediction_precision": "float32 restored from CSV",
+      "raw_csv_mae_delta": 7.798881540566072e-09,
+      "eligible_for_ml_ranking": true,
+      "recalculated_metrics_match": true
+    },
+    {
+      "model": "CatBoost",
+      "N": 1289,
+      "Parts": 112,
+      "MAE": 47.38369742343582,
+      "RMSE": 110.42158569158029,
+      "WAPE_pct": 48.8074044900182,
+      "prediction_precision": "float64",
+      "raw_csv_mae_delta": 0.0,
+      "eligible_for_ml_ranking": true,
+      "recalculated_metrics_match": true
+    },
+    {
+      "model": "LightGBM",
+      "N": 1289,
+      "Parts": 112,
+      "MAE": 53.07347734619071,
+      "RMSE": 121.37935322975272,
+      "WAPE_pct": 54.668141520888454,
+      "prediction_precision": "float64",
+      "raw_csv_mae_delta": 0.0,
+      "eligible_for_ml_ranking": true,
+      "recalculated_metrics_match": true
+    },
+    {
+      "model": "Related LightGBM",
+      "N": 1289,
+      "Parts": 112,
+      "MAE": 53.67923168794355,
+      "RMSE": 121.19196546635722,
+      "WAPE_pct": 55.292096568450724,
+      "prediction_precision": "float64",
+      "raw_csv_mae_delta": 0.0,
+      "eligible_for_ml_ranking": true,
+      "recalculated_metrics_match": true
+    },
+    {
+      "model": "D+3 Plan Reference",
+      "N": 1289,
+      "Parts": 112,
+      "MAE": 54.75640031031808,
+      "RMSE": 132.2304245713212,
+      "WAPE_pct": 56.40163017420489,
+      "prediction_precision": "float64",
+      "raw_csv_mae_delta": 0.0,
+      "eligible_for_ml_ranking": false,
+      "recalculated_metrics_match": true
+    }
+  ],
+  "lstm_best_eligible_ml_model": true,
+  "displayed_mae_matches": true,
+  "baseline": {
+    "relative_mae_reduction_pct": 36.70069039219379,
+    "ci95_relative_mae_reduction_pct": [
+      -13.590954274574088,
+      59.22377097144252
+    ],
+    "bootstrap_seed": 42,
+    "bootstrap_repetitions": 20000,
+    "without_fold_1_relative_mae_reduction_pct": -16.399495629319482,
+    "all_folds_and_leave_one_fold_out_match": true,
+    "input_and_original_script_hashes_match": true
+  },
+  "split_audit_time_boundaries_match": true,
+  "existing_evidence": [
+    {
+      "file": "baseline_comparison.json",
+      "semantic_match": true,
+      "byte_match": false,
+      "local_sha256": "eba92e61fe7a536bb9baac9b4fa44bb32d5c2915d708a9e147fa0943ede77645",
+      "github_sha256": "c4c0782683bbc091ccd8cc2fd5afd4d42b3d50e6a08aebc4cc7ea373444ea245",
+      "normalized_newlines_match": true
+    },
+    {
+      "file": "ranking_audit.json",
+      "semantic_match": true,
+      "byte_match": false,
+      "local_sha256": "528b7c58272b4e6883bfa2b7bbce38d8dff86e8a4b111ed828a64d8e914e39b5",
+      "github_sha256": "278faf5b7d4bb481a3a9c63aa73f4a4e62e33785e7b85612ccb8fd0ac3b8df54",
+      "normalized_newlines_match": true
+    }
+  ],
+  "ranking": {
+    "github_json_matches": true,
+    "raw_gap_arithmetic_and_top_seven_order_match": true,
+    "raw_part_60_66_exact_tie": true,
+    "backend_execution_performed": false
+  },
+  "limitations": [
+    "Metrics and bootstrap are recalculations of saved forecasts, not retraining.",
+    "The bootstrap does not adjust for serial dependence or model selection optimism.",
+    "Raw-data preprocessing and the 107-row backend ranking universe were not independently regenerated."
+  ],
+  "training_performed": false
+}

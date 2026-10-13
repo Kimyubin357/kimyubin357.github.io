@@ -1,0 +1,17 @@
+* text=auto eol=lf
+*.html text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.md text eol=lf
+VERSION text eol=lf
+*.py text eol=lf
+*.ps1 text eol=crlf
+*.cmd text eol=crlf
+# Keep evidence bytes intact for SHA-256 provenance checks.
+evidence/*.csv -text whitespace=cr-at-eol
+evidence/*.json -text whitespace=cr-at-eol
+# Preserve the bundled font license's original whitespace.
+assets/SUIT-LICENSE.txt whitespace=-blank-at-eol
+*.png binary
+*.jpg binary
+*.woff2 binary
