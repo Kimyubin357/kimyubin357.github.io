@@ -2,7 +2,7 @@
 
 프로젝트를 계속 추가할 수 있는 정적 포트폴리오 사이트. 기존 Dash·FastAPI·Firebase 실행과 독립적이다.
 
-현재 버전은 **0.3.5 (2026-10-15)**이다. BatteryFlow AI·부산 심야약국·제조 전력 예측을 대표 프로젝트로 소개한다. 포트폴리오 사이트 자체는 아직 배포하지 않았으며, 연결된 대시보드의 배포와 구분한다.
+현재 버전은 **0.3.5 (2026-10-15)**이다. BatteryFlow AI·부산 심야약국·제조 전력 예측을 대표 프로젝트로 소개한다. 포트폴리오 공개 주소는 https://kimyubin357.github.io/ 이며, 연결된 대시보드와 별도의 GitHub Pages 사이트다.
 
 버전의 기준은 `VERSION`이다. 릴리스 시 이 파일, HTML의 CSS·JS `?v=` 값, 이 문서와 `design/SPEC.md`의 현재 버전을 함께 갱신한다. `design/QA.md`는 버전별 검증 이력을 보존한다. 구현 기준은 [SPEC](design/SPEC.md), 검증 결과는 [QA](design/QA.md), 수치 출처는 [근거 자료 안내](evidence/README.md)에 정리했다.
 
@@ -48,7 +48,7 @@ YouTube IFrame API로 영상 구역이 화면에 45% 이상 보이면 35~59초 �
 
 운영용 비밀 키·Firebase SDK·이력서의 주소·전화·생년월일은 포함하지 않는다. 2026-10-13 사용자 요청으로 배포된 BatteryFlow AI(Cloud Run, https://batteryflow-u6lb5fm2vq-du.a.run.app/login)를 메인 대표 카드의 "라이브 서비스"와 상세 페이지의 "라이브 서비스 열기" 버튼으로 연결했다(`projects.js`의 `demo`). 같은 날 사용자 요청으로 체험 계정(`projects.js`의 `demoAccount`)을 메인 카드와 상세 페이지에 표시한다. 비밀번호는 화면에서 가려지고 눈 아이콘으로 볼 수 있으나, 페이지 소스에는 그대로 있으므로 공개 계정으로 취급한다. 브라우저 인쇄용 최소 스타일은 있지만 최종 PDF 편집본은 아니다.
 
-나중에 GitHub Pages를 사용할 때 공개용 파일은 HTML, CSS, JS(projects.js 포함), assets, evidence이며 상대 경로이므로 하위 저장소 경로에서도 동작한다. 배포는 별도 확인 후 진행한다.
+나중에 GitHub Pages를 사용할 때 공개용 파일은 HTML, CSS, JS(projects.js 포함), assets, evidence이며 상대 경로이므로 하위 저장소 경로에서도 동작한다. GitHub Pages는 `main` 브랜치의 루트(`/`)를 게시한다. `.nojekyll`로 정적 파일을 그대로 제공하며, `main`에 푸시하면 자동으로 갱신된다.
 
 ## 부산 심야약국 추가 · 2026-10-14
 
@@ -99,3 +99,7 @@ BatteryFlow 첫 화면에 최종 ERP 발주 계획량이라는 대상, 기간별
 ## v0.3.5 상단 메뉴 순서 정리 · 2026-10-15
 
 메인·세 프로젝트·새 프로젝트 템플릿의 상단 메뉴를 실제 본문 순서인 인터뷰 → 프로젝트 → 소개 → 연락으로 통일했다. 작은 모바일에서도 인터뷰를 숨기지 않고 네 메뉴를 표시하며, 기존 글꼴·색상·본문 순서는 유지한다.
+
+## GitHub Pages · 2026-10-15
+
+기존 `Portfolio` 저장소는 커밋 기록을 유지한 채 `kimyubin357.github.io`로 이름을 변경했다. 공식 주소는 https://kimyubin357.github.io/ 이다. 사이트 수정 후 `git push origin main`을 실행하면 Pages가 자동으로 새 버전을 게시한다.

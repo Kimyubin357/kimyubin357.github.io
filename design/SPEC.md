@@ -49,7 +49,7 @@
 
 ## 저장소와 배포
 
-이 폴더는 BatteryFlow와 별개의 Git 저장소다. 첫 커밋은 main 브랜치에 기록한다. 배포 시 공개 파일은 index.html·batteryflow.html·busan-night-pharmacy.html·styles.css·site.js·projects.js·busan-night-pharmacy.css·busan-night-pharmacy.js·assets·evidence다. 템플릿, 로컬 도구 설정, design의 과거 기록은 배포 대상에서 제외한다. 배포 목적지는 정해지지 않았으며 별도 요청 시 진행한다.
+이 폴더는 BatteryFlow와 별개의 Git 저장소다. 첫 커밋은 main 브랜치에 기록한다. 배포 시 공개 파일은 index.html·batteryflow.html·busan-night-pharmacy.html·styles.css·site.js·projects.js·busan-night-pharmacy.css·busan-night-pharmacy.js·assets·evidence다. 템플릿, 로컬 도구 설정, design의 과거 기록은 배포 대상에서 제외한다. 대표 사이트 주소는 https://kimyubin357.github.io/ 이다. 저장소 `Kimyubin357/kimyubin357.github.io`의 `main` 브랜치 루트(`/`)를 게시하며 `.nojekyll`로 정적 파일을 그대로 제공한다.
 
 ## 부산 심야약국 상세 페이지
 
