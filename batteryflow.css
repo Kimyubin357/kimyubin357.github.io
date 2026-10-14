@@ -1,0 +1,39 @@
+/* BatteryFlow reuses the site's SUIT, colors and case-study layout. */
+.battery-scope{font-size:17px;line-height:1.85;color:var(--muted);margin-block:18px 0}
+.battery-scope strong{color:var(--ink)}
+.battery-role-lines{margin-block:18px 22px;font-size:15px;line-height:1.75}
+.battery-role-lines>div{display:grid;grid-template-columns:76px minmax(0,1fr);gap:12px;margin-top:8px}
+.battery-role-lines dt{font-weight:750;color:var(--ink)}
+.battery-role-lines dd{min-width:0;color:var(--muted);overflow-wrap:anywhere}
+.battery-case .battery-evaluation{border-left:3px solid var(--blue);background:var(--soft);padding:18px 20px;border-radius:10px;font-size:15px;line-height:1.85;margin-block:22px}
+.battery-evaluation strong{color:var(--blue)}
+.battery-evaluation span{display:block;margin-top:8px;color:var(--muted)}
+.battery-main-figure{margin-bottom:28px}
+.battery-case .battery-main-figure .case-cover-caption{margin-bottom:10px}
+.battery-original-link{font-size:14px;margin-top:12px}
+.battery-mobile-crops{display:none}
+.battery-case .disclosures{grid-template-columns:minmax(0,1fr)}
+.battery-case .disclosures details,.battery-case .disclosures details>div{min-width:0}
+.battery-case .disclosures p{overflow-wrap:anywhere}
+.battery-case .table-wrap{max-width:100%}
+.battery-case .table-wrap:focus-visible,.battery-crop-scroll:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.battery-case .supporting-figure figcaption{margin-top:12px}
+.battery-crop{display:block;position:relative;aspect-ratio:var(--bf-ratio);overflow:hidden;border:1px solid var(--line);border-radius:14px;background:#fff;min-width:0}
+.battery-case .battery-crop img{position:absolute;max-width:none;width:var(--bf-image-width);height:auto;left:var(--bf-image-left);top:var(--bf-image-top);margin:0;border:0;border-radius:0}
+.battery-crop:focus-visible{outline:2px solid var(--blue);outline-offset:4px}
+.battery-crop-scroll{overflow-x:auto;max-width:100%;border-radius:14px;border:1px solid var(--line);background:white;scrollbar-gutter:stable}
+.battery-case .battery-pan-image{width:640px;border:0;border-radius:0}
+.battery-case .battery-figure-intro{font-size:16px;font-weight:750;line-height:1.7;color:var(--ink);margin-bottom:12px}
+.battery-case .battery-crop-summary{font-size:15px;line-height:1.85;margin-bottom:14px}
+.battery-case .battery-pan-hint{font-size:13px;color:var(--muted);line-height:1.8;margin-top:10px}
+@media(max-width:760px){
+ .battery-role-lines{font-size:14px}
+ .battery-role-lines>div{grid-template-columns:65px minmax(0,1fr);gap:9px}
+ .battery-scope{font-size:16px}
+ .battery-case .battery-evaluation{padding:16px;font-size:14.5px}
+ .battery-case .battery-full-image{display:none!important}
+ .battery-mobile-crops{display:block}
+ .battery-mobile-crops>.battery-crop+.battery-crop{margin-top:12px}
+ .battery-mobile-crops+.case-cover-caption,.battery-mobile-crops+figcaption{margin-top:14px}
+}
+@media print{.battery-case .battery-full-image{display:block!important}.battery-mobile-crops{display:none}.battery-role-lines,.battery-evaluation{break-inside:avoid}}

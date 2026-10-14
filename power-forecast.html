@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="김유빈의 제조 전력 분석 사례. 울산 기상 시차·반복 프로파일 발견에서 검증 기준을 보완하고, Q1 → Q2·LSTM → Q3 → 제출 대표 Q2의 판단과 팀원 접근·AI 구현을 구분했습니다.">
+  <title>제조 전력 예측과 피크 사전경보 | 김유빈 포트폴리오</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/SUIT-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=0.3.4">
+  <link rel="stylesheet" href="power-forecast.css?v=0.3.4">
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
+  <script src="site.js?v=0.3.4" defer onerror="document.documentElement.classList.remove('js')"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="./" aria-label="김유빈 포트폴리오 처음으로">김유빈<span aria-hidden="true"></span></a>
+    <nav aria-label="주 메뉴"><a href="./#work">프로젝트</a><a href="./#interview">인터뷰</a><a href="./#about">소개</a><a href="./#contact">연락</a></nav>
+  </div></header>
+
+  <main class="case container power-case" id="main">
+    <a class="text-link back-link" href="./#work"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> 포트폴리오로 돌아가기</a>
+    <article>
+<header class="case-header">
+<p class="eyebrow" data-reveal>Case Study · 제조 데이터 분석</p>
+<h1 data-reveal>제조 전력 예측과<br>피크 사전경보</h1>
+<p class="case-headline" data-reveal>기상의 시차를 찾아, 예측 입력의 시간 기준을 검증했습니다.</p>
+<ul class="case-meta" aria-label="프로젝트 정보" data-reveal><li>2026.10.02–10.08</li><li>점프업 · 3인 팀</li><li>팀장 · 데이터 분석·검증</li></ul>
+<dl class="power-role-lines" aria-label="역할과 구현 범위" data-reveal>
+<div><dt>직접 담당</dt><dd>변수·근무 리듬 분석, 울산 기상 대조·시차 검증, 평가 기준·모델 선택 판단, 팀 결과 통합·AI 교차검토</dd></div>
+<div><dt>팀원 참고</dt><dd>권동현: 접근법을 참고해 재실험 · 고도현: 분석 결과·보고서 형식 비교</dd></div>
+<div><dt>AI 지원</dt><dd>Codex·Claude Code 지원으로 코드 작성·학습·집계·그림 구현</dd></div>
+</dl>
+<ul class="power-overview" aria-label="개인 분석과 공동 결과 핵심 요약" data-reveal>
+<li><span class="power-source-label">본인 주도 · 기상 조사</span><strong>99.84% 일치</strong><p>울산 공식 기온·습도·풍속<br>6,107 / 6,117행</p><small>자료 확보·검증 주도, 계산은 AI 협업</small></li>
+<li><span class="power-source-label">본인 질문 · 공동 검증</span><strong>255일 중<br>140개 패턴</strong><p>반복된 하루 전력 모양 확인<br>새 프로파일의 오차 별도 평가</p><small>작업 리듬·데이터 반복 가설에서 출발</small></li>
+<li><span class="power-source-label">공동 결과 · 9월 회고</span><strong>6.311 → 5.988</strong><p>Q1 → Q2 전체 MAE</p><small class="power-caution">고전력 MAE 7.211 → 7.295<br>개발 교체 조건 미충족</small></li>
+</ul>
+<div class="case-actions" data-reveal><a class="button" href="#my-analysis">내 분석 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a><a class="button ghost" href="#troubleshooting">트러블 슈팅 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a></div>
+<p class="power-dateline">제6회 K-인공지능 제조데이터 분석 경진대회 ⑤번 제공 과제 · 2021년 데이터 · 9월은 회고 평가</p>
+</header><section class="case-section" id="my-analysis" aria-labelledby="my-analysis-title"><h2 data-reveal id="my-analysis-title"><span class="step-number">01</span> 울산 관측과 대조해 기상의 시차를 찾았습니다.</h2><div class="case-content">
+<p class="power-source-label">본인 주도 · 자료 대조와 검증 설계 / 계산·시각화는 AI 협업</p>
+<p>기상 결측 보완을 제안한 뒤 온습도와 전력의 관계까지 탐색했습니다. 비슷한 기상 기록으로 관측소 후보를 찾자는 아이디어를 제시하고, 공식 API 자료를 확보해 <strong>울산 ASOS 152</strong>의 기온·습도·풍속과 대조했습니다.</p>
+<ol class="power-reasoning" aria-label="기상 발견에서 판단과 적용까지">
+<li><strong>발견</strong><span>5월 22일부터 원자료 기상이 공식 관측보다 한 시간 앞선 행에 붙어 있었습니다. 지속되는 시차와 산발적 불일치를 구분했습니다.</span></li>
+<li><strong>판단</strong><span><strong>과거 기록처럼 보이는 행에 예측 당시 알 수 없던 기상값이 들어 있었습니다.</strong> 행 번호 대신 공식 관측 시각으로 입력의 가용성을 다시 확인했습니다.</span></li>
+<li><strong>적용</strong><span>공식 시각 대조 결과와 입력 코드를 근거로 Claude Code의 누출 지적을 Codex와 교차검토했습니다. <strong>이전 1시간 최대값 모델의 원자료 기상 묶음을 제외해 재실행</strong>했고, 15분 모델은 공식 관측·가용 시각으로 연결했습니다.</span></li>
+</ol><figure class="power-figure"><a class="power-image-link" href="assets/power-forecast/04_weather_alignment.png" target="_blank" rel="noopener noreferrer" aria-label="5월 22일 전후 날짜별로 가장 잘 맞는 울산 공식 관측 시각의 대응 원본 확대"><img src="assets/power-forecast/04_weather_alignment.png" width="2560" height="950" alt="5월 22일 전후 날짜별로 가장 잘 맞는 울산 공식 관측 시각의 대응" loading="lazy"></a><figcaption>날짜별 대응 시차입니다. 5월 22일부터 원자료 t시가 공식 t+1시 관측과 가장 잘 맞았습니다. 본인은 시차 가설과 자료 대조를 주도했고, AI가 일치율을 계산했습니다.<span class="power-enlarge">그림을 선택하면 원본을 확대할 수 있습니다.</span></figcaption></figure><div class="table-wrap" tabindex="0" aria-label="기상 시각 대응 전후 비교"><table><caption>원래 기온·습도·풍속 비교 · 보간값 제외</caption><thead><tr><th scope="col">원자료 시각</th><th scope="col">일치하는 공식 관측</th><th scope="col">일치 행</th></tr></thead><tbody><tr><th scope="row">5/21까지 t시</th><td>같은 날 t시</td><td>3,378 / 3,384</td></tr><tr><th scope="row">5/22부터 t시</th><td>t+1시</td><td>2,729 / 2,733</td></tr></tbody></table></div>
+<p class="section-note">15분 실험은 공식 관측 후 1시간부터 사용 가능하다고 가정했습니다. 실제 API 공개 지연을 검증한 값은 아닙니다. 풍속 결측 3행은 동시 비교에서 제외했고 불일치 10행을 남겼습니다. 과거 모델의 수정 범위는 1시간 최대값 모델이며 공장 위치·전력 구간의 실제 시각 정의는 미확인입니다.</p>
+</div></section>
+<section class="case-section" id="rhythm-analysis" aria-labelledby="rhythm-analysis-title"><h2 data-reveal id="rhythm-analysis-title"><span class="step-number">02</span> 작업 리듬과 데이터 반복을 나눠 검증했습니다.</h2><div class="case-content">
+<p class="power-source-label">본인 질문·가설 검증 / 정밀 집계·그림은 AI 협업</p>
+<p>“매주 비슷한 전력 흐름은 사람의 작업 리듬일까, 데이터를 반복한 것일까?”라는 질문에서 시작했습니다. <strong>근무 리듬과 완전히 같은 수치의 반복을 나누어 확인</strong>했습니다.</p>
+<h3 class="power-subheading">① 작업 리듬을 수치로 확인</h3><figure class="power-figure"><a class="power-image-link" href="assets/power-forecast/03_work_rhythm.png" target="_blank" rel="noopener noreferrer" aria-label="평일 시간별 전력 중앙값·사분위 범위와 생산량 중앙값, 12시·17시 구간 표시 원본 확대"><img src="assets/power-forecast/03_work_rhythm.png" width="2560" height="950" alt="평일 시간별 전력 중앙값·사분위 범위와 생산량 중앙값, 12시·17시 구간 표시" loading="lazy"></a><figcaption>평일 181일의 전력과 생산량을 별도 축 영역에 표시했습니다. 12시 전력이 11·13시 평균보다 낮은 날은 176일, 감소율 중앙값은 37.0%입니다. 식사·휴게·교대는 가능한 해석이며 실제 근무표는 없습니다.<span class="power-enlarge">그림을 선택하면 원본을 확대할 수 있습니다.</span></figcaption></figure><h3 class="power-subheading">② 완전히 같은 하루를 발견하고 채점 기준 보완</h3>
+<ol class="power-reasoning" aria-label="반복 발견에서 검증 기준 전환까지">
+<li><strong>발견</strong><span>AI 집계로 완전한 <strong>255일 중 140개 고유 전력 패턴</strong>을 확인했습니다. 96개 전력값이 모두 같은 날짜 쌍은 302개였고, 그중 178쌍은 생산량이 달랐습니다.</span></li>
+<li><strong>판단</strong><span>6월 30일 중 28일이 이전 학습 기간에 등장한 패턴이었습니다. 전체 오차만 보면 처음 보는 날의 성능을 과대평가할 수 있다는 팀·AI의 검토를 수용했습니다.</span></li>
+<li><strong>적용</strong><span>전체 오차와 함께 <strong>학습에 없던 프로파일의 MAE·고전력 MAE</strong>를 비교했습니다. 반복 여부는 사후 채점용이며 미래 예측 입력에는 넣지 않았습니다.</span></li>
+</ol><figure class="power-figure"><a class="power-image-link" href="assets/power-forecast/02_repeated_profiles.png" target="_blank" rel="noopener noreferrer" aria-label="개발 월의 이전 학습 기간과 같은 전력 프로파일과 처음 등장한 프로파일 분포 원본 확대"><img src="assets/power-forecast/02_repeated_profiles.png" width="2560" height="950" alt="개발 월의 이전 학습 기간과 같은 전력 프로파일과 처음 등장한 프로파일 분포" loading="lazy"></a><figcaption>5월은 31일 중 17일, 6월은 30일 중 28일이 이전 학습 기간의 전력 프로파일과 같았습니다. 7월의 완전한 29일에는 같은 프로파일이 없었습니다. 본인의 반복 질문 → AI 집계 → 팀·AI 검토 → 신규 프로파일 별도 평가로 이어졌습니다.<span class="power-enlarge">그림을 선택하면 원본을 확대할 수 있습니다.</span></figcaption></figure><h3 class="power-subheading">③ 기상 시차를 전력에도 적용할지 교차검증</h3>
+<p>기상 시차가 전력·생산에도 적용되는지 확인하기 위해 <strong>5월 22일 앞뒤 28일의 월~금 각 20일</strong>을 비교했습니다.</p><figure class="power-figure"><a class="power-image-link" href="assets/power-forecast/lunch_comparison.png" target="_blank" rel="noopener noreferrer" aria-label="5월 22일 전후 시간 평균 전력의 중앙값과 사분위 범위 비교, 두 기간 모두 12시 저점과 13시 회복 원본 확대"><img src="assets/power-forecast/lunch_comparison.png" width="1700" height="1020" alt="5월 22일 전후 시간 평균 전력의 중앙값과 사분위 범위 비교, 두 기간 모두 12시 저점과 13시 회복" loading="lazy"></a><figcaption>시간 평균 전력만 비교한 그림입니다. 4/24–5/21 대 5/22–6/18의 월~금 각 20일이며, 11·12·13시 중 12시가 유일한 최저인 날은 전 19/20일·후 20/20일입니다.<span class="power-enlarge">그림을 선택하면 원본을 확대할 수 있습니다.</span></figcaption></figure><blockquote class="decision"><strong>기상의 시차를 전력·생산 열에 일괄 적용하지 않았습니다.</strong><p>전후 모두 기록된 12시 저점과 13시 회복이 유지됐고 저녁 리듬도 같았습니다. 모든 열을 1시간 이동할 근거는 얻지 못했습니다. 실제 전력 구간의 시작·완료 시각을 확정한 결과는 아닙니다.</p></blockquote>
+<div class="disclosures power-inline-disclosures"><details><summary>저녁 패턴으로 같은 판단을 추가 확인</summary><div><figure class="power-figure"><a class="power-image-link" href="assets/power-forecast/evening_comparison.png" target="_blank" rel="noopener noreferrer" aria-label="5월 22일 전후 17시 전력 감소·18시 반등과 19→20시 생산량 변화 원본 확대"><img src="assets/power-forecast/evening_comparison.png" width="1700" height="1360" alt="5월 22일 전후 17시 전력 감소·18시 반등과 19→20시 생산량 변화" loading="lazy"></a><figcaption>동일한 전후 20평일 비교입니다. 전력과 생산량은 별도 축 영역에 표시했습니다. 17시가 16·18시 평균보다 낮은 날은 전 19/20일·후 20/20일입니다.<span class="power-enlarge">그림을 선택하면 원본을 확대할 수 있습니다.</span></figcaption></figure><p>17시 하락·18시 반등과 19→20시 생산 급감이 같은 기록 시간에 유지됐습니다. 두 비교 모두 공휴일을 별도 제외하지 않았으며 선은 중앙값, 음영은 사분위 범위입니다.</p></div></details></div>
+</div></section>
+<section class="case-section" id="model-results" aria-labelledby="model-results-title"><h2 data-reveal id="model-results-title"><span class="step-number">03</span> 실험을 비교하고 제출 대표 Q2를 선택했습니다.</h2><div class="case-content">
+<div id="troubleshooting" class="power-troubleshooting">
+<p class="power-source-label">본인: 평가 기준·선택 판단 / 팀원: 유사일·잔차 접근 / AI: 구현·학습·집계</p>
+<p>저는 <strong>학습에 없던 패턴과 고전력 오차를 함께 평가</strong>하고, 경보의 지속시간·발생 횟수를 모두 검토하도록 기준을 정리했습니다. 권동현 님의 유사일·잔차 접근은 발행 당시 관측 가능한 정보만 쓰는 조건으로 다시 비교했습니다.</p>
+<ol class="power-experiment-path" aria-label="모델 실험과 최종 선택 네 단계">
+<li><a href="#stage-q1"><span>01 · 기준</span><strong>Q1</strong><small>유사일 + 잔차 기준선</small></a></li>
+<li><a href="#stage-q2"><span>02 · 확장 비교</span><strong>Q2 · LSTM</strong><small>입력·모델·혼합 비교</small></a></li>
+<li><a href="#stage-q3"><span>03 · 고전력 개선</span><strong>Q3</strong><small>가중 잔차 후보 통과</small></a></li>
+<li class="is-final"><a href="#stage-final"><span>04 · 대표 선택</span><strong>제출 대표 Q2</strong><small>9월 회고를 포함한 판단</small></a></li>
+</ol>
+<p class="power-validation"><strong>평가 순서</strong> 5~7월 개발 → 1~7월 최종 학습 → 8월 경보 보정 → 9월 회고</p>
+<ol class="power-stage-grid" aria-label="단계별 문제, 개선 시도, 검증 결과와 선택 이유"><li class="power-stage" id="stage-q1"><div class="power-stage-heading"><span class="power-stage-number">01</span><h3>Q1 · 비교 기준</h3></div><p class="power-stage-status">기준 모델로 유지</p><dl><div><dt>문제</dt><dd>팀원의 접근을 우리 발행 시점 조건에서 검증할 기준이 필요했습니다.</dd></div><div><dt>시도</dt><dd>직접 예측과 유사일·잔차 예측을 50:50으로 혼합했습니다.</dd></div><div><dt>검증</dt><dd>신규 프로파일 개발 MAE <strong>6.632</strong>.</dd></div><div><dt>판단</dt><dd>관측 완료 정보만 쓰는 HGB 혼합을 비교 기준으로 유지했습니다.</dd></div></dl></li><li class="power-stage" id="stage-q2"><div class="power-stage-heading"><span class="power-stage-number">02</span><h3>Q2·LSTM · 확장 비교</h3></div><p class="power-stage-status">Q2 교체 조건 미충족 · LSTM 미채택</p><dl><div><dt>문제</dt><dd>아침·점심 후 큰 오차를 줄일 후보가 필요했습니다.</dd></div><div><dt>시도</dt><dd>재가동 정보·LightGBM 혼합과 LSTM을 비교했습니다.</dd></div><div><dt>검증</dt><dd>Q2 신규 프로파일 MAE <strong>0.12% 개선</strong>, 고전력 MAE <strong>14.83% 악화</strong>.</dd></div><div><dt>판단</dt><dd>Q2는 교체 조건을 충족하지 못했고, LSTM도 신규 프로파일 개발 오차가 더 컸습니다.</dd></div></dl></li><li class="power-stage" id="stage-q3"><div class="power-stage-heading"><span class="power-stage-number">03</span><h3>Q3 · 고전력 개선</h3></div><p class="power-stage-status">고전력 후보 보호 조건 통과</p><dl><div><dt>문제</dt><dd>Q2의 고전력 오차는 개선되지 않았습니다.</dd></div><div><dt>시도</dt><dd>고전력 표본의 학습 가중치를 2배로 둔 잔차 모델을 비교했습니다.</dd></div><div><dt>검증</dt><dd><strong>Q1 대비</strong> 신규 프로파일 고전력 MAE <strong>14.22% 감소</strong>.</dd></div><div><dt>판단</dt><dd>개발 전체 MAE는 2.26% 증가했지만 전체·신규 프로파일 MAE의 5% 악화 제한을 통과했습니다.</dd></div></dl></li><li class="power-stage" id="stage-final"><div class="power-stage-heading"><span class="power-stage-number">04</span><h3>제출 대표 모델: Q2</h3></div><p class="power-stage-status">9월 회고까지 고려한 선택</p><dl><div><dt>문제</dt><dd>전체 오차는 Q2, 고전력 오차는 Q3가 더 낮았습니다.</dd></div><div><dt>비교</dt><dd>전체 정확도와 큰 오차 발생 건수를 함께 봤습니다.</dd></div><div><dt>검증</dt><dd>9월 Q2/Q3 MAE <strong>5.988 / 6.622</strong>, 오차 50 초과 <strong>13 / 21건</strong>.</dd></div><div><dt>판단</dt><dd>전체·큰 오차 부담을 고려해 Q2를 제출 대표로 정하고 Q3 결과도 남겼습니다.</dd></div></dl></li></ol></div>
+<p class="section-note">9월 고전력 기준은 1~7월 학습값 상위 10%인 169 이상입니다. 개발에서는 각 월 이전 학습분포의 상위 10%를 사용했습니다. 실제 1,344개 구간 × 4개 예측 거리 = 5,376행을 동일하게 비교했습니다. 전력 단위는 원자료 수치입니다.</p>
+<div class="power-metric-grid" aria-label="9월 Q1 대비 Q2 성능과 한계 요약">
+<div><span>전체 MAE · 감소</span><strong>6.311 → 5.988</strong><p>Q1 대비 Q2 · 약 5.12% 감소<br>오차 50 초과 27 → 13건</p></div>
+<div class="has-limit"><span>고전력 MAE · 증가</span><strong>7.211 → 7.295</strong><p>고전력 구간에서는 오차 증가<br>전체 MAE 개선과 함께 공개</p></div></div>
+<p class="power-limit"><strong>개발 조건 미충족 → 회고 선택 → 새 기간 검증 필요.</strong> Q2는 Q1 대비 사전 개발 교체 조건을 충족하지 못했습니다. 이미 탐색한 9월의 전체·큰 오차 부담을 보고 제출 대표로 선택했습니다. 독립 시험이 아니므로 새 기간의 검증이 필요합니다.</p><p class="section-note">오차 50 초과는 원자료 수치로 정한 사후 설명 기준입니다.</p><figure class="power-figure"><a class="power-image-link" href="assets/power-forecast/06_model_comparison.png" target="_blank" rel="noopener noreferrer" aria-label="공동 실험의 Q1·Q2·Q3·LSTM 전체 MAE와 고전력 MAE 비교 원본 확대"><img src="assets/power-forecast/06_model_comparison.png" width="2560" height="950" alt="공동 실험의 Q1·Q2·Q3·LSTM 전체 MAE와 고전력 MAE 비교" loading="lazy"></a><figcaption>9월 회고 평가에서 전체 오차는 Q2, 고전력 오차는 Q3가 더 낮았습니다. Q2·LSTM은 같은 확장 단계에서 비교했고, 이후 Q3를 실험했습니다. 수치는 개인 단독 성과가 아닌 공동 실험 결과입니다.<span class="power-enlarge">그림을 선택하면 원본을 확대할 수 있습니다.</span></figcaption></figure><div class="disclosures power-inline-disclosures"><details><summary>개발 수치·모델 설정·예측 시간 가정</summary><div>
+<p><strong>개발 지표:</strong> Q1 → Q2의 신규 프로파일 MAE는 6.632 → 6.624, 신규 프로파일 고전력 MAE는 11.812 → 13.563입니다. LSTM 단독 후보의 신규 프로파일 MAE는 8.120이며 LSTM과 트리 예측을 섞은 후보도 미채택했습니다.</p>
+<p><strong>사전 교체 기준:</strong> 신규 프로파일 MAE가 1% 이상 개선되고, 전체 MAE와 신규 프로파일 고전력 MAE가 각각 5% 넘게 악화되지 않아야 했습니다.</p>
+<p><strong>Q3 비교 기준은 Q1입니다.</strong> 신규 프로파일 고전력 MAE는 11.812 → 10.132, 개발 전체 MAE는 6.488 → 6.635입니다. 신규 프로파일과 전체 개발 MAE는 서로 다른 집계입니다.</p>
+<p><strong>본인 판단:</strong> 신규 프로파일·고전력 평가를 함께 보고 전체 오차와 경보 부담도 보호하도록 비교 범위를 정리했습니다. <strong>팀원 참고:</strong> 권동현의 유사일·잔차와 최근 흐름 후보. <strong>AI 구현:</strong> 트리·LSTM·가중 잔차 학습, 누출 검사와 저장 예측 재현.</p>
+<div class="table-wrap" tabindex="0" aria-label="9월 회고 평가 모델 비교표, 좁은 화면에서는 가로 스크롤"><table><caption>동일 평가 행 상세 비교 · 낮을수록 좋음</caption><thead><tr><th scope="col">모델</th><th scope="col">전체 MAE</th><th scope="col">고전력 MAE</th><th scope="col">오차 50 초과</th></tr></thead><tbody>
+<tr><th scope="row">Q1 · HGB 혼합 기준</th><td>6.311</td><td>7.211</td><td>27건</td></tr>
+<tr class="is-representative"><th scope="row">Q2 · LightGBM 혼합</th><td>5.988</td><td>7.295</td><td>13건</td></tr>
+<tr><th scope="row">Q3 · 고전력 가중 잔차</th><td>6.622</td><td>7.112</td><td>21건</td></tr>
+<tr><th scope="row">LSTM · 비교 후보</th><td>6.854</td><td>9.646</td><td>16건</td></tr>
+</tbody></table></div>
+<div class="power-model-flow" aria-label="직접 예측과 유사일 잔차 예측의 고정 혼합"><div><strong>직접 예측</strong><span>과거 관측 → LightGBM → 전력값</span></div><div><strong>유사일 + 잔차</strong><span>과거 유사일 기준선 + 학습한 차이</span></div><p>두 예측의 고정 50:50 평균</p></div>
+<p>Random Forest·ExtraTrees·HGB·LightGBM·LSTM과 입력 묶음·고정 혼합을 비교했습니다. 변화량을 입력하는 실험과 변화량 자체를 학습하는 목표는 구분했고, 최종 전력 방식은 직접·유사일 잔차 혼합입니다. 팀원의 탐색 설정을 그대로 복사한 것은 아닙니다.</p>
+<p>원자료 네 전력 열을 15분 시간축으로 펼쳐 발행 후 15·30·45·60분에 끝나는 네 칸을 예측하고, 묶인 구간의 평균·최대를 계산했습니다. h시 행의 네 값이 h:15·h:30·h:45·h+1:00에 관측 완료된다는 가정이며, 각 칸 시작까지는 0·15·30·45분입니다.</p>
+<p>유사일은 발행 당시 96칸이 관측 완료된 최근 42일 중 최대 3일에서 골랐습니다. 미래 목표값·당일 최종 생산량은 사용하지 않았습니다.</p>
+</div></details></div>
+</div></section>
+<section class="case-section" id="alarm-analysis" aria-labelledby="alarm-analysis-title"><h2 data-reveal id="alarm-analysis-title"><span class="step-number">04</span> 큰 실패와 오경보 부담까지 검토했습니다.</h2><div class="case-content">
+<p class="power-source-label">본인: 지속시간·발생 횟수 동시 검토 / 공동 실험: 예측과 경보의 결과</p>
+<p>“피크를 놓치지 않되 너무 예민하게 반응하지 않게”라는 기준으로 검토했습니다. 전력값 예측과 별도로 <strong>기상 없는 ExtraTrees 경보</strong>를 평가했고, 8월에서 임계값을 보정한 뒤 9월에는 고정했습니다.</p>
+<div class="power-metric-grid alarm-summary" aria-label="9월 경보 탐지와 부담 요약">
+<div><span>위험 사건 탐지</span><strong>56 / 56개</strong><p>위험 15분 칸은 189개 중 1개 미탐지</p></div>
+<div class="has-limit"><span>오경보 표시</span><strong>227.1분 / 일</strong><p>가정한 120분 / 일 예산 초과<br>경보 칸 정밀도 47.0%</p></div></div>
+<p class="section-note">9월 1,343개 경보 평가 칸 · 14달력일 · 대상 칸 시작 15분 전 경보. 위험 기준 169는 학습 상위 10%이며 계약전력 한도가 아닙니다.</p><figure class="power-figure"><a class="power-image-link" href="assets/power-forecast/10_alarm_burden.png" target="_blank" rel="noopener noreferrer" aria-label="8월 오경보 7.97칸·9월 15.14칸을 하루 8칸 예산과 비교, 오경보 사건 수는 각각 0.35·0.71 원본 확대"><img src="assets/power-forecast/10_alarm_burden.png" width="2560" height="950" alt="8월 오경보 7.97칸·9월 15.14칸을 하루 8칸 예산과 비교, 오경보 사건 수는 각각 0.35·0.71" loading="lazy"></a><figcaption>오경보 사건 수와 표시 지속시간을 함께 비교했습니다. 9월 오경보는 212칸이며, 표시 시간은 작업자의 실제 검토 소요시간이 아닙니다.<span class="power-enlarge">그림을 선택하면 원본을 확대할 수 있습니다.</span></figcaption></figure><div class="power-comparison-note"><strong>짧아진 경보가 더 자주 울리는 문제를 발견했습니다.</strong><p>시간을 줄이는 후보는 8월 오경보 칸을 247 → 222개로 줄였지만 완전히 헛된 경보 발생은 11 → 19회로 늘렸습니다. 9월에도 227.1 → 190.7분/일로 줄어든 대신 헛된 경보는 10 → 14회로 늘었습니다.</p><p>저는 <strong>경보가 짧아져도 발생 횟수가 늘면 부담이 줄었다고 볼 수 없다고 판단</strong>했습니다. 8월에서 횟수 보호 조건까지 만족한 후보가 없어 기존 경보를 유지했습니다. 이 보호 조건을 보완한 계기는 9월 회고였으며, 후보 계산과 최종 경보 선택에는 8월만 사용했습니다.</p></div>
+<p><strong>큰 실패도 남겼습니다.</strong> 9/8 11:30 발행 → 12:00–12:15 구간의 실제 전력은 0, Q2 예측은 116.4였습니다. 시간·요일·생산 전환별로 점검했지만, 설비 기록이 없어 급락 원인을 확인하지 못했습니다.</p>
+<div class="disclosures power-inline-disclosures"><details><summary>큰 오차의 실제·예측과 해석 범위</summary><div><figure class="power-figure"><a class="power-image-link" href="assets/power-forecast/08_failure_case.png" target="_blank" rel="noopener noreferrer" aria-label="9월 8일 11시 30분 발행 예측, 12시~12시 15분 실제 전력 0, Q2 예측 116.4 원본 확대"><img src="assets/power-forecast/08_failure_case.png" width="2560" height="950" alt="9월 8일 11시 30분 발행 예측, 12시~12시 15분 실제 전력 0, Q2 예측 116.4" loading="lazy"></a><figcaption>Q2의 최대 오차 사례입니다. 실제 생산 상태는 사후 설명용이며 미래 입력이나 경보 해제에는 쓰지 않았습니다. 고장·식사시간을 원인으로 확정하지 않았습니다.<span class="power-enlarge">그림을 선택하면 원본을 확대할 수 있습니다.</span></figcaption></figure></div></details></div>
+<blockquote class="decision"><strong>현장 조치는 조건부 검토안으로 제시했습니다.</strong><p>아침·점심 후 신규 설비의 순차 가동과 이동 가능한 작업의 분산을 제안했습니다. 설비별 부하·납기·안전 제약을 확보한 뒤 효과를 검증해야 하며 실제 절감률은 성과로 쓰지 않았습니다.</p></blockquote>
+</div></section>
+<div class="disclosures">
+<details><summary>변수의 의미를 검토한 내용</summary><div>
+<p><strong>인건비:</strong> 09–17시에는 1, 나머지 시간에는 1.5가 기록돼 시급 배율이라는 가설을 검토했습니다. 생산량 0인 시간에도 값이 있어 실제 지급액·근무 인원으로 단정하지 않았습니다.</p>
+<p><strong>공장인원:</strong> 소수값에 의문을 제기하고 생산량과의 수식 관계를 확인했습니다. 생산량 ÷ 공장인원이 대부분 정수에 가까웠습니다. 결측 인원 17행은 생산량이 모두 0이어서 0 대체를 검토·적용했으며 실제 무인 근무를 확인한 결과는 아닙니다.</p>
+<p>설명서가 없어 변수 이름만으로 금액·사람 수·인과효과를 확정하지 않았고, 정의가 불명확하거나 미래에 알 수 없는 변수는 주요 입력에서 제외했습니다.</p></div></details>
+<details><summary>팀원 자료에서 참고한 것과 공동 구현 범위</summary><div>
+<p><strong>권동현 → 접근 참고·재실험:</strong> 유사일·잔차 아이디어와 최근 42일·최대 3일 기준을 참고했습니다. 권동현 님의 밤샘 자료에서 최근 2시간 흐름·변화량·ExtraTrees 탐색·혼합을 후보로 검토하고 자체 조건에서 실험했습니다. 모든 목표·설정이 최종 채택된 것은 아닙니다.</p>
+<p><strong>고도현 → 분석·보고서 비교:</strong> 생산 패턴·월별 검증·조건별 오류·일정 제약을 비교했습니다. 최종 제출 보고서에서는 제공 PDF의 생산 패턴 그림과 표 스타일을 참고했고 출처를 표시했습니다. 해당 참고 그림은 이 웹페이지에 사용하지 않았습니다. 특정 Q2 입력의 차용 출처와 실제 일정 조정 효과는 확인되지 않았습니다.</p>
+<p><strong>김유빈 → 질문·기준·통합 판단:</strong> 변수 해석과 기상·반복 패턴 검증 방향, 예측 단위와 비교 범위, 누수 금지·고전력 오차·경보 부담 검토를 이끌었습니다. 팀원 결과와 Codex·Claude Code의 비판을 교차검토하고 근거를 대조해 판단했습니다.</p>
+<p><strong>Codex·Claude Code 지원 → 구현·실행:</strong> 전처리·모델·평가·테스트·시각화 코드를 작성하고 학습·집계를 수행했습니다. 본인 질문과 AI 계산, 팀원 접근의 출처를 분리해 정리했습니다.</p>
+<a class="text-link" href="evidence/power-forecast/contributions.json" target="_blank" rel="noopener noreferrer">역할·참고 접근 정리 (JSON)</a></div></details>
+<details><summary>반복 프로파일 감사의 상세 근거</summary><div><p>원본 6,168행 중 시간 오류 48행을 격리하고 정상 6,120행을 분석했습니다. 완전한 255일 중 반복 그룹에 속한 날은 160일이며, 96개 전력값이 모두 같은 날짜 쌍은 302개입니다. 그중 178쌍은 생산량이 달랐고 302쌍 모두 기온은 달랐습니다.</p><p>반복 여부는 사후 채점·감사용으로만 사용했습니다. 높은 전력값을 제거하지 않았으며 원자료의 생성·병합 방식은 확인되지 않았습니다.</p></div></details>
+<details><summary>누출 검사와 예측 재현 근거</summary><div>
+<p>발행 이후 전력·생산량을 바꿔도 입력과 LSTM 시퀀스가 변하지 않는지 검사했습니다. 대체값과 표준화는 학습 구간에서 정하고 유사일은 관측 완료된 과거 날짜만 사용했습니다.</p>
+<p>저장된 제출 패키지 검증 기록은 99개 테스트와 9월 전력 5,376행·경보 1,343행 재예측을 포함합니다. 저장 예측과 최대 차이는 약 2.84×10⁻¹⁴입니다. 이번 페이지 수정에서는 수치만 대조했으며 재학습하지 않았습니다.</p>
+<div class="evidence-links"><a href="evidence/power-forecast/metrics.json" target="_blank" rel="noopener noreferrer">평가·검증 요약 (JSON)</a><a href="evidence/power-forecast/model_comparison.csv" target="_blank" rel="noopener noreferrer">모델 비교 (CSV)</a><a href="evidence/power-forecast/analysis_summary.json" target="_blank" rel="noopener noreferrer">기상·분석 집계 (JSON)</a><a href="evidence/power-forecast/README.md" target="_blank" rel="noopener noreferrer">수치 출처와 해석 범위</a></div></div></details>
+<details><summary>경보 민감도와 남은 개선 과제</summary><div><figure class="power-figure"><a class="power-image-link" href="assets/power-forecast/14_alarm_tradeoff.png" target="_blank" rel="noopener noreferrer" aria-label="오경보 칸과 미탐지 칸의 교환을 나타낸 8월·9월 경보 민감도 곡선 원본 확대"><img src="assets/power-forecast/14_alarm_tradeoff.png" width="2560" height="950" alt="오경보 칸과 미탐지 칸의 교환을 나타낸 8월·9월 경보 민감도 곡선" loading="lazy"></a><figcaption>후보 임계값은 8월에서 정했습니다. 9월은 사후 비교이며 9월 성능으로 최종 임계값을 다시 고르지 않았습니다.<span class="power-enlarge">그림을 선택하면 원본을 확대할 수 있습니다.</span></figcaption></figure><p>새 기간의 검증, 발행 이전 기상 도착을 기록하는 수집 체계, 실제 설비·작업 제약 확보가 후속 과제입니다.</p></div></details>
+<details><summary>데이터와 해석 범위</summary><div><ol>
+<li><strong>9월은 회고 평가:</strong> 이미 탐색한 기간이고 대표 모델 판단에 사후 선택이 포함됩니다. 독립 시험으로 해석하지 않습니다.</li>
+<li><strong>시간·단위:</strong> 원자료 시각의 시작·완료 정의와 kW·kWh 단위는 미확인입니다. 합계를 비용·절감률로 환산하지 않습니다.</li>
+<li><strong>기상:</strong> 울산 공식 관측과의 일치가 공장 위치를 확정하지 않습니다. 관측 후 1시간 사용 가능성은 실험 가정입니다.</li>
+<li><strong>현장 효과:</strong> 실제 가동 변경이나 비용 절감을 측정하지 않았습니다.</li>
+</ol></div></details></div>
+    </article>
+    <div class="case-footer"><a class="text-link" href="./#work"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> 포트폴리오로 돌아가기</a><span>실험 결과 2026.10.08 · 수치 대조·포트폴리오 정리 2026.10.15</span></div>
+  </main>
+</body>
+</html>

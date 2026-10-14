@@ -1,0 +1,174 @@
+{
+  "schema_version": 2,
+  "project_id": "manufacturing-power-forecast",
+  "verified_on": "2026-10-15",
+  "language": "ko",
+  "title": "제조 전력의 15분 예측과 피크 경보 분석",
+  "public_summary_sentences": [
+    "2021년 9월 회고 평가의 동일한 5,376개 예측에서 평균 절대오차(MAE)를 기존 HGB 혼합 모델의 6.311에서 LightGBM 혼합 모델의 5.988로 약 5.12% 줄였습니다.",
+    "같은 평가에서 절대오차 50 초과 예측은 27건에서 13건으로 약 51.85% 감소했으며, 50은 사후 분석에서 정한 원자료 수치 기준입니다.",
+    "과거 전력·완료된 생산·가용 시각을 제한한 공식 기상을 이용해 다음 네 개 15분 구간을 예측하고, 직접 예측과 유사일 잔차 예측을 50:50으로 결합했습니다.",
+    "시간 오류 48행과 반복 전력 프로파일을 따로 진단하고 미래 정보 사용을 검사했으며, 저장된 독립 패키지 검증 기록에서 99개 테스트와 9월 예측 재현을 확인했습니다.",
+    "고전력 MAE는 9월에 7.211에서 7.295로 약 1.16% 악화됐고 개발 신규 프로파일에서도 약 14.83% 악화돼, 기존 모델 교체 보호 조건을 모두 충족하지 못했습니다.",
+    "별도 ExtraTrees 경보는 구간 시작 15분 전 위험 사건 56개를 모두 포착했지만 개별 구간 정밀도는 47%였고 하루 오경보 표시 시간은 227.1분으로 가정한 120분 예산을 초과했습니다.",
+    "5,376행은 1,344개 실제 15분 구간에 대한 네 예측 리드의 결과이며 9월은 이미 탐색한 회고 평가로, 원자료 전력 단위와 기상 관측 후 1시간 가용성은 미확인 가정입니다.",
+    "변수·근무 리듬·반복 패턴을 질문하고 가설을 검증했습니다. 울산 공식 기상 대조·시차 조사, 실험 조건 판단, 팀 결과 통합과 AI 교차검토를 주도했습니다. 코드·학습·집계·그림은 Codex·Claude Code 지원으로 구현했습니다."
+  ],
+  "evaluation": {
+    "period": "2021-09-01~2021-09-14",
+    "timezone": "Asia/Seoul",
+    "retrospective": true,
+    "independent_blind_test": false,
+    "prediction_rows": 5376,
+    "unique_target_quarters": 1344,
+    "rows_per_horizon": 1344,
+    "horizons_steps": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "target_end_ahead_minutes": [
+      15,
+      30,
+      45,
+      60
+    ],
+    "target_start_ahead_minutes": [
+      0,
+      15,
+      30,
+      45
+    ],
+    "row_note": "같은 실제 15분 구간을 네 예측 리드로 평가하므로 5,376행이 서로 독립된 관측 5,376개를 뜻하지 않는다.",
+    "unit": "원자료 수치 단위; kW/kWh 정의 미확인"
+  },
+  "main_model": {
+    "baseline": "HGB direct/residual blend",
+    "candidate": "LightGBM restart direct/similar-day residual blend",
+    "blend_weight": 0.5,
+    "mae_baseline": 6.310590723495959,
+    "mae_candidate": 5.9876658573109465,
+    "mae_reduction_percent": 5.117189187736094,
+    "absolute_error_gt50_baseline": 27,
+    "absolute_error_gt50_candidate": 13,
+    "large_error_count_reduction_percent": 51.851851851851855,
+    "large_error_threshold": 50,
+    "large_error_threshold_posthoc": true
+  },
+  "tradeoffs": {
+    "september_high_mae_baseline": 7.210742033783835,
+    "september_high_mae_candidate": 7.294561936464209,
+    "september_high_mae_increase_percent": 1.1624310270379985,
+    "development_unseen_high_mae_baseline": 11.81182121447337,
+    "development_unseen_high_mae_candidate": 13.563054219344481,
+    "development_unseen_high_mae_increase_percent": 14.826104908574756,
+    "passes_existing_model_replacement_guard": false,
+    "representative_choice": "개발 교체 조건 미충족을 공개한 상태에서 전체·큰 오차 부담과 9월 회고 결과를 고려한 제출 대표 선택; 새 기간 검증 필요"
+  },
+  "alarm": {
+    "model": "ExtraTrees point forecast without weather",
+    "lead_to_interval_start_minutes": 15,
+    "evaluated_slots": 1343,
+    "actual_risk_events": 56,
+    "detected_events": 56,
+    "event_recall": 1.0,
+    "risky_slots": 189,
+    "missed_risky_slots": 1,
+    "slot_precision": 0.47,
+    "slot_recall": 0.9947089947089947,
+    "false_positive_slots": 212,
+    "calendar_days": 14,
+    "false_alarm_display_minutes_per_day": 227.14285714285714,
+    "assumed_budget_minutes_per_day": 120,
+    "minute_budget_met": false,
+    "risk_threshold": 169.0,
+    "risk_threshold_note": "학습 15분 전력 상위 10% 기준; 실제 계약전력 한도 아님",
+    "event_note": "연속 위험 구간을 묶은 사건 재현율과 15분 구간 정밀도는 서로 다른 지표이다.",
+    "minute_note": "FP 구간 수×15분÷달력일; 작업자의 실제 검토 소요시간이 아니다."
+  },
+  "quality": {
+    "raw_rows": 6168,
+    "valid_hourly_rows": 6120,
+    "quarantined_rows": 48,
+    "grid_quarters": 24672,
+    "observed_quarters": 24480,
+    "missing_quarters": 192,
+    "complete_days": 255,
+    "unique_daily_power_profiles": 140,
+    "weather_availability_delay_hours_assumption": 1,
+    "live_weather_availability_verified": false
+  },
+  "verification": {
+    "stored_tests_passed": 99,
+    "stored_reprediction_power_rows": 5376,
+    "stored_reprediction_alarm_rows": 1343,
+    "stored_maximum_prediction_difference": 2.842170943040401e-14,
+    "aggregate_tables_cross_checked": true,
+    "verification_scope": "저장된 package_verification.json의 검증 기록을 읽고 집계표와 대조; 이번 공개자료 작성에서 재학습·테스트 재실행 없음"
+  },
+  "role": {
+    "summary": "변수·근무 리듬·반복 패턴을 질문하고 가설을 검증했습니다. 울산 공식 기상 대조·시차 조사, 실험 조건 판단, 팀 결과 통합과 AI 교차검토를 주도했습니다.",
+    "contributions_file": "contributions.json"
+  },
+  "source_fingerprints": [
+    {
+      "file": "model_comparison.csv",
+      "kind": "aggregate_csv",
+      "sha256": "6742be0e88173c6831d18bc70c0b9613c16339caa45b279d373d88f0fce2743f"
+    },
+    {
+      "file": "alarm_metrics.csv",
+      "kind": "aggregate_csv",
+      "sha256": "e4c66a3d9cc65e97352a7de54523a2da99205d7e39e02273babce294b8002763"
+    },
+    {
+      "file": "horizon_metrics.csv",
+      "kind": "aggregate_csv",
+      "sha256": "3bfa7b9a0a9022b1183327c05687b57e0a9c25e6039bd7777293312ca9b627a2"
+    },
+    {
+      "file": "experiment_policy.json",
+      "kind": "json_policy",
+      "sha256": "b4fbd1e85d14f6fb64b564f6b8ce18db74c2a4e514f4ddca41e0cb838411428b"
+    }
+  ],
+  "publication_scope": "집계 수치와 실험 정책의 지문만 포함; 원본 데이터·개인정보·서명·설문·API 키·절대 경로 미포함",
+  "project_period": {
+    "start": "2026-10-02",
+    "end": "2026-10-08"
+  },
+  "limitations": [
+    "실제 비용 절감·가동 조정 효과는 측정하지 않았습니다.",
+    "실시간 기상 수집·현장 운영을 검증하지 않았습니다.",
+    "9월은 이미 탐색한 회고 평가입니다."
+  ],
+  "model_decisions": {
+    "Q1": {
+      "development_unseen_mae": 6.631918783,
+      "status": "비교 기준"
+    },
+    "Q2": {
+      "development_unseen_mae": 6.624088112,
+      "passes_existing_Q1_guard": false,
+      "status": "개발 교체 조건 미충족; 9월 회고까지 고려한 제출 대표"
+    },
+    "LSTM": {
+      "development_unseen_mae": 8.12,
+      "status": "미채택 비교 후보"
+    },
+    "Q3": {
+      "development_unseen_high_mae_baseline": 11.81182121447337,
+      "development_unseen_high_mae_candidate": 10.132065865,
+      "high_mae_reduction_percent": 14.22,
+      "development_total_mae_baseline": 6.487959893,
+      "development_total_mae_candidate": 6.634745644,
+      "passes_development_protection_guard": true,
+      "status": "고전력 목표 개선 후보로 보존"
+    },
+    "historical_hourly_weather_repair": {
+      "scope": "이전 1시간 최대값 모델의 원자료 기상 묶음 제외",
+      "selection_uses_september": false
+    }
+  }
+}

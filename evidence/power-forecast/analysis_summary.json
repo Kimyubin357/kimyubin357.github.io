@@ -1,0 +1,30 @@
+{
+  "station": "울산 ASOS 152",
+  "variables": [
+    "기온",
+    "습도",
+    "풍속"
+  ],
+  "before_boundary": {
+    "period": "2021-01-01~2021-05-21",
+    "official_offset_hours": 0,
+    "matches": 3378,
+    "rows": 3384
+  },
+  "after_boundary": {
+    "period": "2021-05-22~2021-09-14",
+    "official_offset_hours": 1,
+    "matches": 2729,
+    "rows": 2733
+  },
+  "matches": 6107,
+  "compared_rows": 6117,
+  "match_percent": 99.83652117050842,
+  "wind_missing_rows": 3,
+  "exceptions": 10,
+  "comparison": "원래 숫자·절대 허용오차1e-8·보간값 제외",
+  "lunch_dip_days": 176,
+  "weekday_days": 181,
+  "lunch_median_drop_percent": 36.9565,
+  "limit": "기상 대응은 공장 위치·병합 경위·전력 시간 정의를 확정하지 않음"
+}

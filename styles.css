@@ -465,3 +465,7 @@ figcaption{font-size:14.5px;color:var(--muted);line-height:1.5;margin-top:10px}
  /* The heading and caption already describe the clip outside this small frame. */
  .video-cover .video-title,.video-cover .video-subtitle{display:none}
 }
+
+/* Keep chart axes visible in the new project card. */
+.feature-media[href="power-forecast.html"] img{object-fit:contain;object-position:center}
+.feature-inner:hover .feature-media[href="power-forecast.html"] img{transform:none}
