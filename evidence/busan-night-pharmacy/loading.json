@@ -1,0 +1,10 @@
+{
+  "scope": "Compressed/uncompressed first-screen required file totals, not measured load-time improvement. Excludes map tiles and HTTP headers.",
+  "baseline_uncompressed_bytes": 8978798,
+  "web_initial_uncompressed_bytes": 1103117,
+  "reduction_percent": 87.71,
+  "baseline_gzip_bytes": 6645428,
+  "web_initial_gzip_bytes": 1016835,
+  "manifest_sha256": "93de135e7e7ee19307359e09a8cb17c9d55e97400710e7ca27dfbab1ef880fc7",
+  "source_payload_sha256": "857f2a76fbc66b908af4271b49a3c087e26f5df05b156cd95c0b953f6b7edc2f"
+}

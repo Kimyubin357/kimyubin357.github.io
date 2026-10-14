@@ -1,0 +1,14 @@
+{
+  "scope": "Calculation consistency checks, not field or impact validation.",
+  "analysis_data_collected_date": "2026-10-13",
+  "coordinates_corrected_date": "2026-10-14",
+  "checks": {
+    "grid_count": 21963,
+    "candidate_scores_checked": 10062,
+    "all_candidate_scores_recomputed": true,
+    "forward_route_origins_checked": 20,
+    "max_distance_error_m": 6.0760716905861045e-05,
+    "legacy_hira_reference_required": false
+  },
+  "source_sha256": "5e18031846320065ff1148b9c0097d5bdbe06a8d94160aebe6ceff7614fff4a7"
+}

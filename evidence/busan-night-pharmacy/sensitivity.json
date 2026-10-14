@@ -1,0 +1,85 @@
+{
+  "scope": "한 번에 하나의 가정만 변경한 순위 비교. 확률·신뢰구간·현장 검증이 아닙니다.",
+  "model": "api",
+  "walking_minutes": 15,
+  "base_candidate": "수영우리약국",
+  "scenarios": [
+    {
+      "id": "baseline",
+      "label": "기준: 4km/h · 원래 가정",
+      "speed_kmh": 4,
+      "baseLeaderRank": 1,
+      "baseLeaderLow": 42953.39299233333,
+      "winner": {
+        "j": 1039,
+        "low": 42953.39299233333,
+        "high": 43817.48486766666,
+        "rank": 1,
+        "id": "C1202873",
+        "name": "수영우리약국"
+      }
+    },
+    {
+      "id": "speed3",
+      "label": "보행속도 3km/h",
+      "speed_kmh": 3,
+      "baseLeaderRank": 17,
+      "baseLeaderLow": 26235.312036333333,
+      "winner": {
+        "j": 1172,
+        "low": 30480.153116380952,
+        "high": 32711.25960004762,
+        "rank": 1,
+        "id": "C1202832",
+        "name": "연제봄약국"
+      }
+    },
+    {
+      "id": "speed5",
+      "label": "보행속도 5km/h",
+      "speed_kmh": 5,
+      "baseLeaderRank": 32,
+      "baseLeaderLow": 48481.475565333334,
+      "winner": {
+        "j": 1674,
+        "low": 54118.2199417619,
+        "high": 72877.50476999999,
+        "rank": 1,
+        "id": "C1202127",
+        "name": "화목2층약국"
+      }
+    },
+    {
+      "id": "sunday_unknown",
+      "label": "일요일 일반약국 휴무 가정 → 미상",
+      "speed_kmh": 4,
+      "baseLeaderRank": 23,
+      "baseLeaderLow": 30680.994994523808,
+      "winner": {
+        "j": 402,
+        "low": 38306.854099285716,
+        "high": 53854.804659999994,
+        "rank": 1,
+        "id": "C1200386",
+        "name": "삼보약국"
+      }
+    },
+    {
+      "id": "uniform",
+      "label": "거주인구 비중 → 격자 면적 비중",
+      "speed_kmh": 4,
+      "baseLeaderRank": 2,
+      "baseLeaderLow": 41747.428095290394,
+      "winner": {
+        "j": 1557,
+        "low": 42751.44815137119,
+        "high": 43156.10629900055,
+        "rank": 1,
+        "id": "C1201175",
+        "name": "큰소망약국"
+      }
+    }
+  ],
+  "baseline_max_error": 6.633251905441284e-05,
+  "source_sha256": "a5a8e6cfd9eebe743213ebca6d84da7330b534979e635fb57f2df94cecbbe119"
+}

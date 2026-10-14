@@ -2,9 +2,9 @@
 
 프로젝트를 계속 추가할 수 있는 정적 포트폴리오 사이트. 기존 Dash·FastAPI·Firebase 실행과 독립적이다.
 
-현재 버전은 **0.1.0 (2026-10-13)**이며 독립 Git 저장소의 첫 커밋 기준이다. 포트폴리오는 로컬에서 검증했으며 아직 배포하지 않았다. BatteryFlow 라이브 서비스는 별도의 배포다.
+현재 버전은 **0.2.2 (2026-10-14)**이다. BatteryFlow AI와 부산 심야약국 보행 접근성 지도를 대표 프로젝트로 소개한다. 포트폴리오 사이트 자체는 아직 배포하지 않았으며, 연결된 두 대시보드의 배포와 구분한다.
 
-버전의 기준은 `VERSION`이다. 릴리스 시 이 파일, 세 HTML의 CSS·JS `?v=` 값, 이 문서와 `design/SPEC.md`·`design/QA.md`의 현재 버전을 함께 갱신한다. 구현 기준은 [SPEC](design/SPEC.md), 검증 결과는 [QA](design/QA.md), 수치 출처는 [근거 자료 안내](evidence/README.md)에 정리했다.
+버전의 기준은 `VERSION`이다. 릴리스 시 이 파일, HTML의 CSS·JS `?v=` 값, 이 문서와 `design/SPEC.md`의 현재 버전을 함께 갱신한다. `design/QA.md`는 버전별 검증 이력을 보존한다. 구현 기준은 [SPEC](design/SPEC.md), 검증 결과는 [QA](design/QA.md), 수치 출처는 [근거 자료 안내](evidence/README.md)에 정리했다.
 
 ## 실행
 
@@ -20,13 +20,15 @@ Windows에서 이 폴더의 `start.cmd`를 더블 클릭한다. Python 3이 있�
 - `project-template.html`: 새 프로젝트 상세 페이지 템플릿. 복사 후 TODO를 채우고 `projects.js`의 `link`로 연결한다.
 - `index.html`: 히어로·SBS 인터뷰·대표 프로젝트·소개/기술·학력/자격증·연락처. 학력은 부트캠프·충북대(편입·졸업)·군산대(수료)·삼일상업고(졸업) 순의 가로 타임라인이며 로고는 `assets/logo-ls.png`, `logo-cbnu.png`, `logo-kunsan.png`, `logo-samil.png`(2026-10-13 사용자 제공)이다. 자격증은 상장 형태 카드(정보처리기사·SQLD·컴퓨터활용능력 1급·리눅스마스터 2급, 취득일은 사용자 제공 자격증 PDF의 합격일과 이력서)이며, 학점·주소·연락처는 넣지 않고, 자격증 원본 파일(자격번호·생년월일 포함)은 사이트에 넣지 않는다.
 - `batteryflow.html`: BatteryFlow 상세 사례.
+- `busan-night-pharmacy.html`: 부산 심야약국 상세 사례. 전후 지도 전환은 `busan-night-pharmacy.js`, 페이지 전용 스타일은 `busan-night-pharmacy.css`.
+- `assets/busan-night-pharmacy/`, `evidence/busan-night-pharmacy/`: 실제 캡처 5장과 독립적인 공개용 수치 근거.
 - `styles.css`: 공통 반응형 디자인과 스크롤 애니메이션.
 - `site.js`: 프로젝트 렌더링, 스크롤 등장·패럴랙스·영상 확대·진행바, 인터뷰 플레이어.
 - `assets/`: 사이트 이미지·로컬 폰트. 프로필 사진은 `portrait-480.jpg`/`portrait-960.jpg`를 사용하고 원본 `portrait.png`는 보존.
 - `evidence/`: 9가지 방법 전체 비교 CSV, 신뢰구간·순위 JSON, GitHub 원본 대조 결과와 출처 안내.
 - `design/`: 현재 구현 기준·검증 기록 및 초기 시안. `SPEC-2026-10-07.md`, `QA-2026-10-07.md`, concept/render 이미지는 과거 기록이다.
 
-대표 프로젝트 영역에는 기본 HTML 상세 링크가 있다. JavaScript 비활성화, `site.js`·`projects.js` 로드 실패, 대표 카드 생성 오류 때도 BatteryFlow 상세 페이지에 접근할 수 있다. 대표 데이터가 있고 카드 생성에 성공했을 때만 이 링크를 카드로 교체한다.
+대표 프로젝트 영역에는 기본 HTML 상세 링크가 있다. JavaScript 비활성화, `site.js`·`projects.js` 로드 실패, 대표 카드 생성 오류 때도 두 프로젝트 상세 페이지에 접근할 수 있다. 대표 데이터가 있고 카드 생성에 성공했을 때만 이 링크를 카드로 교체한다.
 
 ## 인터뷰 영상 동작
 
@@ -47,3 +49,17 @@ YouTube IFrame API로 영상 구역이 화면에 45% 이상 보이면 35~59초 �
 운영용 비밀 키·Firebase SDK·이력서의 주소·전화·생년월일은 포함하지 않는다. 2026-10-13 사용자 요청으로 배포된 BatteryFlow AI(Cloud Run, https://batteryflow-u6lb5fm2vq-du.a.run.app/login)를 메인 대표 카드의 "라이브 서비스"와 상세 페이지의 "라이브 서비스 열기" 버튼으로 연결했다(`projects.js`의 `demo`). 같은 날 사용자 요청으로 체험 계정(`projects.js`의 `demoAccount`)을 메인 카드와 상세 페이지에 표시한다. 비밀번호는 화면에서 가려지고 눈 아이콘으로 볼 수 있으나, 페이지 소스에는 그대로 있으므로 공개 계정으로 취급한다. 브라우저 인쇄용 최소 스타일은 있지만 최종 PDF 편집본은 아니다.
 
 나중에 GitHub Pages를 사용할 때 공개용 파일은 HTML, CSS, JS(projects.js 포함), assets, evidence이며 상대 경로이므로 하위 저장소 경로에서도 동작한다. 배포는 별도 확인 후 진행한다.
+
+## 부산 심야약국 추가 · 2026-10-14
+
+사용자가 확정한 포트폴리오 원고에서 본인 역할·AI 구현 지원, 월요일 NMC 보완 1,679곳·가정 3곳·미상 14곳, 후보 순위 민감도와 기준일 데모의 한계를 반영했다. 카드에서 상세 페이지, 지도 전후 전환, 모바일 약국 찾기 캡처와 근거 파일로 연결한다. 원본 분석 작업 폴더를 참조하지 않으며 API 키나 대형 원천 데이터는 포함하지 않는다.
+
+배포 시 `busan-night-pharmacy.html`·전용 CSS/JS와 추가 assets/evidence도 포함한다. 이번 요청은 로컬 사이트 반영으로, GitHub 게시나 사이트 배포를 실행한 의미가 아니다.
+
+### v0.2.1 내용·화면 보완
+
+도착 시각 판정, 전체 결과, 5개 조건별 순위·선두 후보, 트러블슈팅 3건을 본문에 추가했다. 과거 보완 기록에서 두 약국의 변경 값을 공개용 JSON으로 정리하고 개별 웹 검색 이력과 구분했다. 공개 GitHub 링크, About·공간 분석·배포 기술, 지도 확대 비교와 동일 높이 모바일 이미지를 반영했다. 검증 기록은 `design/QA.md`에 버전별로 기록한다.
+
+### v0.2.2 정렬 보완
+
+SBS 재생 아이콘, 접기 화살표, SVG 링크·시간 예시, 버튼 줄높이·상세 액션을 정리했다. 작은 모바일 화면의 영상 제목 겹침과 메인 제목·배지 및 데스크톱 배경 장식의 가로 넘침을 수정했다. 검증 범위와 한계는 `design/QA.md`에 기록한다.

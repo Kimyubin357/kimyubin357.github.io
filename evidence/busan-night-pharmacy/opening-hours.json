@@ -1,0 +1,83 @@
+{
+  "scope": "기존 부산 분석 대상 1,696곳의 월요일 구성. 지도 목록 1,716곳과 구분.",
+  "data_collected_date": "2026-10-13",
+  "historical_sequence": {
+    "initial_designated_monday_start_assumptions": 19,
+    "hira_reference_date": "2026-06-30",
+    "hira_filled_monday": 16,
+    "hira_filled_sunday": 7,
+    "hira_only_values_in_primary_model": false,
+    "nmc_historical_monday_applied": 1679,
+    "nmc_historical_all_day_rows_updated": 1681,
+    "counts_are_not_additive": true
+  },
+  "final_analysis_monday": {
+    "nmc_registered": 1679,
+    "assumed_from_equal_tue_fri": 3,
+    "unknown": 14,
+    "total": 1696
+  },
+  "live_code_execution": {
+    "status": "passed",
+    "started_at": "2026-10-14T10:40:25.005449+00:00",
+    "finished_at": "2026-10-14T10:40:45.356481+00:00",
+    "snapshot_mode_used": false,
+    "existing_nmc_pages_reused": false,
+    "busan_live_rows": 1701,
+    "busan_master_rows": 1696,
+    "nmc_live_rows": 1714,
+    "nmc_monday_rows_applied": 1679,
+    "final_monday_sources_analysis_scope": {
+      "observed": 1679,
+      "unknown": 14,
+      "assumed_monday_tue_fri_equal": 3
+    },
+    "stages": [
+      {
+        "name": "collect_designated_live",
+        "exit_code": 0,
+        "seconds": 0.238
+      },
+      {
+        "name": "collect_busan_api_live",
+        "exit_code": 0,
+        "seconds": 1.939
+      },
+      {
+        "name": "process_pharmacies_including_monday_analysis",
+        "exit_code": 0,
+        "seconds": 2.114
+      },
+      {
+        "name": "public_policy_from_new_designation_matches",
+        "exit_code": 0,
+        "seconds": 0.002
+      },
+      {
+        "name": "supplement_hira_hours_main_unchanged",
+        "exit_code": 0,
+        "seconds": 0.401
+      },
+      {
+        "name": "collect_nmc_hours_main_live_no_cached_pages",
+        "exit_code": 0,
+        "seconds": 15.201
+      },
+      {
+        "name": "build_schedules_using_newly_generated_nmc_csv",
+        "exit_code": 0,
+        "seconds": 0.271
+      }
+    ]
+  },
+  "execution_scope": "Actual unmodified repository code: live collection -> schedule processing -> NMC supplementation -> final weekly schedule. Full road-network/grid/HTML pipeline not rerun in this subset check.",
+  "limitations": [
+    "Registered source times are not verified live opening hours.",
+    "99% is source coverage for Monday, not accuracy."
+  ],
+  "source_sha256": {
+    "historical_nmc_update_summary.json": "f65fe71a330a39ea463f086ff9316e21bd199c9d6062d4a66b0d81ffc08716ad",
+    "hours_supplement_summary.json": "bab39297882a1866285baa52c950ecb07381a98d693212256d20cb769b07cb2f",
+    "actual_live_hours_result.json": "20114cf27d430d65704d16aaf519bde7b3cc2ca7237c3b4dd7751e263d2ffd6d"
+  }
+}

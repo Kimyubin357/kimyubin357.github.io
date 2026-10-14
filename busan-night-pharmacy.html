@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="부산 심야약국 보행 접근성 지도. 운영시간 결측을 NMC로 보완하고, 보행거리와 잠재수요로 추가 지정 후보를 비교한 개인 프로젝트입니다. 보행거리뿐 아니라 도착 시각의 영업 여부를 판정하고, 가정에 따른 후보 순위 변화를 함께 제시합니다.">
+  <title>부산 심야약국 보행 접근성 지도 | 김유빈 포트폴리오</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/SUIT-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=0.2.2">
+  <link rel="stylesheet" href="busan-night-pharmacy.css?v=0.2.2">
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
+  <script src="projects.js?v=0.2.2" defer></script>
+  <script src="site.js?v=0.2.2" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="busan-night-pharmacy.js?v=0.2.2" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="./" aria-label="김유빈 포트폴리오 처음으로">김유빈<span aria-hidden="true"></span></a>
+    <nav aria-label="주 메뉴"><a href="./#work">프로젝트</a><a href="./#interview">인터뷰</a><a href="./#about">소개</a><a href="./#contact">연락</a></nav>
+  </div></header>
+  <main class="case container pharmacy-case" id="main">
+    <a class="text-link back-link" href="./#work"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> 포트폴리오로 돌아가기</a>
+    <article>
+      <header class="case-header">
+        <p class="eyebrow" data-reveal>Case Study · Spatial Analysis</p>
+        <h1 data-reveal data-delay="1">부산 심야약국<br>보행 접근성 지도</h1>
+        <p class="case-headline" data-reveal data-delay="2">거리만이 아니라,<br>도착했을 때 문이 열려 있는지까지.</p>
+        <ul class="case-meta" aria-label="프로젝트 정보" data-reveal data-delay="3"><li>2026.09 · 보완 2026.10</li><li>개인 프로젝트</li><li>데이터·공간 분석</li></ul>
+        <p class="pharmacy-role"><strong>직접 담당</strong> 데이터 선정 · 운영시간 검색·전처리 · 보행거리 기반 분석 기획<br><strong>AI 지원</strong> 분석 코드 · 재현 파이프라인 · 대시보드 구현</p>
+        <div class="case-actions">
+          <a class="button" href="https://busan-night-pharmacy-map-768810209035.asia-east1.run.app/" target="_blank" rel="noopener noreferrer">대시보드 열기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+          <a class="button ghost" href="#hours-title">데이터를 다룬 과정 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-7-7 7 7 7-7"/></svg></a>
+          <a class="text-link" href="https://github.com/Kimyubin357/busan-night-pharmacy-map" target="_blank" rel="noopener noreferrer">GitHub 코드 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        </div>
+        <p class="pharmacy-dateline">대시보드 자료 기준 2026.10.13 · 실시간 현장 영업정보가 아닌 등록 시간표 기준 데모입니다.</p>
+      </header>
+      <figure data-reveal="scale">
+        <a class="case-cover pharmacy-image-link" href="assets/busan-night-pharmacy/map-after.jpg" target="_blank" rel="noopener" aria-label="후보 추가 후 접근성 지도 원본 크게 보기">
+          <img src="assets/busan-night-pharmacy/map-after.jpg" alt="월요일 23시·도보 15분 조건에서 수영우리약국 추가로 새롭게 접근 가능한 수요 격자가 초록으로 표시된 실제 화면" width="1280" height="824" fetchpriority="high">
+        </a>
+        <figcaption class="case-cover-caption">후보 추가 후 접근성 지도 · 전체 수요 중 기존 공급으로 닿지 못하던 수요가 얼마나 새롭게 연결되는지 비교합니다.</figcaption>
+      </figure>
+
+      <section class="case-section" aria-labelledby="problem-title" data-reveal>
+        <h2 id="problem-title"><span class="step-number">01</span> 밤에 열린 약국을 찾기 어렵다는 불편에서 시작했습니다.</h2>
+        <div class="case-content">
+          <p>부산 맘카페에서 밤중에 갈 수 있는 약국을 찾기 어려웠다는 글을 접했습니다. 직접 검색해 봐도 지역과 요일별 운영시간을 한눈에 파악하기 어려웠고, 관련 자료를 찾으며 <strong>공공심야약국 정책</strong>을 알게 됐습니다.</p>
+          <p>질문은 두 가지였습니다. 시민은 지금 어디로 갈 수 있을까? 공공심야약국을 한 곳 더 지정한다면 어디를 먼저 검토해야 할까? 지정약국 19곳과 심야에 여는 일반약국, 생활인구와 보행거리를 함께 분석했습니다.</p>
+          <p class="section-note">2026 BIG DATA 활용대회에 개인으로 지원한 프로젝트입니다. 본선에는 진출하지 못했으며, 이후 재현성·데이터 품질·시민용 화면을 보완했습니다. 맘카페 사례는 문제 발견의 계기이며 정량적인 사용자 조사 결과는 아닙니다.</p>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="hours-title" data-reveal>
+        <h2 id="hours-title"><span class="step-number">02</span> 월요일 결측의 약 99%를 NMC 시간표로 보완했습니다.</h2>
+        <div class="case-content">
+          <p>부산 API 1,701건 중 타지역 5건을 제외한 <strong>1,696곳 모두 월요일 시작 시각이 공란</strong>이었습니다. 같은 시설의 NMC 등록 시간을 대조하고, 원본·보완 가정·미상을 따로 기록했습니다.</p>
+          <div class="flow-row" aria-label="부산 원본 수집, 같은 약국 매칭, NMC 시간표 보완"><span>부산 원본 보존</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg><span>기관 ID·시설 대조</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg><span>NMC 시간표 보완</span></div>
+          <div class="table-wrap"><table>
+            <caption>기존 부산 분석 대상 1,696곳의 최종 월요일 구성 · 시민용 지도 목록 1,716곳과 구분</caption>
+            <thead><tr><th scope="col">처리 근거</th><th scope="col">약국 수</th></tr></thead>
+            <tbody><tr><th scope="row">NMC 등록 시간표</th><td>1,679곳</td></tr><tr><th scope="row">화~금 동일 시간에 따른 가정</th><td>3곳</td></tr><tr><th scope="row">근거 부족으로 미상 유지</th><td>14곳</td></tr></tbody>
+          </table></div>
+          <p>기관 ID와 이름 또는 전화가 일치하고 위치가 200m 이내인 약국을 연결했습니다. 미상·추정 시간표는 NMC의 완전한 시간 쌍으로 교체하고, 부산 API와 충돌하면 NMC를 우선 적용했습니다. 초기에는 심평원 분기 자료도 검토했지만, 심평원만으로 보완한 값은 최종 주모형에서 제외했습니다.</p>
+          <p class="section-note">약 99%는 월요일 시간표를 보완한 비율입니다. 실제 영업의 정확도나 현장 검증 비율이 아닙니다.</p>
+          <div class="pharmacy-decisions" aria-labelledby="decision-title">
+            <h3 id="decision-title">직접 정한 기준을, 실제 보완 이력으로 설명합니다.</h3>
+            <p>과거 분기 자료와 NMC가 다르면 NMC 시간표를 우선하고, 남은 공란은 근거에 따라 가정 또는 미상으로 구분했습니다. 보관된 이력에서 다음 두 건을 확인했습니다.</p>
+            <div class="table-wrap"><table>
+              <caption>월요일 시작 시각 보완 이력 · 부산 원본의 종료 시각은 두 곳 모두 19:00</caption>
+              <thead><tr><th scope="col">약국</th><th scope="col">부산 원본</th><th scope="col">초기 심평원 보완</th><th scope="col">NMC로 교체</th></tr></thead>
+              <tbody><tr><th scope="row">미소약국<small>사상구 사상로 325</small></th><td>시작 공란</td><td>08:00–19:00</td><td>08:30–19:00</td></tr><tr><th scope="row">우리약국<small>해운대구 중동1로 26</small></th><td>시작 공란</td><td>08:30–19:00</td><td>09:00–19:00</td></tr></tbody>
+            </table></div>
+            <p class="section-note">부산 원본의 결측을 심평원으로 먼저 보완한 뒤 NMC와 달랐던 두 건입니다. 원천·감사표를 대조한 사례이며, 개별 웹 검색을 복원한 기록은 아닙니다.</p>
+            <a class="text-link" href="evidence/busan-night-pharmacy/decision-cases.json" target="_blank" rel="noopener">두 약국의 변경 값·출처 해시 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+          </div>
+
+        </div>
+      </section>
+
+
+      <section class="case-section pharmacy-arrival" aria-labelledby="arrival-title">
+        <h2 id="arrival-title">가까워도, 도착 전에 닫으면 접근 가능으로 세지 않습니다.</h2>
+        <div class="case-content">
+          <p><strong>도착 시각 = 출발 시각 + OSM 도로망 보행시간.</strong> 거리 기준 안에 있고 도착 순간에도 영업 중인 약국이 있는지 격자마다 판정합니다. 자정을 넘는 구간은 도착 요일뿐 아니라 전날 시작한 영업까지 함께 검사하고, 종료 정각은 제외합니다.</p>
+          <div class="pharmacy-arrival-examples" aria-label="도착 시각 판정 예시">
+            <article><p class="eyebrow">예시 01 · 자정에 폐점</p><h3>월 23:50 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg> 화 00:05</h3><p>15분 걸어 도착 · 00:00 폐점</p><strong>거리 기준 안이어도 접근 제외</strong></article>
+            <article><p class="eyebrow">예시 02 · 전날 영업이 이어짐</p><h3>화 00:40 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg> 화 00:50</h3><p>10분 걸어 도착 · 월 22:00–화 01:00 영업</p><strong>월요일 구간으로 접근 포함</strong></article>
+          </div>
+          <p class="section-note">판정 원리를 설명한 예시입니다. 01:00 종료 약국에 01:00 정각 도착하면 제외합니다. 실제 약국별 결과는 등록 시간표와 보완 가정을 사용합니다.</p>
+        </div>
+      </section>
+      <aside class="pharmacy-results" aria-label="전체 결과 요약">
+        <div><span>현재 공급 · 도보 15분</span><strong>18.2–33.9%</strong><p>접근 가능한 잠재수요의 모형상 하한–상한</p></div>
+        <div><span>추가 지정 후보 · 기본 조건</span><strong>상위 5곳 모두 수영구</strong><p>수영우리 · 영진 · 수영 · 디온 · 큰소망약국</p></div>
+        <p class="section-note">API+결측 가정 · 7요일 × 22·23·00시의 21조건 평균. 아래 캡처의 16.8%는 월요일 23시 한 조건의 하한입니다. <a class="text-link" href="evidence/busan-night-pharmacy/results-summary.json" target="_blank" rel="noopener">전체 결과 근거 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></p>
+      </aside>
+      <section class="case-section" aria-labelledby="map-title">
+        <h2 id="map-title"><span class="step-number">03</span> 기존에 닿던 수요를 빼고, 새로 닿는 수요를 계산했습니다.</h2>
+        <div class="case-content">
+          <p>생활인구를 100m 격자에 배분하고 OSM 도로망으로 보행거리를 계산했습니다. 후보 한 곳이 매일 22–익일 01시에 운영한다고 가정해, <strong>기존 공급으로는 닿지 못하던 잠재수요 중 새로 접근 가능한 양</strong>을 비교했습니다.</p>
+          <p class="section-note">수영우리약국 · 월요일 23:00 출발 · 도보 15분 · API+결측 가정 기준. 아래 두 화면은 같은 후보와 지도 범위이며, 색 변화를 확인할 수 있도록 지도 영역만 확대했습니다. 화면을 선택하면 전체 원본을 엽니다.</p>
+        </div>
+        <div class="pharmacy-comparison">
+          <div class="pharmacy-switch" role="group" aria-label="후보 추가 전후 화면 선택">
+            <button type="button" data-map-state="before" aria-pressed="true" aria-controls="accessibility-view" disabled>현재 공급</button>
+            <button type="button" data-map-state="after" aria-pressed="false" aria-controls="accessibility-view" disabled>후보 1곳 추가 후</button>
+          </div>
+          <figure>
+            <a id="accessibility-original" class="pharmacy-image-link pharmacy-map-crop" href="assets/busan-night-pharmacy/map-before.jpg" target="_blank" rel="noopener" aria-label="선택한 지도 화면 원본 크게 보기">
+              <img id="accessibility-view" src="assets/busan-night-pharmacy/map-before.jpg" alt="후보 추가 전: 기존 공급으로 접근하기 어려운 잠재수요가 붉은 격자로 표시된 지도" width="1280" height="824" loading="lazy">
+            </a>
+            <figcaption id="accessibility-caption" role="status" aria-live="polite">현재 공급: 붉은 격자는 기존 약국으로 접근하기 어려운 잠재수요입니다.</figcaption>
+          </figure>
+          <div class="pharmacy-originals"><a href="assets/busan-night-pharmacy/map-before.jpg" target="_blank" rel="noopener">추가 전 원본 보기</a><a href="assets/busan-night-pharmacy/map-after.jpg" target="_blank" rel="noopener">추가 후 원본 보기</a></div>
+        </div>
+        <div class="case-content">
+          <p>추가 후 초록은 추가 접근 하한에 기여하는 격자, 파랑은 기존 미상에서 가정상 접근으로 바뀐 격자입니다. 점선 원은 직선 참고 범위이고, 색 변화는 도로망 거리로 판정합니다.</p>
+          <p>이 시간대의 추가 접근 잠재수요는 43,143–44,009명입니다. 후보 순위에 쓰는 21개 조건 평균 42,953–43,817명과 구분하며, <strong>실제 방문자나 수혜자 수가 아닙니다.</strong></p>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="sensitivity-title" data-reveal>
+        <h2 id="sensitivity-title"><span class="step-number">04</span> 1위를 단정하지 않고, 가정을 바꿔봤습니다.</h2>
+        <div class="case-content">
+          <p>기본 15분 조건에서 수영우리약국이 1위지만, 2위와 추가 수요 하한 차이는 약 195명(0.45%)입니다. 보행속도·일요일 휴무 가정·수요 배분을 하나씩 바꾸니 기본 선두의 순위는 <strong>1–32위</strong>로 달라졌습니다.</p>
+        </div>
+        <div class="case-content">
+          <div class="table-wrap"><table class="pharmacy-sensitivity"><caption>API 보완·가정 / 도보 15분 · 한 번에 하나의 가정만 변경</caption><thead><tr><th scope="col">조건</th><th scope="col">수영우리약국 순위</th><th scope="col">해당 조건의 1위</th></tr></thead><tbody><tr><th scope="row">기준 · 4km/h</th><td>1위</td><td>수영우리약국</td></tr><tr><th scope="row">보행속도 3km/h</th><td>17위</td><td>연제봄약국</td></tr><tr><th scope="row">보행속도 5km/h</th><td>32위</td><td>화목2층약국</td></tr><tr><th scope="row">일요일 일반약국 휴무 가정 → 미상</th><td>23위</td><td>삼보약국</td></tr><tr><th scope="row">거주인구 비중 → 격자 면적 비중</th><td>2위</td><td>큰소망약국</td></tr></tbody></table></div>
+          <blockquote class="decision"><strong>특정 약국의 확정적 최적성보다 상위 후보군을 제시했습니다.</strong><p>기본 가정에서는 수영구 후보군이 우선 검토 대상이며, 보행속도에 민감한 결과입니다. 하한–상한도 명시한 시간표·가정에 따른 모형 범위이며 통계적 신뢰구간이 아닙니다.</p></blockquote>
+        </div>
+      </section>
+
+
+      <section class="case-section" aria-labelledby="trouble-title">
+        <h2 id="trouble-title">데이터가 맞아 보여도, 실제 동작을 다시 확인했습니다.</h2>
+        <div class="pharmacy-issues">
+          <article><span class="eyebrow">01 · 좌표 품질</span><h3>두 API 좌표가 같아도 주소 구가 달랐습니다.</h3><dl><div><dt>문제</dt><dd>해운대구 송송약국 등이 다른 구에 표시됐습니다.</dd></div><div><dt>원인</dt><dd>두 원천이 같은 잘못된 좌표를 공유해, API 간 일치만으로는 잡히지 않았습니다.</dd></div><div><dt>해결</dt><dd>도로명·건물번호가 유일하게 일치한 8곳을 건물점으로 보정하고 거리를 재계산했습니다. 주소 구–지도 구 불일치는 0건, 15분 하한은 18.7% → 18.2%로 바뀌었습니다.</dd></div></dl></article>
+          <article><span class="eyebrow">02 · 시설 선택</span><h3>동명 약국은 유지하고, 팝업 선택 기준을 바꿨습니다.</h3><dl><div><dt>문제</dt><dd>동래구·해운대구 송송약국이 같은 좌표를 공유해 다른 시설의 팝업을 열 수 있었습니다.</dd></div><div><dt>원인</dt><dd>지도에서 시설을 좌표로 찾아 선택했습니다.</dd></div><div><dt>해결</dt><dd>시설 ID로 연결하고 두 약국의 주소·선택 팝업을 각각 검사했습니다. 이름이 같다는 이유로 합치지 않았습니다.</dd></div></dl></article>
+          <article><span class="eyebrow">03 · 실패 복구</span><h3>갱신 실패가 기존 분석 결과를 덮어쓰지 않게 했습니다.</h3><dl><div><dt>문제</dt><dd>수집·검증이 실패하거나 이전 성공 기록이 남아 있으면 불완전한 결과를 게시할 위험이 있었습니다.</dd></div><div><dt>원인</dt><dd>계산 중인 결과와 공개 결과를 분리하고 이번 실행의 성공을 확인해야 했습니다.</dd></div><div><dt>해결</dt><dd>격리 폴더에서 검사한 뒤 교체하고, 실패 시 기존 시간표·분석을 보존합니다. 실패 주입과 오래된 성공 기록 두 경우를 검사했습니다. 정기 자동 갱신은 운영하지 않습니다.</dd></div></dl></article>
+        </div>
+        <p class="section-note">코드·감사표·화면 검사에 근거한 사례입니다. 건물점 보정은 출입구·현장 검증이 아닙니다. <a class="text-link" href="evidence/busan-night-pharmacy/troubleshooting.json" target="_blank" rel="noopener">해결·검사 근거 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></p>
+      </section>
+      <section class="case-section service-section" aria-labelledby="finder-title">
+        <h2 id="finder-title">분석에서, 시민이 약국을 찾는 화면까지.</h2>
+        <p class="muted">1,716곳을 검색하고 구·군→동, 현재 영업 중, 선택 요일 심야 운영, 공공심야약국 필터로 좁힙니다. 목록에서 약국을 선택하면 지도로 이동해 같은 시설의 주소·시간표·전화 링크를 확인합니다.</p>
+        <div class="pharmacy-phone-grid">
+          <figure><a class="pharmacy-image-link" href="assets/busan-night-pharmacy/finder-mobile-filter.jpg" target="_blank" rel="noopener" aria-label="지역 필터 전체 화면 원본 크게 보기"><img src="assets/busan-night-pharmacy/finder-mobile-filter.jpg" alt="수영구 광안2동과 공공심야약국으로 좁히는 모바일 지역 필터 화면" width="390" height="1316" loading="lazy"></a><figcaption><strong>지역과 유형으로 좁히기</strong><br>수영구 → 광안2동 → 공공심야약국<br><small>화면 일부 · 선택하면 전체 원본</small></figcaption></figure>
+          <figure><a class="pharmacy-image-link" href="assets/busan-night-pharmacy/finder-mobile-selected.jpg" target="_blank" rel="noopener" aria-label="약국 선택 후 지도 이동 화면 원본 크게 보기"><img src="assets/busan-night-pharmacy/finder-mobile-selected.jpg" alt="목록에서 세종약국을 선택하면 지도로 이동하고 주소·시간표·전화 링크가 표시되는 모바일 화면" width="390" height="844" loading="lazy"></a><figcaption><strong>목록에서 지도로 이어가기</strong><br>지도 이동 · 선택 표시 · 운영정보 확인</figcaption></figure>
+        </div>
+        <p class="section-note">2026.10.14 캡처 · 수요일 16:08 저장 시간표 판정. 화면의 ‘영업 중’은 현장 영업 확인이 아닙니다. 이미지를 선택하면 원본을 크게 볼 수 있습니다.</p>
+      </section>
+
+      <div class="disclosures" data-reveal>
+        <details><summary>본인 기여와 AI 활용 범위</summary><div>
+          <p><strong>직접 담당:</strong> 외부 데이터 선정, 검색한 운영정보와의 교차 대조·전처리·가공, 보행거리로 공공심야약국 추가 지정 후보를 비교하자는 분석 아이디어.</p>
+          <p><strong>AI의 도움을 받은 구현:</strong> 데이터 처리·공간 분석 코드, 격자 배분, 보행망·거리행렬, 후보 점수·민감도, 재현 파이프라인, 대시보드·검사 코드 구현과 반복 수정.</p>
+          <p>개인으로 단독 지원했습니다. 결측·충돌 처리 기준은 직접 정했습니다. AI 구현은 감사표·후보 점수의 독립 재집계·가정별 순위 비교 결과를 근거로 검토했습니다.</p>
+        </div></details>
+        <details><summary>데이터 출처와 남은 결측 처리</summary><div>
+          <p>부산 약국·NMC API, 공공심야약국 명단, 부산 빅데이터웨이브의 2026-07 생활인구, SGIS 100m 인구격자·행정동 경계, 2026-10-12 OSM 보행망과 도로명주소를 결합했습니다.</p>
+          <p>부산 API와 NMC가 충돌하면 NMC를 우선 적용했습니다. 남은 월요일이 미상이고 화~금 시작·종료가 모두 같으면 월요일을 보완했습니다.</p>
+          <p>일반약국의 토·일이 두 원천 모두 공란이고 화~금이 완비되면 주말 휴무를, 일요일만 공란이고 화~토가 완비되면 일요일 휴무를 가정했습니다. 공공심야약국의 일요일은 해당 정책 구간을 별도 가정으로 보완했습니다. 그 밖의 근거 부족은 미상으로 남깁니다.</p>
+          <p>명확한 휴게시간 81곳과 월별 요일 예외 9곳을 별도 처리했습니다. 등록값·추정·휴무 가정을 구분하고, 변경 전후를 감사표로 보존했습니다.</p>
+          <p>주소와 지도 구가 달랐던 8곳은 도로명주소 건물점으로 보정해 거리를 재계산했습니다. 동명 약국은 각각 유지하고, 건물점과 250m 이상 차이가 남은 21곳은 위치 확인 필요로 표시했습니다.</p>
+          <div class="evidence-links"><a href="evidence/busan-night-pharmacy/data-notes.md" target="_blank" rel="noopener">출처·기준일·처리 순서</a><a href="evidence/busan-night-pharmacy/opening-hours.json" target="_blank" rel="noopener">월요일 보완·실행 근거 (JSON)</a></div>
+        </div></details>
+        <details><summary>계산 검증과 초기 로딩 개선</summary><div>
+          <p>21,963개 격자·동 조각과 1,696곳의 보행거리를 계산했습니다. 후보 1,677곳 × 운영 기준 2 × 도보 기준 3의 <strong>10,062개 점수를 독립 재집계</strong>해 일치 여부를 검사했습니다. 출발점 20개의 정방향 경로와 거리행렬 최대 차이는 약 0.00006m였습니다.</p>
+          <p>탭별 지연 로딩과 gzip·캐시·재시도를 적용해 첫 화면 필수 파일 합계를 <strong>8.98MB → 1.10MB, 약 88% 줄였습니다.</strong> 압축 전 파일 합계이며 실제 로딩 시간 개선율은 아닙니다. 웹본과 데이터·코드·글꼴을 내장한 다운로드용 독립 HTML을 구분했습니다.</p>
+          <p>2026-10-13 당시 전체 최신 파이프라인 19단계의 시간 합계는 약 227초입니다. 현재 코드는 스냅샷 23단계·최신 24단계로, 이 전체 구성의 시간을 새로 측정한 것은 아닙니다. 10-14에는 기존 코드를 수정 없이 새 API 수집부터 월요일 보완·최종 시간표 생성까지 별도로 격리 실행했습니다.</p>
+          <p>최신 갱신은 격리 폴더에서 검사를 통과한 후 결과를 교체하며 실패하면 기존 결과를 보존합니다. 과거 SGIS 임시 링크가 만료돼도 동일 해시의 원본을 재사용하도록 입력 기준과 SHA-256을 남겼습니다.</p>
+          <div class="evidence-links"><a href="evidence/busan-night-pharmacy/validation.json" target="_blank" rel="noopener">후보 점수·거리 검사 (JSON)</a><a href="evidence/busan-night-pharmacy/sensitivity.json" target="_blank" rel="noopener">가정별 순위·점수 (JSON)</a><a href="evidence/busan-night-pharmacy/loading.json" target="_blank" rel="noopener">초기 필수 파일 비교 (JSON)</a></div>
+        </div></details>
+        <details><summary>해석 범위와 프로젝트 정보</summary><div>
+          <ol>
+            <li><strong>잠재수요:</strong> 생활인구를 거주인구 분포로 배분했습니다. 실제 약국 이용자나 의약품 수요가 아닙니다.</li>
+            <li><strong>보행 가정:</strong> 기본 속도는 4km/h이며 경사·계단 감속·야간 안전은 반영하지 않았습니다.</li>
+            <li><strong>운영시간:</strong> 등록 시간표·보완 가정을 사용합니다. 공휴일·임시휴무·현장 영업을 검증한 자료가 아닙니다. 기준일 이후 변경은 자동 반영되지 않습니다.</li>
+            <li><strong>후보:</strong> 참여 의향·야간 인력·지정 자격을 확인한 결과가 아닙니다. 순위는 가정에 따른 검토 순서입니다.</li>
+            <li><strong>분석 방법:</strong> 실제 방문자 레이블이 없어 예측·분류 모델은 사용하지 않았습니다. 보행 네트워크를 이용한 시나리오 분석입니다.</li>
+          </ol>
+          <p>2026년 9월 기획·분석, 10월 13–14일 후속 보완. 공모전은 개인으로 지원했으며 접수 마감은 9월 18일이었습니다. DB 없이 Cloud Run에 배포한 기준일 데모이고 자동 갱신·CI/CD는 사용하지 않습니다.</p>
+          <div class="evidence-links"><a href="https://www.dxchallenge.co.kr/events/2026-bigdata" target="_blank" rel="noopener noreferrer">공모전 모집 안내</a><a href="https://github.com/Kimyubin357/busan-night-pharmacy-map" target="_blank" rel="noopener noreferrer">GitHub 저장소 (공개)</a><a href="https://busan-night-pharmacy-map-768810209035.asia-east1.run.app/downloads/busan-night-pharmacy.html" target="_blank" rel="noopener noreferrer">데이터 내장 HTML 열기 · 약 9MB</a></div>
+        </div></details>
+      </div>
+    </article>
+    <div class="case-footer"><a class="text-link" href="./#work"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> 포트폴리오로 돌아가기</a><span>자료 기준 2026.10.13 · 위치 보정·내용 검토 2026.10.14</span></div>
+  </main>
+</body>
+</html>

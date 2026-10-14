@@ -1,0 +1,35 @@
+{
+  "scope": "Archived implementation and publication checks; not field validation.",
+  "coordinates": {
+    "source": "coordinate_district_review.csv",
+    "corrected": 8,
+    "district_mismatch_after": 0,
+    "api_15min_lower_before_percent": 18.7,
+    "api_15min_lower_after_percent": 18.2,
+    "remaining_building_point_review": 21
+  },
+  "same_name_selection": {
+    "facility_ids": [
+      "C1202834",
+      "C1203068"
+    ],
+    "selection_key": "facility_id",
+    "evidence": "docs/VALIDATION_RUN.md: actual Chrome ID-specific SongSong search and popup checks"
+  },
+  "refresh": {
+    "implementation": "reproduce/refresh_dashboard.py",
+    "tests": "reproduce/test_refresh.py",
+    "cases": [
+      "failed stage preserves existing schedule/model",
+      "old success cannot pass this refresh"
+    ],
+    "scheduled_service": false
+  },
+  "source_sha256": {
+    "coordinate_district_review.csv": "9e6159974fe4f055b907ecc460c5ced0b4a6bb9d70a528dd3c9251f912af8e82",
+    "coordinate_validation.json": "eebd6eed48c8fbdd3b2284acca555e4f3066c666ca57800c2d38ea4bbe091744",
+    "reproduce/refresh_dashboard.py": "524d1fdb8820987f7e29c9afcf5860cce16ddcbf32b64098a27241b605b7fe9f",
+    "reproduce/test_refresh.py": "c695066745bc3c9137989379fd7a14089c31c1f81dcf0a2ac6c44b504ef5cb2d",
+    "docs/VALIDATION_RUN.md": "e2694f76ea34f28d0879e1cf0f62d5e935d0a4e21832e25dc6823a23c957f4c6"
+  }
+}

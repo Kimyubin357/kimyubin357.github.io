@@ -1,0 +1,45 @@
+{
+  "scope": "API model, 15-minute threshold, mean over seven days × three departure hours; not one Monday 23:00 slot.",
+  "model": "api",
+  "minutes": 15,
+  "departures_per_week": 21,
+  "current_access": {
+    "total": 3292751.3333333335,
+    "lower": 599970.3646190623,
+    "upper": 1117486.5492517457
+  },
+  "lower_percent": 18.2,
+  "upper_percent": 33.9,
+  "top_five": [
+    {
+      "pharmacy_id": "C1202873",
+      "name": "수영우리약국",
+      "district": "수영구",
+      "rank": "1"
+    },
+    {
+      "pharmacy_id": "C1200304",
+      "name": "영진약국",
+      "district": "수영구",
+      "rank": "2"
+    },
+    {
+      "pharmacy_id": "C1200730",
+      "name": "수영약국",
+      "district": "수영구",
+      "rank": "3"
+    },
+    {
+      "pharmacy_id": "C1202299",
+      "name": "디온약국",
+      "district": "수영구",
+      "rank": "4"
+    },
+    {
+      "pharmacy_id": "C1201175",
+      "name": "큰소망약국",
+      "district": "수영구",
+      "rank": "5"
+    }
+  ]
+}

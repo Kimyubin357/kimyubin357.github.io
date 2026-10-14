@@ -56,7 +56,7 @@
               ${p.category ? `<span class="feature-category">${escapeHtml(p.category)}</span>` : ''}
               ${meta ? `<span>${meta}</span>` : ''}
             </div>
-            <h3><a href="${escapeHtml(href)}"${linkAttrs(href)}>${escapeHtml(p.title)}</a></h3>
+            <h3><a href="${escapeHtml(href)}"${linkAttrs(href)}>${p.titleLines?.length ? p.titleLines.map(line => `<span class="project-title-line">${escapeHtml(line)}</span>`).join(' ') : escapeHtml(p.title)}</a></h3>
             ${p.tagline ? `<p class="feature-tagline">${escapeHtml(p.tagline)}</p>` : ''}
             ${p.highlights?.length ? `<dl class="feature-highlights">${p.highlights.map((h) => `<div><dt>${escapeHtml(h.label)}</dt><dd>${escapeHtml(h.text)}</dd></div>`).join('')}</dl>` : ''}
             ${tags(p.tags)}

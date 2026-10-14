@@ -1,0 +1,60 @@
+{
+  "scope": "Archived Monday supplements that HIRA filled and NMC subsequently replaced. Not three complete conflicting schedules and not evidence of a manual web search.",
+  "manual_web_search_sources_available": false,
+  "manual_search_count": null,
+  "cases": [
+    {
+      "id": "C1200758",
+      "name": "미소약국",
+      "address": "부산광역시 사상구 사상로 325  (덕포동)",
+      "day": 1,
+      "busan": [
+        null,
+        "1900"
+      ],
+      "historical_hira": [
+        "0800",
+        "1900"
+      ],
+      "historical_nmc": [
+        "0830",
+        "1900"
+      ],
+      "current_published_intervals_minutes": [
+        [
+          510.0,
+          1140.0
+        ]
+      ]
+    },
+    {
+      "id": "C1200498",
+      "name": "우리약국",
+      "address": "부산광역시 해운대구 중동1로 26 (중동)",
+      "day": 1,
+      "busan": [
+        null,
+        "1900"
+      ],
+      "historical_hira": [
+        "0830",
+        "1900"
+      ],
+      "historical_nmc": [
+        "0900",
+        "1900"
+      ],
+      "current_published_intervals_minutes": [
+        [
+          540.0,
+          1140.0
+        ]
+      ]
+    }
+  ],
+  "sources": {
+    "team2/update_20260915/hira_hours_comparison.csv": "c862cf5c3a52c477e108821f9e090ca77ca418a388bffb5b506003fd1b42d0e8",
+    "team2/update_20260915/nmc_hours_comparison.csv": "15e1b877ede6fdaf8800196db0f93fa5984d1f96d8e30701f75eba5d9f0a9b58",
+    "dashboard_v3/dashboard_data.json.gz": "857f2a76fbc66b908af4271b49a3c087e26f5df05b156cd95c0b953f6b7edc2f"
+  }
+}
