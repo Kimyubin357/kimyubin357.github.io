@@ -79,7 +79,7 @@ window.PORTFOLIO_PROJECTS = [
     category: '데이터 분석 · 머신러닝',
     tags: ['Python', 'pandas', 'LightGBM', 'scikit-learn', 'PyTorch'],
     cover: 'assets/power-forecast/06_model_comparison.png',
-    coverAlt: '공동 실험의 Q1·Q2·Q3·LSTM 전체 오차와 고전력 오차 비교',
+    coverAlt: '9월 평가에서 기준·제출·피크 특화·LSTM 모델의 전체 오차와 피크 구간 오차 막대 비교. 전체 오차는 제출 모델 5.99, 피크 구간 오차는 피크 특화 모델 7.11이 가장 낮음',
     highlights: [
       { label: '문제', text: '공장 전력을 15분 단위로 예측하고 피크 전에 경보하기 (경진대회 과제)' },
       { label: '내 역할', text: '팀장 · 데이터 검증 · 평가 기준 설계' },

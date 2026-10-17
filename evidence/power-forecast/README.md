@@ -10,6 +10,7 @@
 - metrics.json: 모델·경보·데이터 품질·검증 기록과 모델 선택 범위.
 - model_comparison.csv: 동일 9월 평가 행의 Q1·Q2·Q3·LSTM 비교.
 - analysis_summary.json: 공식 기상 대조·리듬·반복 프로파일 집계.
+- make_model_comparison.py: `model_comparison.csv`의 `mae`·`high_mae`로 사이트 그림 `assets/power-forecast/06_model_comparison.png`(2560×950)를 다시 그리는 스크립트(2026-10-17). 페이지 용어에 맞춰 Q1·Q2·Q3를 기준·제출·피크 특화 모델로 표기한다. 실행: `python make_model_comparison.py model_comparison.csv 06_model_comparison.png <SUIT-Regular/Bold.ttf 폴더>` (SUIT 가변 글꼴을 450·700 정적 TTF로 변환해 사용).
 
 ## 수치의 해석
 
