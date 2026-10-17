@@ -2,7 +2,7 @@
 
 프로젝트를 계속 추가할 수 있는 정적 포트폴리오 사이트. 기존 Dash·FastAPI·Firebase 실행과 독립적이다.
 
-현재 버전은 **0.4.2 (2026-10-17)**이다. BatteryFlow AI·부산 심야약국·제조 전력 예측을 대표 프로젝트로 소개한다. 포트폴리오 공개 주소는 https://kimyubin357.github.io/ 이며, 연결된 대시보드와 별도의 GitHub Pages 사이트다.
+현재 버전은 **0.4.3 (2026-10-17)**이다. BatteryFlow AI·부산 심야약국·제조 전력 예측을 대표 프로젝트로 소개한다. 포트폴리오 공개 주소는 https://kimyubin357.github.io/ 이며, 연결된 대시보드와 별도의 GitHub Pages 사이트다.
 
 버전의 기준은 `VERSION`이다. 릴리스 시 이 파일, HTML의 CSS·JS `?v=` 값, 이 문서와 `design/SPEC.md`의 현재 버전을 함께 갱신한다. `design/QA.md`는 버전별 검증 이력을 보존한다. 구현 기준은 [SPEC](design/SPEC.md), 검증 결과는 [QA](design/QA.md), 수치 출처는 [근거 자료 안내](evidence/README.md)에 정리했다.
 

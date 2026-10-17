@@ -81,3 +81,8 @@
 .pharmacy-arrival-examples h3 .icon{width:20px;height:20px;color:var(--blue)}
 .pharmacy-switch button{display:inline-flex;align-items:center;justify-content:center;min-height:44px}
 .pharmacy-arrival-examples.pharmacy-arrival-single{grid-template-columns:minmax(0,1fr);max-width:560px}
+@media (max-width:480px){
+  .pharmacy-case .case-section .table-wrap td{white-space:nowrap}
+  .pharmacy-sensitivity{min-width:460px}
+  .pharmacy-sensitivity th[scope="row"]{min-width:150px}
+}
