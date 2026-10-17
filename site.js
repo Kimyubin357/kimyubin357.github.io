@@ -62,10 +62,7 @@
             ${tags(p.tags)}
             <div class="feature-actions">
               <a class="button" href="${escapeHtml(href)}"${linkAttrs(href)}>프로젝트 자세히 보기 ${arrow}</a>
-              ${p.demo ? `<a class="button ghost" href="${escapeHtml(p.demo)}" target="_blank" rel="noopener noreferrer">라이브 서비스 ${external}</a>` : ''}
-              ${p.github && p.github !== href ? `<a class="text-link ink" href="${escapeHtml(p.github)}" target="_blank" rel="noopener noreferrer">GitHub ${external}</a>` : ''}
             </div>
-            ${p.demoAccount ? demoAccount(p.demoAccount) : ''}
           </div>
         </div>
       </article>`;

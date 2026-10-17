@@ -4,8 +4,9 @@
  * featured: true  → 메인 상단 "대표 프로젝트"에 크게 노출 (order 순, 최대 3개)
  * featured: false → 아래 "전체 프로젝트" 목록에만 노출
  * link            → 상세 페이지(예: project-template.html을 복사해 만든 파일). 없으면 github로 연결
- * demo            → 배포된 서비스 주소(선택). 있으면 "라이브 서비스" 버튼이 표시됨
- * demoAccount     → 체험 계정 { id, password }(선택). 비밀번호는 가려진 채로 표시되고 눈 아이콘으로 보기
+ * demo            → 배포된 서비스 주소(선택). 메인 카드에는 표시하지 않음 — 상세 페이지의 "라이브 서비스 열기" 버튼에 직접 넣는다
+ * demoAccount     → 체험 계정 { id, password }(선택). 상세 페이지의 <div data-demo-account="id">에만 표시 (메인 카드에는 표시 안 함)
+ * 메인 카드에는 "프로젝트 자세히 보기" 버튼 하나만 표시된다.
  *
  * 새 프로젝트 예시:
  * {

@@ -32,7 +32,11 @@
         <h1 data-reveal data-delay="1">TODO 프로젝트 이름</h1>
         <p class="case-headline" data-reveal data-delay="2">TODO 핵심 메시지 한두 줄</p>
         <ul class="case-meta" aria-label="프로젝트 정보" data-reveal data-delay="3"><li>TODO 기간</li><li>TODO 인원</li><li>TODO 역할</li></ul>
-        <a class="button" href="https://github.com/Kimyubin357" target="_blank" rel="noopener noreferrer">GitHub에서 코드 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        <!-- 버튼 규칙: 배포 서비스가 있으면 [라이브 서비스 열기](button) → [GitHub에서 코드 보기](button ghost). 없는 링크는 버튼째 뺀다. -->
+        <div class="case-actions">
+          <a class="button" href="TODO 배포 주소" target="_blank" rel="noopener noreferrer">라이브 서비스 열기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+          <a class="button ghost" href="https://github.com/Kimyubin357" target="_blank" rel="noopener noreferrer">GitHub에서 코드 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        </div>
       </header>
       <figure data-reveal="scale">
         <div class="case-cover"><img src="assets/TODO.png" alt="TODO 화면 설명"></div>
