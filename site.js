@@ -231,6 +231,28 @@
     sections.forEach((s) => navObserver.observe(s));
   }
 
+  /* ---------- Pre-warm live services (Cloud Run cold start) ---------- */
+  // 상세 페이지를 여는 순간, 화면에 보이지 않는 요청을 한 번 보내 서버를 미리 깨운다.
+  // no-cors 요청이라 응답 내용은 읽지 않으며, 실패해도 페이지에는 아무 영향이 없다.
+  const prewarmTargets = [...new Set($$('[data-prewarm]').map((el) => el.dataset.prewarm).filter(Boolean))];
+  if (prewarmTargets.length && !navigator.connection?.saveData) {
+    const prewarm = () => prewarmTargets.forEach((url) => {
+      const key = `prewarm:${url}`;
+      try {
+        // 같은 탭에서 3분 안에 다시 열면 생략한다.
+        const last = Number(sessionStorage.getItem(key) || 0);
+        if (Date.now() - last < 180000) return;
+        sessionStorage.setItem(key, String(Date.now()));
+      } catch (_) { /* storage unavailable: still warm once */ }
+      fetch(`${url}${url.includes('?') ? '&' : '?'}warm=${Date.now()}`, {
+        mode: 'no-cors', cache: 'no-store', credentials: 'omit',
+      }).catch(() => {});
+    });
+    // 페이지 자체의 이미지·글꼴 로딩을 방해하지 않도록 로드가 끝난 뒤 보낸다.
+    if (document.readyState === 'complete') prewarm();
+    else window.addEventListener('load', prewarm, { once: true });
+  }
+
   /* ---------- Interview video (local clip, no YouTube ads) ---------- */
   const frame = $('#interview-player');
   const video = $('#interview-video');

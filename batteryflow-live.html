@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="BatteryFlow AI 라이브 서비스를 여는 중입니다. 서버가 준비되면 로그인 화면으로 자동 이동합니다.">
+  <meta name="robots" content="noindex">
+  <title>BatteryFlow AI 여는 중 | 김유빈 포트폴리오</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/SUIT-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=0.4.2">
+  <link rel="stylesheet" href="batteryflow-live.css?v=0.4.2">
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
+  <script src="projects.js?v=0.4.2" defer></script>
+  <script src="site.js?v=0.4.2" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="batteryflow-live.js?v=0.4.2" defer></script>
+</head>
+<body class="wake-page">
+  <div class="wake" data-wake data-target="https://batteryflow-u6lb5fm2vq-du.a.run.app/login" data-slow-after="60">
+    <header class="wake-top">
+      <a class="brand" href="./" aria-label="김유빈 포트폴리오 처음으로">김유빈<span aria-hidden="true"></span></a>
+      <a class="text-link wake-back" href="batteryflow.html"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> 상세 페이지로 돌아가기</a>
+    </header>
+
+    <main class="wake-main" id="main">
+      <div class="wake-copy">
+        <p class="wake-chip" role="status" aria-live="polite"><span class="dot" aria-hidden="true"></span><span class="only-wait">서버 준비 중</span><span class="only-ready">준비 완료</span><span class="only-slow">조금 더 걸리고 있어요</span></p>
+        <h1 class="only-wait">BatteryFlow AI를<br>여는 중이에요</h1>
+        <h1 class="only-ready">준비됐어요.<br>로그인 화면으로 이동합니다</h1>
+        <h1 class="only-slow">평소보다 오래<br>걸리고 있어요</h1>
+        <p class="wake-lead only-wait">사용하지 않을 때는 비용을 아끼려고 서버를 꺼 두기 때문에, 첫 접속에서 켜지는 데 20–30초쯤 걸립니다. 준비되면 자동으로 이동합니다.</p>
+        <p class="wake-lead only-ready"><span data-countdown-text><strong class="wake-count" data-count>3</strong>초 뒤 자동으로 이동합니다. 아래 체험 계정으로 로그인해 보세요.</span><span data-paused-text hidden>체험 계정을 확인한 뒤 “바로 이동”을 눌러 주세요.</span></p>
+        <p class="wake-lead only-slow">서버가 아직 켜지는 중입니다. 조금 더 기다리거나, 새 탭에서 직접 열어 보세요. 오류가 아니라 대기 시간이 길어진 것입니다.</p>
+
+        <div class="wake-progress" aria-hidden="true">
+          <div class="wake-bar"><span></span></div>
+          <div class="wake-meta"><span><span data-sec>0</span>초 경과</span><span class="only-wait">보통 20–30초</span><span class="only-ready">완료</span><span class="only-slow">계속 확인 중</span></div>
+        </div>
+        <ol class="wake-steps" aria-label="진행 단계">
+          <li><span class="mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>서버 깨우기 요청</li>
+          <li><span class="mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>서비스 응답 확인</li>
+          <li><span class="mark" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="m5 12.5 4.5 4.5L19 7.5"/></svg></span>로그인 화면으로 이동</li>
+        </ol>
+
+        <div class="wake-actions">
+          <a class="button only-ready" data-go href="https://batteryflow-u6lb5fm2vq-du.a.run.app/login">바로 이동 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a>
+          <a class="button only-slow" href="https://batteryflow-u6lb5fm2vq-du.a.run.app/login" target="_blank" rel="noopener noreferrer">새 탭에서 직접 열기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+          <button class="text-link only-slow" type="button" data-retry>다시 확인하기</button>
+          <a class="text-link wake-skip only-wait" href="https://batteryflow-u6lb5fm2vq-du.a.run.app/login">기다리지 않고 바로 열기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        </div>
+        <noscript><p class="wake-lead"><a class="text-link" href="https://batteryflow-u6lb5fm2vq-du.a.run.app/login">BatteryFlow AI 열기</a> · 첫 접속은 20–30초 걸릴 수 있습니다.</p></noscript>
+      </div>
+
+      <aside class="wake-side" aria-label="곧 열릴 화면과 체험 계정">
+        <figure class="wake-preview">
+          <img src="assets/demand-dashboard.png" alt="곧 열릴 BatteryFlow 공급망 화면: 부품별 예측·기존 계획·차이 비교" width="1918" height="904">
+          <figcaption><strong>곧 열릴 화면</strong> · 부품별 예측·기존 계획·차이를 한 화면에서 비교합니다.</figcaption>
+        </figure>
+        <div data-demo-account="batteryflow"></div>
+      </aside>
+    </main>
+
+    <p class="wake-foot">Google Cloud Run · 접속이 없으면 서버가 자동으로 꺼집니다</p>
+  </div>
+</body>
+</html>

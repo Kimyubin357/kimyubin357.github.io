@@ -17,3 +17,6 @@ Thumbs.db
 
 # 원본 방송 전체 파일은 공개 저장소에 올리지 않는다 (잘라낸 클립만 assets/interview/에 포함)
 SBS_8_news.mp4
+
+# Cowork 앱이 저장한 검토용 시안(배포 대상 아님)
+Claude outputs/
