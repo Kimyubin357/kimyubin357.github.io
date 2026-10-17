@@ -490,3 +490,17 @@ figcaption{font-size:14.5px;color:var(--muted);line-height:1.5;margin-top:10px}
   .case-stats li{padding:18px 20px}
 }
 @media print{.case-stats,.case-roles{break-inside:avoid}}
+
+/* 2026-10-17 · 정렬 보완: 프로필 하단 배지를 사진 밖으로, 2열 학력·1열 자격증 중앙 정렬 */
+@media (min-width:821px){
+  .hero-visual{margin-right:24px}
+  .chip-bottom{right:-8%}
+}
+@media (max-width:1100px) and (min-width:821px){
+  .timeline li{text-align:center}
+  .timeline .edu-mark{margin-inline:auto}
+  .timeline h3{justify-content:center}
+}
+@media (max-width:820px){
+  .cert-grid{margin-inline:auto;width:100%}
+}
