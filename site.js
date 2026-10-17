@@ -231,186 +231,107 @@
     sections.forEach((s) => navObserver.observe(s));
   }
 
-  /* ---------- Interview video ---------- */
+  /* ---------- Interview video (local clip, no YouTube ads) ---------- */
   const frame = $('#interview-player');
-  if (!frame) return;
+  const video = $('#interview-video');
+  if (!frame || !video) return;
   const cover = $('#play-interview');
   const soundButton = $('#sound-toggle');
-  const videoId = frame.dataset.videoId;
-  const start = Number(frame.dataset.start || 0);
-  const end = Number(frame.dataset.end || 0);
-  const watchUrl = `https://www.youtube.com/watch?v=${videoId}&t=${start}s`;
-  // YouTube refuses embeds without an http(s) origin (e.g. opening index.html directly).
-  const canEmbed = /^https?:$/.test(location.protocol);
-  let player = null;
+  const note = $('#interview-note');
+  const sourceUrl = 'https://www.youtube.com/watch?v=RI5JTzQbqe4&t=35s';
   let inView = false;
   let autoMode = !reduceMotion;
-  let apiPromise = null;
-  let creating = false;
-  let playerReady = false;
-  let pendingUserPlay = false;
-  let gaveUp = false;
-  let fallbackTimer = null;
-  let loopTimer = null;
+  let failed = false;
+
+  function updateSoundButton() {
+    const soundOn = !video.muted && video.volume > 0;
+    const label = soundOn ? '소리 끄기' : autoMode ? '소리 켜고 처음부터 보기' : '소리 켜기';
+    $('span', soundButton).textContent = label;
+    soundButton.classList.toggle('is-sound-on', soundOn);
+    soundButton.setAttribute('aria-label', label);
+    soundButton.setAttribute('aria-pressed', String(soundOn));
+  }
+
+  const tryPlay = () => video.play().catch(() => {
+    // Autoplay can be refused (e.g. data saver). Keep the cover so the user can start it.
+    frame.classList.remove('is-playing');
+  });
+
+  function startAuto() {
+    if (failed || !autoMode) return;
+    video.muted = true;
+    video.loop = true;
+    soundButton.hidden = false;
+    updateSoundButton();
+    tryPlay();
+  }
+
+  function playWithSound() {
+    if (failed) return;
+    autoMode = false;
+    soundButton.hidden = false;
+    video.loop = false;
+    video.controls = true;
+    video.currentTime = 0;
+    video.muted = false;
+    video.volume = 1;
+    updateSoundButton();
+    tryPlay();
+  }
+
+  function toggleSound() {
+    if (failed) return;
+    if (!video.muted && video.volume > 0) {
+      video.muted = true;
+    } else if (autoMode) {
+      playWithSound();
+      return;
+    } else {
+      video.muted = false;
+      video.volume = 1;
+    }
+    updateSoundButton();
+  }
 
   function useFallbackLink() {
-    if (gaveUp) return;
-    gaveUp = true;
-    creating = false;
-    playerReady = false;
-    pendingUserPlay = false;
-    window.clearTimeout(fallbackTimer);
-    window.clearInterval(loopTimer);
-    loopTimer = null;
-    if (player) { try { player.destroy(); } catch (_) { /* ignore */ } player = null; }
-    frame.classList.remove('is-loading', 'is-playing', 'is-ready');
+    if (failed) return;
+    failed = true;
+    frame.classList.remove('is-playing');
     soundButton.hidden = true;
     const link = document.createElement('a');
     link.className = 'video-cover';
-    link.href = watchUrl;
+    link.href = sourceUrl;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
     link.setAttribute('aria-label', 'YouTube에서 SBS 인터뷰 35초부터 보기');
     link.innerHTML = cover.innerHTML;
-    $('.video-subtitle', link).textContent = 'YouTube에서 출연 구간 보기';
-    const current = $('.video-cover', frame);
-    current?.replaceWith(link);
-    const note = $('.interview figcaption > span');
-    if (note) note.lastChild.textContent = '김유빈 출연 구간 00:35–00:59';
+    $('.video-subtitle', link).textContent = 'YouTube에서 출연 장면 보기';
+    cover.replaceWith(link);
+    if (note) note.textContent = '김유빈 출연 장면 00:35–00:59';
   }
 
-  function loadApi() {
-    if (apiPromise) return apiPromise;
-    apiPromise = new Promise((resolve, reject) => {
-      if (window.YT?.Player) { resolve(window.YT); return; }
-      const previous = window.onYouTubeIframeAPIReady;
-      window.onYouTubeIframeAPIReady = () => { previous?.(); resolve(window.YT); };
-      const script = document.createElement('script');
-      script.src = 'https://www.youtube.com/iframe_api';
-      script.onerror = reject;
-      document.head.append(script);
-    });
-    return apiPromise;
-  }
-
-  function watchClipEnd() {
-    window.clearInterval(loopTimer);
-    loopTimer = window.setInterval(() => {
-      if (gaveUp || !playerReady || !player?.getCurrentTime) return;
-      if (player.getCurrentTime() >= end - 0.2) {
-        player.seekTo(start, true);
-        if (autoMode && inView && player.isMuted()) {
-          player.playVideo();
-        } else {
-          player.pauseVideo();
-        }
-      }
-    }, 250);
-  }
-
-  function playFromStart() {
-    if (gaveUp || !playerReady) return;
-    pendingUserPlay = false;
-    player.unMute();
-    player.setVolume(100);
-    player.seekTo(start, true);
-    player.playVideo();
+  video.addEventListener('playing', () => frame.classList.add('is-playing'));
+  video.addEventListener('ended', () => {
+    // User playback: return to the start and show the cover again.
+    video.currentTime = 0;
+    video.controls = false;
     soundButton.hidden = true;
-  }
+    frame.classList.remove('is-playing');
+  });
+  video.addEventListener('volumechange', updateSoundButton);
+  video.addEventListener('error', useFallbackLink);
+  cover.addEventListener('click', playWithSound);
+  soundButton.addEventListener('click', toggleSound);
+  updateSoundButton();
 
-  function requestUserPlay() {
-    if (gaveUp) return;
-    autoMode = false;
-    pendingUserPlay = true;
-    if (playerReady) playFromStart();
-    else createPlayer(false);
-  }
-
-  function createPlayer(muted) {
-    if (player || creating || gaveUp) return;
-    creating = true;
-    frame.classList.add('is-loading');
-    fallbackTimer = window.setTimeout(useFallbackLink, 10000);
-    loadApi().then((YT) => {
-      // The 10s fallback may already have replaced the player with a link.
-      if (gaveUp) return;
-      player = new YT.Player('interview-yt', {
-        videoId,
-        playerVars: {
-          start, end, autoplay: 0, mute: muted ? 1 : 0, playsinline: 1, rel: 0,
-          controls: 1, modestbranding: 1, origin: location.origin,
-        },
-        events: {
-          onReady(event) {
-            if (gaveUp) return;
-            window.clearTimeout(fallbackTimer);
-            creating = false;
-            playerReady = true;
-            frame.classList.remove('is-loading');
-            frame.classList.add('is-ready');
-            const iframe = event.target.getIframe();
-            iframe.title = 'SBS 8뉴스 — 김유빈 부트캠프 인터뷰 (35초–59초)';
-            if (pendingUserPlay) {
-              playFromStart();
-            } else if (autoMode) {
-              event.target.mute();
-              soundButton.hidden = false;
-              if (inView) event.target.playVideo();
-            }
-          },
-          onStateChange(event) {
-            if (gaveUp || !playerReady) return;
-            if (event.data === YT.PlayerState.PLAYING) {
-              if (autoMode && !inView) {
-                event.target.pauseVideo();
-                return;
-              }
-              frame.classList.add('is-playing');
-              watchClipEnd();
-            } else {
-              window.clearInterval(loopTimer);
-              loopTimer = null;
-              if (event.data === YT.PlayerState.ENDED) {
-                event.target.seekTo(start, true);
-                if (autoMode && inView && event.target.isMuted()) event.target.playVideo();
-                else event.target.pauseVideo();
-              }
-            }
-          },
-          onError() {
-            if (gaveUp) return;
-            useFallbackLink();
-          },
-        },
-      });
-    }).catch(() => {
-      useFallbackLink();
-    });
-  }
-
-  if (!canEmbed) {
-    useFallbackLink();
-    return;
-  }
-
-  if (reduceMotion) {
-    const note = $('.interview figcaption > span');
-    if (note) note.lastChild.textContent = '김유빈 출연 구간 00:35–00:59';
-  }
-
-  cover.addEventListener('click', requestUserPlay);
-  soundButton.addEventListener('click', requestUserPlay);
+  if (reduceMotion && note) note.textContent = '김유빈 출연 장면 · 눌러서 재생합니다.';
 
   if ('IntersectionObserver' in window) {
     new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         inView = entry.isIntersecting && entry.intersectionRatio >= 0.45;
-        if (inView && autoMode) {
-          if (!player) createPlayer(true);
-          else if (playerReady) player.playVideo();
-        } else if (!inView && playerReady) {
-          player.pauseVideo();
-        }
+        if (inView && autoMode) startAuto();
+        else if (!inView && !video.paused) video.pause();
       });
     }, { threshold: [0, 0.45] }).observe(frame);
   }

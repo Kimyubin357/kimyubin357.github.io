@@ -14,3 +14,6 @@ Thumbs.db
 .env
 .env.*
 !.env.example
+
+# 원본 방송 전체 파일은 공개 저장소에 올리지 않는다 (잘라낸 클립만 assets/interview/에 포함)
+SBS_8_news.mp4

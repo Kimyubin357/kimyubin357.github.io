@@ -113,7 +113,8 @@ nav a.is-active{background:var(--ink);color:white}
 .interview-lead{margin:18px auto 0;max-width:640px;color:#b5bfd2;font-size:19px}
 .interview{--vp:1;position:relative;max-width:1180px;margin-inline:auto}
 .video-frame{position:relative;aspect-ratio:16/9;background:var(--night-2);overflow:hidden;border-radius:calc(28px - var(--vp) * 10px);transform:scale(calc(.84 + var(--vp) * .16));transform-origin:50% 0;box-shadow:0 50px 120px -40px rgba(36,87,214,.55),0 0 0 1px rgba(255,255,255,.08);will-change:transform}
-.video-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:0}
+.video-frame iframe,.video-frame video{position:absolute;inset:0;width:100%;height:100%;border:0;z-index:0;object-fit:cover;background:var(--night-2)}
+.video-frame video[controls]{object-fit:contain;z-index:3}
 .video-poster{position:absolute;inset:0;z-index:1;transition:opacity .6s}
 .video-poster img{width:100%;height:100%;object-fit:cover}
 .video-poster::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,15,29,.35) 0%,rgba(10,15,29,.55) 45%,rgba(10,15,29,.92) 100%)}
@@ -127,10 +128,15 @@ nav a.is-active{background:var(--ink);color:white}
 .video-subtitle{font-size:16px;color:#c8d0de}
 .video-frame.is-loading .play-circle::after{animation-duration:1s}
 .video-frame.is-playing .video-poster,.video-frame.is-playing .video-cover{opacity:0;pointer-events:none}
-.sound-toggle{position:absolute;left:20px;bottom:64px;z-index:3;display:inline-flex;align-items:center;gap:10px;padding:12px 20px 12px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:rgba(10,15,29,.6);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:white;font-size:15px;font-weight:700;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s var(--ease),background .2s}
+.sound-toggle{position:absolute;left:20px;bottom:20px;z-index:4;display:inline-flex;align-items:center;gap:10px;padding:12px 20px 12px 16px;border-radius:999px;border:1px solid rgba(255,255,255,.3);background:var(--blue);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);color:white;font-size:15px;font-weight:700;opacity:0;transform:translateY(8px);transition:opacity .4s,transform .4s var(--ease),background .2s}
+.sound-toggle[hidden]{display:none}
+.video-frame video[controls]~.sound-toggle{bottom:64px}
 .video-frame.is-playing .sound-toggle{opacity:1;transform:none}
 .sound-toggle:hover{background:var(--blue)}
+.sound-toggle.is-sound-on{background:rgba(75,85,99,.92);border-color:rgba(255,255,255,.24)}
+.sound-toggle.is-sound-on:hover{background:rgba(55,65,81,.96)}
 .sound-toggle .wave{animation:wave 1.4s ease-in-out infinite}
+.sound-toggle.is-sound-on .wave{animation:none}
 @keyframes wave{50%{opacity:.25}}
 .interview figcaption{display:flex;flex-wrap:wrap;gap:8px 16px;justify-content:space-between;align-items:center;margin-top:22px;font-size:15px;color:#a7b1c4;position:relative}
 .interview figcaption>span{display:inline-flex;align-items:center;gap:10px}

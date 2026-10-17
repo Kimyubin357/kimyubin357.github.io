@@ -8,11 +8,10 @@
   <title>김유빈 | 데이터 분석 · 머신러닝 엔지니어</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/SUIT-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="preconnect" href="https://i.ytimg.com">
-  <link rel="stylesheet" href="styles.css?v=0.4.0">
+  <link rel="stylesheet" href="styles.css?v=0.4.1">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
-  <script src="projects.js?v=0.4.0" defer></script>
-  <script src="site.js?v=0.4.0" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="projects.js?v=0.4.1" defer></script>
+  <script src="site.js?v=0.4.1" defer onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -74,25 +73,24 @@
       </div>
       <div class="container">
         <figure class="interview" data-video-scale>
-          <div class="video-frame" id="interview-player"
-               data-video-id="RI5JTzQbqe4" data-start="35" data-end="59">
+          <div class="video-frame" id="interview-player">
+            <video id="interview-video" class="video-mount" src="assets/interview/sbs-interview.mp4" poster="assets/interview/sbs-interview-poster.jpg" muted loop playsinline preload="metadata" title="SBS 8뉴스 — 김유빈 부트캠프 인터뷰 장면 (원본 00:35–00:59)"></video>
             <div class="video-poster" aria-hidden="true">
-              <img src="https://i.ytimg.com/vi/RI5JTzQbqe4/maxresdefault.jpg" alt="" loading="lazy" onerror="this.remove()">
+              <img src="assets/interview/sbs-interview-poster.jpg" alt="" width="1280" height="720" loading="lazy">
             </div>
-            <div id="interview-yt" class="video-mount"></div>
-            <button class="video-cover" type="button" id="play-interview" aria-label="SBS 인터뷰 35초부터 59초까지 재생">
+            <button class="video-cover" type="button" id="play-interview" aria-label="SBS 인터뷰 장면 소리와 함께 재생">
               <span class="play-circle"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 12 7-12 7Z"/></svg></span>
               <span class="video-title">SBS 8뉴스 · 부트캠프 현장 인터뷰</span>
-              <span class="video-subtitle">김유빈 출연 구간 00:35–00:59</span>
+              <span class="video-subtitle">김유빈 출연 장면 · 24초</span>
             </button>
-            <button class="sound-toggle" type="button" id="sound-toggle" hidden>
+            <button class="sound-toggle" type="button" id="sound-toggle" aria-label="소리 켜고 처음부터 보기" aria-pressed="false" hidden>
               <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4Z"/><path class="wave" d="M16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12"/></svg>
               <span>소리 켜고 처음부터 보기</span>
             </button>
           </div>
           <figcaption>
-            <span><span class="live-dot" aria-hidden="true"></span>화면에 보이면 출연 구간이 음소거로 자동 재생됩니다.</span>
-            <a href="https://www.youtube.com/watch?v=RI5JTzQbqe4&amp;t=35s" target="_blank" rel="noopener noreferrer">YouTube 원본 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+            <span><span class="live-dot" aria-hidden="true"></span><span id="interview-note">화면에 보이면 출연 장면이 음소거로 자동 재생됩니다.</span></span>
+            <span class="video-credit">출처: SBS 8뉴스 · <a href="https://www.youtube.com/watch?v=RI5JTzQbqe4&amp;t=35s" target="_blank" rel="noopener noreferrer">원본 영상 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></span>
           </figcaption>
         </figure>
       </div>
