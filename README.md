@@ -2,7 +2,7 @@
 
 프로젝트를 계속 추가할 수 있는 정적 포트폴리오 사이트. 기존 Dash·FastAPI·Firebase 실행과 독립적이다.
 
-현재 버전은 **0.4.4 (2026-11-05)**이다. BatteryFlow AI·부산 심야약국·제조 전력 예측을 대표 프로젝트로 소개한다. 포트폴리오 공개 주소는 https://kimyubin357.github.io/ 이며, 연결된 대시보드와 별도의 GitHub Pages 사이트다.
+현재 버전은 **0.4.5 (2026-11-05)**이다. BatteryFlow AI·부산 심야약국·제조 전력 예측을 대표 프로젝트로 소개한다. 포트폴리오 공개 주소는 https://kimyubin357.github.io/ 이며, 연결된 대시보드와 별도의 GitHub Pages 사이트다.
 
 버전의 기준은 `VERSION`이다. 릴리스 시 이 파일, HTML의 CSS·JS `?v=` 값, 이 문서와 `design/SPEC.md`의 현재 버전을 함께 갱신한다. `design/QA.md`는 버전별 검증 이력을 보존한다. 구현 기준은 [SPEC](design/SPEC.md), 검증 결과는 [QA](design/QA.md), 수치 출처는 [근거 자료 안내](evidence/README.md)에 정리했다.
 
@@ -138,3 +138,9 @@ BatteryFlow 원본 로그를 다시 대조한 결과, 관측일 49일 중 17일�
 - 첫 화면 캡처는 전환 전 화면이라 캡션에 그 사실을 적었다. 한계·검증 접기는 결론 철회·평가 규모·이월 판정 기준으로 바꿨다.
 - 메인 카드: 태그라인, 태그(LSTM → XGBoost), 결과 문장.
 - 근거: `evidence/batteryflow-v3/`를 추가했다. 기존 `evidence/`의 v2 파일은 철회한 기록으로 그대로 보존한다.
+
+## v0.4.5 BatteryFlow 화면 캡처 교체 · 2026-11-05
+
+- 공급망 화면 캡처를 v3 화면으로 바꿨다(`assets/demand-dashboard-v3.png`, 1918×904). 로그인 없이 쓸 수 있는 로컬 체험 모드에서 Part 92·2021-11-01을 찍었다(XGBoost 204개 · 기존 계획 102개 · +102개). 이전 `demand-dashboard.png`는 삭제했다.
+- 체험 모드 안내 띠 때문에 카드가 69px 아래에 있어, 모바일 확대 영역(`--bf-image-left/top`)을 새 위치로 다시 맞췄다.
+- 상세 페이지 헤드라인을 모바일에서 두 줄이 되도록 줄였다. Copilot 화면 캡처(`copilot-followup.png`)는 전환 전 화면 그대로다.

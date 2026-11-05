@@ -34,7 +34,7 @@ window.PORTFOLIO_PROJECTS = [
     team: '3인 팀',
     category: '머신러닝 · 서비스',
     tags: ['Python', 'XGBoost', 'FastAPI', 'Dash', 'Gemini', 'Firebase'],
-    cover: 'assets/demand-dashboard.png',
+    cover: 'assets/demand-dashboard-v3.png',
     coverAlt: '부품의 예측량과 기존 D+3 계획, 차이와 검토 방향을 함께 확인하는 BatteryFlow 공급망 화면',
     highlights: [
       { label: '문제', text: '최근 패턴과 다른 발주 계획을 어떻게 찾을까?' },
