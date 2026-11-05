@@ -7,11 +7,11 @@
   <title>BatteryFlow AI | 김유빈 포트폴리오</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/SUIT-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=0.4.3">
-  <link rel="stylesheet" href="batteryflow.css?v=0.4.3">
+  <link rel="stylesheet" href="styles.css?v=0.4.4">
+  <link rel="stylesheet" href="batteryflow.css?v=0.4.4">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
-  <script src="projects.js?v=0.4.3" defer></script>
-  <script src="site.js?v=0.4.3" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="projects.js?v=0.4.4" defer></script>
+  <script src="site.js?v=0.4.4" defer onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -26,16 +26,16 @@
       <header class="case-header">
         <p class="eyebrow" data-reveal>Case Study</p>
         <h1 data-reveal data-delay="1">BatteryFlow AI</h1>
-        <p class="case-headline" data-reveal data-delay="2">9가지 방법을 비교해 발주 계획보다 오차가 낮은 기준선을 찾고,<br>계획 검토 서비스로 만들었습니다.</p>
+        <p class="case-headline" data-reveal data-delay="2">9가지 방법을 비교하고, 원본 대조로<br>처음 결론을 바로잡았습니다.</p>
         <p class="battery-scope"><strong>일별 ERP 발주 계획량</strong>을 예측해, 담당자가 기존 D+3 계획과 나란히 비교·검토하도록 했습니다.</p>
 <ul class="case-meta" aria-label="프로젝트 정보" data-reveal data-delay="3"><li>2026.09.21–09.30</li><li>3인 팀</li><li>공급망 분석</li><li>서비스 구현·통합</li></ul>
 <dl class="case-roles" aria-label="본인·팀원·AI 역할">
 <div><dt>본인</dt><dd>발주량 분석·예측, FastAPI·Dash 서비스, AI Copilot 구현·통합</dd></div>
 <div><dt>팀원</dt><dd>유현경: 예지보전·디자인 / 최우찬: 품질보증·Firestore</dd></div>
-<div><dt>AI 지원</dt><dd>구현 초안·수정 (시간 경계·정렬 규칙·실패 사례 검증은 본인이 설계)</dd></div>
+<div><dt>AI 지원</dt><dd>구현 초안·수정과 원본 재검증 (시간 경계·정렬 규칙·실패 사례 검증은 본인이 설계)</dd></div>
 </dl>
 <ul class="case-stats" aria-label="핵심 수치 요약">
-<li><span>9가지 방법 중 최저 오차</span><strong>54.8 → 34.7개</strong><p>기존 D+3 계획 대비 평균 오차(MAE)<br>7일 이동평균 · 시간순 교차검증</p></li>
+<li><span>원본 재검증</span><strong>17일 / 49일</strong><p>전날 계획표가 반복된 휴일 기록<br>찾아서 평가를 바로잡음</p></li>
 <li><span>데이터 정리</span><strong>17,364행</strong><p>같은 부품·시각에 수량이 다른<br>306개 그룹을 분리</p></li>
 <li><span>Copilot 순위 오류</span><strong>서버 규칙으로 수정</strong><p>빠뜨리던 감소 부품을<br>차이 절댓값 순으로 보완</p></li>
 </ul>
@@ -55,7 +55,7 @@
 <a class="battery-crop " href="assets/demand-dashboard.png" target="_blank" rel="noopener noreferrer" style="--bf-ratio:255 / 97;--bf-image-width:752.15686275%;--bf-image-left:-268.62745098%;--bf-image-top:-337.11340206%" aria-label="기존 D+3 계획 카드 · 전체 원본 보기"><img src="assets/demand-dashboard.png" width="1918" height="904" alt="기존 D+3 계획 카드" loading="lazy"></a>
 <a class="battery-crop " href="assets/demand-dashboard.png" target="_blank" rel="noopener noreferrer" style="--bf-ratio:255 / 97;--bf-image-width:752.15686275%;--bf-image-left:-426.66666667%;--bf-image-top:-337.11340206%" aria-label="계획 대비 차이 카드 · 전체 원본 보기"><img src="assets/demand-dashboard.png" width="1918" height="904" alt="계획 대비 차이 카드" loading="lazy"></a>
 </div>
-<figcaption class="case-cover-caption">Part 60의 예측 476개와 기존 계획 761개를 한 화면에서 비교 (2021-11-01)</figcaption>
+<figcaption class="case-cover-caption">Part 60의 예측 476개와 기존 계획 761개를 한 화면에서 비교 (2021-11-01) · v3 전환 전(7일 이동평균 기준) 화면 캡처</figcaption>
 <a class="text-link battery-original-link" href="assets/demand-dashboard.png" target="_blank" rel="noopener noreferrer">공급망 화면 전체 원본 보기</a>
 </figure>
 
@@ -71,16 +71,17 @@
       </section>
 
       <section class="case-section" aria-labelledby="model-title">
-        <h2 data-reveal id="model-title"><span class="step-number">02</span> 9가지 방법을 비교해 모델의 역할을 정했습니다.</h2>
+        <h2 data-reveal id="model-title"><span class="step-number">02</span> 원본을 다시 대조해 처음 결론을 철회했습니다.</h2>
         <div class="case-content">
-<div class="table-wrap" tabindex="0" aria-label="동일한 12개 목표일의 시간순 CV 주요 모델 비교">
-            <table><caption>9가지 방법 중 주요 비교 · 평균 오차(MAE, 개) · 낮을수록 좋음 · 시간순 교차검증 1,289행</caption>
-              <thead><tr><th scope="col">방법</th><th scope="col">MAE (개)</th><th scope="col">역할</th></tr></thead>
-              <tbody><tr><th scope="row">7일 이동평균</th><td>34.7</td><td>검토 기준선</td></tr><tr><th scope="row">LSTM</th><td>35.2</td><td>학습형 보조</td></tr><tr><th scope="row">기존 D+3 계획</th><td>54.8</td><td>비교 대상</td></tr></tbody>
+          <p>처음 비교에서는 7일 이동평균이 기존 계획보다 오차가 36.7% 낮았습니다. 검토 알림을 날짜별로 나눠 보니 12개 목표일 중 6일은 기존 계획이 거의 모든 부품에서 0이었습니다.</p>
+          <p>원본 로그를 대조하자 관측일 49일 중 17일은 <strong>전날 계획표가 그대로 반복된 휴일 기록</strong>이었습니다. 데이터 가이드북에도 없는 구조입니다. 반복 기록은 실제 기준일로 다시 읽고, 최종 수량을 알 수 없는 날은 정답에서 빼고 9가지 방법을 다시 평가했습니다.</p>
+<div class="table-wrap" tabindex="0" aria-label="휴일 이월 기록을 바로잡은 재평가의 주요 모델 비교">
+            <table><caption>재평가 주요 비교 · 평균 오차(MAE, 개) · 낮을수록 좋음 · 시간순 교차검증 7개 목표일</caption>
+              <thead><tr><th scope="col">방법</th><th scope="col">MAE (개)</th><th scope="col">계획보다 나은 날</th><th scope="col">판단</th></tr></thead>
+              <tbody><tr><th scope="row">기존 D+3 계획</th><td>16.2</td><td>-</td><td>가장 강한 기준</td></tr><tr><th scope="row">XGBoost</th><td>15.9</td><td>9 / 13</td><td>운영 예측</td></tr><tr><th scope="row">LSTM</th><td>22.8</td><td>3 / 13</td><td>불채택</td></tr><tr><th scope="row">7일 이동평균</th><td>30.9</td><td>0 / 13</td><td>철회한 결론</td></tr></tbody>
             </table>
           </div>
-          <p>7일 이동평균은 기존 계획보다 오차가 36.7% 낮았습니다. 다만 기간에 따라 결과가 달라, 확정 예측이 아닌 <strong>최근 패턴과 크게 다른 계획을 찾는 검토 기준선</strong>으로 썼습니다.</p>
-          <blockquote class="decision"><strong>LSTM은 학습형 보조 모델로 남겼습니다.</strong><p>학습형 후보 5개 중 오차가 가장 낮았습니다. 데이터가 더 쌓이면 새 기간에서 다시 비교할 계획입니다.</p></blockquote>
+          <blockquote class="decision"><strong>서비스는 XGBoost 예측을 기존 계획과 나란히 보여 줍니다.</strong><p>13개 시험 목표일 중 9일 더 정확했지만, 95% 구간(−3.1~+1.0개)이 0을 포함해 개선을 확정하지 않았습니다.</p></blockquote>
         </div>
       </section>
 
@@ -89,11 +90,11 @@
         <div class="case-content">
           <p>“계획과 차이가 큰 부품 3개”를 물으면 <strong>감소 부품을 빠뜨리는 오류</strong>를 발견했습니다. 키워드만 확인하던 테스트도 이를 놓쳤습니다.</p>
           <p>수치 조회를 문서 검색과 분리하고, 순위는 <strong>서버 규칙(차이 절댓값 순, 동률이면 부품 번호 순)</strong>으로 확정했습니다.</p>
-          <div class="ranking" aria-label="2021년 11월 1일 검증 결과, Part 92, Part 60, Part 66 순서">
-            <span>Part 92&nbsp; +540.29</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
-            <span>Part 60&nbsp; −284.86</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg><span>Part 66&nbsp; −284.86</span>
+          <div class="ranking" aria-label="2021년 11월 1일 결과, Part 92, Part 106, Part 95 순서">
+            <span>Part 92&nbsp; +101.90</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+            <span>Part 106&nbsp; +84.47</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg><span>Part 95&nbsp; +47.20</span>
           </div>
-          <p class="section-note">2021-11-01 기준 · 차이 단위: 개</p>
+          <p class="section-note">2021-11-01 · XGBoost 예측과 기존 계획의 차이 · 단위: 개</p>
         </div>
       </section>
 
@@ -106,16 +107,16 @@
       <div class="disclosures">
         <details><summary>한계와 검증</summary><div>
           <ol>
-          <li><strong>기간별 변동:</strong> 36.7% 개선의 목표일 단위 bootstrap 95% 구간(−13.6%~59.2%)은 0을 포함하고, 첫 구간을 제외하면 오차가 기존 계획보다 16.4% 컸습니다. 그래서 확정 예측이 아닌 검토 기준선으로 씁니다.</li>
-          <li><strong>평가 규모:</strong> 시간순 교차검증 3개 구간 · 12개 목표일 · 112개 부품 · 1,289행의 합산입니다. 마지막 7개 목표일은 회고 평가이며, 독립 시험은 새 기간에서 수행할 계획입니다.</li>
-          <li><strong>관측일 49일:</strong> LSTM은 3일 입력으로 학습했고, 장기 계절성과 더 긴 입력의 효과는 추가 데이터로 평가할 과제입니다.</li>
+          <li><strong>처음 결론의 철회:</strong> 처음 평가(1,289행·12개 목표일)의 36.7% 개선은 휴일 이월 기록 때문에 기존 계획이 엉뚱한 날을 가리켜 생긴 결과였습니다. 당시에도 95% 구간(−13.6%~59.2%)이 0을 포함해 확정하지 않았고, 원본 대조 후 결론을 철회했습니다.</li>
+          <li><strong>평가 규모:</strong> 정답으로 쓸 수 있는 날이 32일로 줄어, 시간순 교차검증 2개 구간(7개 목표일·111개 부품·743행)과 회고 6개 목표일(643행)로 평가했습니다. 회고는 이미 본 기간이라 독립 시험이 아닙니다.</li>
+          <li><strong>이월 판정 기준:</strong> 전날과 공통 부품의 90% 이상이 수량 82개 칸까지 같으면 이월로 봅니다. 실제로 갱신된 10/2·10/16 토요일은 정답에 포함했습니다. 원본 제공자의 운영 기록으로 확인한 규칙은 아닙니다.</li>
           <li><strong>예측 대상:</strong> 일별 최종 ERP 발주 계획량이며, 실제 소비량 예측과는 다릅니다.</li>
           </ol>
           <p>충돌 306개 그룹·612행을 보존하고 Part 21·26을 격리했습니다. 0은 유지하고, 누락 날짜를 0으로 채우지 않았습니다. 학습 정답의 마지막 날짜가 다음 검증의 첫 예측 기준일보다 앞서는지 검사했습니다.</p>
-          <p>일별 자료 5,380행·115개 부품 중 CV는 1,289행·112개 부품·12개 목표일입니다. Part 45·109·111은 CV 목표 기간에 정답 관측이 없어 평가에서 제외했습니다.</p>
-          <p>신뢰구간은 같은 목표일의 예측을 묶은 paired cluster bootstrap 20,000회로 계산했습니다. Part 60·66은 반올림 전에도 동률이며, 입력 순서 변경과 상위 3개 경계 동률을 검사했습니다.</p>
-          <p>팀 개발 이후 개인 Firebase 환경 이전과 Cloud Run 배포는 개인적으로 진행했습니다.</p>
-          <div class="evidence-links"><a href="evidence/cv_metrics_pooled.csv" target="_blank" rel="noopener">9가지 방법 전체 비교 (CSV)</a><a href="evidence/baseline_comparison.json" target="_blank" rel="noopener">신뢰구간·구간 제외 결과 (JSON)</a><a href="evidence/ranking_audit.json" target="_blank" rel="noopener">수치·동률 확인 결과 (JSON)</a><a href="evidence/source_comparison.json" target="_blank" rel="noopener">GitHub 원본 대조·재계산 결과 (JSON)</a></div>
+          <p>LSTM은 학습 자료가 적어 seed만 바꿔도 구간 오차가 14.8~23.7개로 흔들렸습니다(XGBoost 12.4~18.5개).</p>
+          <p>기존 계획과의 차이는 13개 시험 목표일을 날짜 단위로 재표본화(4,000회)해 판정했습니다. Copilot 순위 규칙은 입력 순서 변경과 상위 3개 경계 동률 검사를 통과했습니다.</p>
+          <p>팀 개발 이후 개인 Firebase 환경 이전과 Cloud Run 배포는 개인적으로 진행했습니다. 2026-11-05 라이브 서비스도 재평가 결과(v3)로 전환했습니다.</p>
+          <div class="evidence-links"><a href="evidence/batteryflow-v3/cv_metrics_pooled.csv" target="_blank" rel="noopener">재평가 9가지 방법 전체 비교 (CSV)</a><a href="evidence/batteryflow-v3/plan_comparison.json" target="_blank" rel="noopener">기존 계획 대비 판정 (JSON)</a><a href="evidence/batteryflow-v3/ranking_2021-11-01.json" target="_blank" rel="noopener">Copilot 순위 결과 (JSON)</a><a href="evidence/cv_metrics_pooled.csv" target="_blank" rel="noopener">철회한 처음 평가 기록 (CSV)</a></div>
         </div></details>
         <details><summary>서비스 화면과 시스템 구성</summary><div>
           <figure class="supporting-figure">

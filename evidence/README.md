@@ -1,5 +1,7 @@
 # BatteryFlow 수치 근거 · v0.1.0
 
+> **2026-11-05 철회:** 이 폴더의 수치(7일 이동평균 MAE 34.7, 기존 계획 대비 36.7% 개선 등)는 휴일 이월 기록을 그날 새로 쓴 계획으로 읽어 생긴 결과로 확인되어 철회했다. 기록으로 원본 그대로 보존하며, 현재 근거는 [batteryflow-v3/](batteryflow-v3/README.md)에 있다.
+
 2026-10-13에 [공개 GitHub 저장소](https://github.com/Kimyubin357/Batteryflow-ML-Platform)의 커밋 `8753ffd187f8fc9b465755e670efca7b3ab09ba4`에서 원본 자료를 확인했다. 모델 재학습 없이 저장 예측과 평가 결과를 대조했다.
 
 ## 파일과 출처
