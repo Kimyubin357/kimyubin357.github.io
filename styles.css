@@ -51,6 +51,9 @@ h3{font-size:22px;font-weight:700}
 .button.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
 .button.ghost:hover{border-color:var(--ink);box-shadow:none}
 .button.ghost:hover .icon{transform:translate(2px,-2px)}
+.button.pdf{background:#c62828;border-color:#c62828;color:#fff}
+.button.pdf:hover{background:#a61f1f;border-color:#a61f1f;box-shadow:0 12px 28px -12px rgba(166,31,31,.6)}
+.button.pdf:hover .icon{transform:translateY(3px)}
 .text-link{display:inline-flex;align-items:center;gap:8px;color:var(--blue);font-weight:700}
 .text-link:hover{text-decoration:underline;text-underline-offset:5px}
 .text-link.ink{color:var(--ink)}
