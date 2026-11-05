@@ -2,7 +2,7 @@
 
 프로젝트를 계속 추가할 수 있는 정적 포트폴리오 사이트. 기존 Dash·FastAPI·Firebase 실행과 독립적이다.
 
-현재 버전은 **0.4.7 (2026-11-05)**이다. BatteryFlow AI·부산 심야약국·제조 전력 예측을 대표 프로젝트로 소개한다. 포트폴리오 공개 주소는 https://kimyubin357.github.io/ 이며, 연결된 대시보드와 별도의 GitHub Pages 사이트다.
+현재 버전은 **0.4.8 (2026-11-05)**이다. BatteryFlow AI·부산 심야약국·제조 전력 예측을 대표 프로젝트로 소개한다. 포트폴리오 공개 주소는 https://kimyubin357.github.io/ 이며, 연결된 대시보드와 별도의 GitHub Pages 사이트다.
 
 버전의 기준은 `VERSION`이다. 릴리스 시 이 파일, HTML의 CSS·JS `?v=` 값, 이 문서와 `design/SPEC.md`의 현재 버전을 함께 갱신한다. `design/QA.md`는 버전별 검증 이력을 보존한다. 구현 기준은 [SPEC](design/SPEC.md), 검증 결과는 [QA](design/QA.md), 수치 출처는 [근거 자료 안내](evidence/README.md)에 정리했다.
 
@@ -155,3 +155,7 @@ BatteryFlow 원본 로그를 다시 대조한 결과, 관측일 49일 중 17일�
 BatteryFlow의 현재 페이지·검색 설명·메인 카드에서 이월을 확정 사실로 쓰던 표현을 공통 부품 90% 이상 동일에 따른 보정 가정으로 바꿨다. CV 7일 MAE와 CV+회고 13일의 일별 비교를 표 머리말에서 구분했다. CSV 입력·추론·비교 흐름과 공식 분석 대상의 검토 기록을 분리해 설명했다. 위 버전별 기록은 당시 상태이며 현재 문안은 이 정정을 따른다.
 
 BatteryFlow 저장소 main(`ef7e35c`)과 라이브 서비스(Cloud Run, 2026-11-05 재배포)에는 Copilot 현재 근거 5개, CSV `carryover_days` 사전 검사, 계획 이력의 이월·보간 표시가 반영돼 있다. 이 사이트의 BatteryFlow 수치·화면은 그 상태와 같다.
+
+## v0.4.8 문제 해결 포트폴리오 PDF 다운로드 · 2026-11-05
+
+첫 화면의 "대표 프로젝트 보기"와 "GitHub" 사이에 "포트폴리오 PDF" 버튼을 넣었다. A4 4쪽 문제 해결 포트폴리오(`assets/portfolio-problem-solving.pdf`)를 `김유빈_문제해결_포트폴리오.pdf` 이름으로 내려받는다. 버튼은 PDF를 뜻하는 빨강(`#c62828`, 흰 글씨 대비 5.62:1)으로 채웠다. PDF의 수치는 `evidence/`의 원자료(`ranking_audit.json`, `batteryflow-v3/plan_comparison.json`, `power-forecast/analysis_summary.json`, `metrics.json`)와 대조했다.
