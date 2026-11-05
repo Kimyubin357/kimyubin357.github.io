@@ -39,7 +39,7 @@ window.PORTFOLIO_PROJECTS = [
     highlights: [
       { label: '문제', text: '최근 패턴과 다른 발주 계획을 어떻게 찾을까?' },
       { label: '내 역할', text: '발주량 예측 · FastAPI·Dash 서비스 · AI Copilot' },
-      { label: '결과', text: '휴일 이월 기록 17일을 찾아 처음 결론을 철회 · XGBoost 예측과 기존 계획을 한 화면에' },
+      { label: '결과', text: '이월 의심일 17일을 보정해 처음 결론을 철회 · XGBoost 예측과 기존 계획을 한 화면에' },
     ],
     link: 'batteryflow.html',
     github: 'https://github.com/Kimyubin357/Batteryflow-ML-Platform',

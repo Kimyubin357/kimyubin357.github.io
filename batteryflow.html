@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="BatteryFlow AI 사례: 9가지 방법을 비교해 기존 발주 계획보다 오차가 낮은 기준선을 찾고, 예측·계획·차이를 비교하는 FastAPI·Dash 서비스와 AI Copilot으로 연결했습니다.">
+  <meta name="description" content="BatteryFlow AI 사례: 원본의 이월 의심 기록을 재검증해 처음 성능 결론을 철회하고, XGBoost 예측과 기존 계획을 비교하는 FastAPI·Dash 서비스와 AI Copilot으로 연결했습니다.">
   <title>BatteryFlow AI | 김유빈 포트폴리오</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/SUIT-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=0.4.6">
-  <link rel="stylesheet" href="batteryflow.css?v=0.4.6">
+  <link rel="stylesheet" href="styles.css?v=0.4.7">
+  <link rel="stylesheet" href="batteryflow.css?v=0.4.7">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
-  <script src="projects.js?v=0.4.6" defer></script>
-  <script src="site.js?v=0.4.6" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="projects.js?v=0.4.7" defer></script>
+  <script src="site.js?v=0.4.7" defer onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -35,7 +35,7 @@
 <div><dt>AI 지원</dt><dd>구현 초안·수정과 원본 재검증 (시간 경계·정렬 규칙·실패 사례 검증은 본인이 설계)</dd></div>
 </dl>
 <ul class="case-stats" aria-label="핵심 수치 요약">
-<li><span>원본 재검증</span><strong>17일 / 49일</strong><p>전날 계획표가 반복된 휴일 기록<br>찾아서 평가를 바로잡음</p></li>
+<li><span>원본 재검증</span><strong>17일 / 49일</strong><p>공통 부품 90% 이상 반복된 날<br>이월 가정으로 재평가</p></li>
 <li><span>데이터 정리</span><strong>17,364행</strong><p>같은 부품·시각에 수량이 다른<br>306개 그룹을 분리</p></li>
 <li><span>Copilot 순위 오류</span><strong>서버 규칙으로 수정</strong><p>빠뜨리던 감소 부품을<br>차이 절댓값 순으로 보완</p></li>
 </ul>
@@ -74,14 +74,14 @@
         <h2 data-reveal id="model-title"><span class="step-number">02</span> 원본을 다시 대조해 처음 결론을 철회했습니다.</h2>
         <div class="case-content">
           <p>처음 비교에서는 7일 이동평균이 기존 계획보다 오차가 36.7% 낮았습니다. 검토 알림을 날짜별로 나눠 보니 12개 목표일 중 6일은 기존 계획이 거의 모든 부품에서 0이었습니다.</p>
-          <p>원본 로그를 대조하자 관측일 49일 중 17일은 <strong>전날 계획표가 그대로 반복된 휴일 기록</strong>이었습니다. 데이터 가이드북에도 없는 구조입니다. 반복 기록은 실제 기준일로 다시 읽고, 최종 수량을 알 수 없는 날은 정답에서 빼고 9가지 방법을 다시 평가했습니다.</p>
+          <p>원본 로그에서 관측일 49일 중 17일은 <strong>공통 부품의 90% 이상에서 수량 82칸이 직전 관측일과 같았습니다.</strong> 이를 이월 의심일로 분류하고, 추정 기준일로 계획을 다시 읽어 정답에서 제외한 뒤 9가지 방법을 재평가했습니다. 제공자의 운영 기록으로 확인한 사실이 아닌 자료 기반 보정 가정입니다.</p>
 <div class="table-wrap" tabindex="0" aria-label="휴일 이월 기록을 바로잡은 재평가의 주요 모델 비교">
-            <table><caption>재평가 주요 비교 · 평균 오차(MAE, 개) · 낮을수록 좋음 · 시간순 교차검증 7개 목표일</caption>
-              <thead><tr><th scope="col">방법</th><th scope="col">MAE (개)</th><th scope="col">계획보다 나은 날</th><th scope="col">판단</th></tr></thead>
+            <table><caption>재평가 주요 비교 · CV 7일 MAE와 CV+회고 13일의 일별 비교 · MAE는 낮을수록 좋음</caption>
+              <thead><tr><th scope="col">방법</th><th scope="col">CV 7일<br>MAE (개)</th><th scope="col">CV+회고 13일 중<br>계획보다 나은 날</th><th scope="col">판단</th></tr></thead>
               <tbody><tr><th scope="row">기존 D+3 계획</th><td>16.2</td><td>-</td><td>가장 강한 기준</td></tr><tr><th scope="row">XGBoost</th><td>15.9</td><td>9 / 13</td><td>운영 예측</td></tr><tr><th scope="row">LSTM</th><td>22.8</td><td>3 / 13</td><td>불채택</td></tr><tr><th scope="row">7일 이동평균</th><td>30.9</td><td>0 / 13</td><td>철회한 결론</td></tr></tbody>
             </table>
           </div>
-          <blockquote class="decision"><strong>서비스는 XGBoost 예측을 기존 계획과 나란히 보여 줍니다.</strong><p>13개 시험 목표일 중 9일 더 정확했지만, 95% 구간(−3.1~+1.0개)이 0을 포함해 개선을 확정하지 않았습니다.</p></blockquote>
+          <blockquote class="decision"><strong>서비스는 XGBoost 예측을 기존 계획과 나란히 보여 줍니다.</strong><p>CV 7일과 회고 6일 중 9일에서 일별 MAE가 더 작았지만, 일별 MAE 차이의 95% 구간(−3.1~+1.0개)이 0을 포함해 개선을 확정하지 않았습니다.</p></blockquote>
         </div>
       </section>
 
@@ -100,21 +100,21 @@
 
       <section class="case-section service-section" aria-labelledby="service-title">
         <h2 id="service-title">분석에서 서비스까지</h2>
-        <ol class="service-flow" aria-label="CSV 입력, FastAPI 추론, Dash 계획 비교, 검토 기록 순서"><li>CSV 입력</li><li>FastAPI 추론</li><li>Dash 계획 비교</li><li>검토 기록</li></ol>
-        <p class="muted">학습·추론의 특징 생성 규칙을 공유하고, 입력 검증과 데이터 버전·동시 수정 확인을 연결했습니다.</p>
+        <ol class="service-flow" aria-label="CSV 입력, 입력 검사, FastAPI 추론, Dash 계획 비교 순서"><li>CSV 입력</li><li>입력 검사</li><li>FastAPI 추론</li><li>Dash 계획 비교</li></ol>
+        <p class="muted">CSV 예측은 입력 자료를 비교하는 기능입니다. 공식 분석 자료의 검토 기록은 별도 검토 화면에서 확인 후 저장하며, 데이터 버전과 동시 수정을 검사합니다.</p>
       </section>
 
       <div class="disclosures">
         <details><summary>한계와 검증</summary><div>
           <ol>
           <li><strong>처음 결론의 철회:</strong> 처음 평가(1,289행·12개 목표일)의 36.7% 개선은 휴일 이월 기록 때문에 기존 계획이 엉뚱한 날을 가리켜 생긴 결과였습니다. 당시에도 95% 구간(−13.6%~59.2%)이 0을 포함해 확정하지 않았고, 원본 대조 후 결론을 철회했습니다.</li>
-          <li><strong>평가 규모:</strong> 정답으로 쓸 수 있는 날이 32일로 줄어, 시간순 교차검증 2개 구간(7개 목표일·111개 부품·743행)과 회고 6개 목표일(643행)로 평가했습니다. 회고는 이미 본 기간이라 독립 시험이 아닙니다.</li>
-          <li><strong>이월 판정 기준:</strong> 전날과 공통 부품의 90% 이상이 수량 82개 칸까지 같으면 이월로 봅니다. 실제로 갱신된 10/2·10/16 토요일은 정답에 포함했습니다. 원본 제공자의 운영 기록으로 확인한 규칙은 아닙니다.</li>
+          <li><strong>평가 규모:</strong> 정답으로 쓸 수 있는 날이 32일로 줄어, 시간순 교차검증 2개 구간(7개 목표일·111개 부품·743행)과 회고 6개 목표일(109개 부품·643행)로 평가했습니다. 회고는 이미 본 기간이라 독립 시험이 아닙니다.</li>
+          <li><strong>이월 판정 기준:</strong> 직전 관측일과 공통 부품의 90% 이상에서 수량 82개 칸이 같으면 날짜 전체를 이월로 간주합니다. 실제로 갱신된 10/2·10/16 토요일은 정답에 포함했습니다. 원본 제공자의 운영 기록으로 확인한 규칙은 아닙니다.</li>
           <li><strong>예측 대상:</strong> 일별 최종 ERP 발주 계획량이며, 실제 소비량 예측과는 다릅니다.</li>
           </ol>
           <p>충돌 306개 그룹·612행을 보존하고 Part 21·26을 격리했습니다. 0은 유지하고, 누락 날짜를 0으로 채우지 않았습니다. 학습 정답의 마지막 날짜가 다음 검증의 첫 예측 기준일보다 앞서는지 검사했습니다.</p>
           <p>LSTM은 학습 자료가 적어 seed만 바꿔도 구간 오차가 14.8~23.7개로 흔들렸습니다(XGBoost 12.4~18.5개).</p>
-          <p>기존 계획과의 차이는 13개 시험 목표일을 날짜 단위로 재표본화(4,000회)해 판정했습니다. Copilot 순위 규칙은 입력 순서 변경과 상위 3개 경계 동률 검사를 통과했습니다.</p>
+          <p>기존 계획과의 일별 MAE 차이는 CV 7일과 회고 6일, 합계 13일을 날짜 단위로 재표본화(4,000회)해 비교했습니다. Copilot 순위 규칙은 입력 순서 변경과 상위 3개 경계 동률 검사를 통과했습니다.</p>
           <p>팀 개발 이후 개인 Firebase 환경 이전과 Cloud Run 배포는 개인적으로 진행했습니다. 2026-11-05 라이브 서비스도 재평가 결과(v3)로 전환했습니다.</p>
           <div class="evidence-links"><a href="evidence/batteryflow-v3/cv_metrics_pooled.csv" target="_blank" rel="noopener">재평가 9가지 방법 전체 비교 (CSV)</a><a href="evidence/batteryflow-v3/plan_comparison.json" target="_blank" rel="noopener">기존 계획 대비 판정 (JSON)</a><a href="evidence/batteryflow-v3/ranking_2021-11-01.json" target="_blank" rel="noopener">Copilot 순위 결과 (JSON)</a><a href="evidence/cv_metrics_pooled.csv" target="_blank" rel="noopener">철회한 처음 평가 기록 (CSV)</a></div>
         </div></details>
@@ -143,7 +143,7 @@
         </div></details>
       </div>
     </article>
-    <div class="case-footer"><a class="text-link" href="./#work"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> 포트폴리오로 돌아가기</a><span>내용 기준 2026.10.07 · 수치 재확인 2026.10.13 · 페이지 정리 2026.10.17</span></div>
+    <div class="case-footer"><a class="text-link" href="./#work"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> 포트폴리오로 돌아가기</a><span>수치 기준 audited_v3 · 평가 범위·설명 정정 2026.11.05</span></div>
   </main>
 </body>
 </html>
