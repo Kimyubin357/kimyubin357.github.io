@@ -90,11 +90,11 @@
         <div class="case-content">
           <p>“계획과 차이가 큰 부품 3개”를 물으면 <strong>감소 부품을 빠뜨리는 오류</strong>를 발견했습니다. 키워드만 확인하던 테스트도 이를 놓쳤습니다.</p>
           <p>수치 조회를 문서 검색과 분리하고, 순위는 <strong>서버 규칙(차이 절댓값 순, 동률이면 부품 번호 순)</strong>으로 확정했습니다.</p>
-          <div class="ranking" aria-label="2021년 11월 1일 결과, Part 92, Part 106, Part 95 순서">
-            <span>Part 92&nbsp; +101.90</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
-            <span>Part 106&nbsp; +84.47</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg><span>Part 95&nbsp; +47.20</span>
+          <div class="ranking" aria-label="2021년 11월 1일 결과, Part 92, Part 60, Part 66 순서">
+            <span>Part 92&nbsp; +533.20</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+            <span>Part 60&nbsp; −387.20</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg><span>Part 66&nbsp; −387.20</span>
           </div>
-          <p class="section-note">2021-11-01 · XGBoost 예측과 기존 계획의 차이 · 단위: 개</p>
+          <p class="section-note">2021-11-01 · 7일 이동평균 예측과 기존 계획의 차이(동률은 부품 번호순) · 단위: 개. 감소 부품이 상위에 드는 경우를 보이려고 7일 이동평균 예시를 썼습니다. 운영 모델(XGBoost)의 상위 3개는 Part 92 +101.90, Part 106 +84.47, Part 95 +47.20입니다. <span class="nowrap">2026-11-20</span> 라이브 Copilot 답변과 같은 순서입니다.</p>
         </div>
       </section>
 
@@ -116,7 +116,7 @@
           <p>LSTM은 학습 자료가 적어 seed만 바꿔도 구간 오차가 14.8~23.7개로 흔들렸습니다(XGBoost 12.4~18.5개).</p>
           <p>기존 계획과의 일별 MAE 차이는 CV 7일과 회고 6일, 합계 13일을 날짜 단위로 재표본화(4,000회)해 비교했습니다. Copilot 순위 규칙은 입력 순서 변경과 상위 3개 경계 동률 검사를 통과했습니다.</p>
           <p>팀 개발 이후 개인 Firebase 환경 이전과 Cloud Run 배포는 개인적으로 진행했습니다. 2026-11-05 라이브 서비스도 재평가 결과(v3)로 전환했습니다.</p>
-          <div class="evidence-links"><a href="evidence/batteryflow-v3/cv_metrics_pooled.csv" target="_blank" rel="noopener">재평가 9가지 방법 전체 비교 (CSV)</a><a href="evidence/batteryflow-v3/plan_comparison.json" target="_blank" rel="noopener">기존 계획 대비 판정 (JSON)</a><a href="evidence/batteryflow-v3/ranking_2021-11-01.json" target="_blank" rel="noopener">Copilot 순위 결과 (JSON)</a><a href="evidence/cv_metrics_pooled.csv" target="_blank" rel="noopener">철회한 처음 평가 기록 (CSV)</a></div>
+          <div class="evidence-links"><a href="evidence/batteryflow-v3/cv_metrics_pooled.csv" target="_blank" rel="noopener">재평가 9가지 방법 전체 비교 (CSV)</a><a href="evidence/batteryflow-v3/plan_comparison.json" target="_blank" rel="noopener">기존 계획 대비 판정 (JSON)</a><a href="evidence/batteryflow-v3/ranking_2021-11-01_ma7.json" target="_blank" rel="noopener">Copilot 순위 결과 · 7일 이동평균 (JSON)</a><a href="evidence/batteryflow-v3/ranking_2021-11-01.json" target="_blank" rel="noopener">Copilot 순위 결과 · XGBoost (JSON)</a><a href="evidence/cv_metrics_pooled.csv" target="_blank" rel="noopener">철회한 처음 평가 기록 (CSV)</a></div>
         </div></details>
         <details><summary>서비스 화면과 시스템 구성</summary><div>
           <figure class="supporting-figure">
@@ -126,7 +126,7 @@
 <p class="battery-crop-summary">후속 답변의 전체 예측·계획 합계 차이는 1,197.69개(13.36%)입니다. 부품 검토 링크와 답변 근거를 함께 제공합니다.</p>
 <div class="battery-crop-scroll" tabindex="0" aria-label="Copilot 답변 확대 영역, 가로로 스크롤해 전체 문장 확인"><a class="battery-crop battery-pan-image" href="assets/copilot-followup-v3.png" target="_blank" rel="noopener noreferrer" style="--bf-ratio:510 / 219;--bf-image-width:376.07843137%;--bf-image-left:-270.19607843%;--bf-image-top:-228.31050228%" aria-label="전체 합계 차이 답변과 Part 92·106·95 검토 링크 · 전체 원본 보기"><img src="assets/copilot-followup-v3.png" width="1918" height="903" alt="전체 합계 차이 답변과 Part 92·106·95 검토 링크" loading="lazy"></a></div><p class="battery-pan-hint">가로로 스크롤하면 확대된 답변의 오른쪽까지 볼 수 있습니다.</p>
 </div>
-<figcaption>2026-11-05 라이브 서비스 캡처 · "계획과 차이가 큰 부품 3개" 답변(위 03 절 순위와 같음)에 이어 전체 합계를 물은 후속 답변입니다.</figcaption>
+<figcaption>2026-11-05 라이브 서비스 캡처 · XGBoost 기준 "계획과 차이가 큰 부품 3개" 답변(Part 92·106·95)에 이어 전체 합계를 물은 후속 답변입니다.</figcaption>
 <a class="text-link battery-original-link" href="assets/copilot-followup-v3.png" target="_blank" rel="noopener noreferrer">Copilot 화면 전체 원본 보기</a>
 </figure>
           <figure class="supporting-figure">

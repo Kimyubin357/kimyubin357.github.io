@@ -89,7 +89,7 @@ window.PORTFOLIO_PROJECTS = [
     title: '제조 전력 예측과 피크 사전경보',
     titleLines: ['제조 전력 예측과', '피크 사전경보'],
     tagline: '기상 데이터의 1시간 어긋남을 찾아, 예측에 미래 정보가 섞이는 것을 막았습니다.',
-    period: '2026.10.02–10.08', team: '점프업 · 3인 팀',
+    period: '2026.10.02–10.08', team: '경진대회 · 3인 팀',
     category: '데이터 분석 · 머신러닝',
     tags: ['Python', 'pandas', 'LightGBM', 'scikit-learn', 'PyTorch'],
     cover: 'assets/power-forecast/06_model_comparison.png',
