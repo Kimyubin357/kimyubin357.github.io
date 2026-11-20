@@ -11,10 +11,27 @@
 
   /* ---------- Projects (data from projects.js) ---------- */
   const projects = (window.PORTFOLIO_PROJECTS || []).slice();
-  const featured = projects
+  const projectById = new Map(projects.map((p) => [p.id, p]));
+  // Each track picks up to three projects and may override their card copy.
+  const tracks = (window.PORTFOLIO_TRACKS || [])
+    .map((t) => ({
+      ...t,
+      items: (t.projects || [])
+        .map((ref) => (projectById.has(ref.id) ? { ...projectById.get(ref.id), ...ref } : null))
+        .filter(Boolean)
+        .slice(0, 3),
+    }))
+    .filter((t) => t.items.length);
+  const requestedTrack = new URLSearchParams(window.location.search).get('track');
+  let currentTrack = tracks.find((t) => t.id === requestedTrack) || tracks[0] || null;
+  const legacyFeatured = projects
     .filter((p) => p.featured)
     .sort((a, b) => (a.order ?? 99) - (b.order ?? 99))
     .slice(0, 3);
+  const featuredItems = () => (currentTrack ? currentTrack.items : legacyFeatured);
+  // Shared with the scroll effects below; refreshed when a track re-renders the cards.
+  let stackCards = [];
+  let ticking = false;
   const projectHref = (p) => p.link || p.github || '#';
   const isExternal = (href) => /^https?:/.test(href);
   const linkAttrs = (href) => (isExternal(href) ? ' target="_blank" rel="noopener noreferrer"' : '');
@@ -37,15 +54,17 @@
       </div>`;
   const tags = (list = []) => `<ul class="tag-list">${list.map((t) => `<li>${escapeHtml(t)}</li>`).join('')}</ul>`;
 
-  function renderFeatured() {
+  function renderFeatured({ reveal = true } = {}) {
     const list = $('#featured-list');
+    const featured = featuredItems();
     if (!list || !featured.length) return;
+    const revealAttr = reveal ? ' data-reveal' : '';
     try {
       const markup = featured.map((p, i) => {
         const href = projectHref(p);
         const meta = [p.period, p.team].filter(Boolean).map(escapeHtml).join(' · ');
         return `
-      <article class="feature-card" style="--i:${i}" data-stack data-reveal>
+      <article class="feature-card" style="--i:${i}" data-stack${revealAttr}>
         <div class="feature-inner">
           <a class="feature-media" href="${escapeHtml(href)}"${linkAttrs(href)} tabindex="-1" aria-hidden="true">
             ${p.cover ? `<img src="${escapeHtml(p.cover)}" alt="${escapeHtml(p.coverAlt || '')}" loading="lazy">` : ''}
@@ -76,7 +95,7 @@
 
   function renderArchive() {
     const section = $('#archive');
-    if (!section || projects.length <= featured.length) return;
+    if (!section || projects.length <= featuredItems().length) return;
     section.hidden = false;
     const grid = $('#archive-grid');
     const filters = $('#archive-filters');
@@ -115,6 +134,78 @@
     });
   }
 
+  /* ---------- Job tracks (tabs above the featured cards) ---------- */
+  function renderTrackCopy() {
+    if (!currentTrack) return;
+    const role = $('#hero-role-text');
+    const intro = $('#hero-intro');
+    const note = $('#work-note');
+    if (role && currentTrack.role) role.textContent = currentTrack.role;
+    if (intro && currentTrack.intro) intro.innerHTML = currentTrack.intro;
+    if (note && currentTrack.note) note.textContent = currentTrack.note;
+    const evidence = $('#track-evidence');
+    if (evidence) {
+      const rows = currentTrack.evidence || [];
+      evidence.hidden = !rows.length;
+      evidence.innerHTML = rows.length ? `
+        <p class="track-evidence-title">${escapeHtml(currentTrack.label)}에서 보여 드릴 역량</p>
+        <ul>${rows.map((r) => {
+          const proof = r.href
+            ? `<a href="${escapeHtml(r.href)}">${escapeHtml(r.proof)} ${arrow}</a>`
+            : `<span>${escapeHtml(r.proof)}</span>`;
+          return `<li><strong>${escapeHtml(r.need)}</strong>${proof}</li>`;
+        }).join('')}</ul>` : '';
+    }
+  }
+
+  function renderTrackTabs() {
+    const tabs = $('#track-tabs');
+    if (!tabs || tracks.length < 2) return;
+    tabs.hidden = false;
+    tabs.innerHTML = tracks.map((t) => {
+      const selected = t === currentTrack;
+      return `<button type="button" role="tab" id="track-tab-${escapeHtml(t.id)}" aria-controls="track-panel" aria-selected="${selected}" tabindex="${selected ? 0 : -1}" data-track="${escapeHtml(t.id)}">${escapeHtml(t.label)}</button>`;
+    }).join('');
+    $('#track-panel')?.setAttribute('aria-labelledby', `track-tab-${currentTrack.id}`);
+    const select = (button, focus) => {
+      const next = tracks.find((t) => t.id === button.dataset.track);
+      if (!next || next === currentTrack) return;
+      currentTrack = next;
+      $$('[role="tab"]', tabs).forEach((b) => {
+        const on = b === button;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+      });
+      if (focus) button.focus();
+      $('#track-panel')?.setAttribute('aria-labelledby', button.id);
+      renderTrackCopy();
+      renderFeatured({ reveal: false });
+      stackCards = $$('[data-stack]');
+      requestTick();
+      // Keep the address shareable: ?track=data opens this tab first next time.
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('track', currentTrack.id);
+        window.history.replaceState(null, '', url);
+      } catch (error) { /* file:// or blocked history — the tab still switches */ }
+    };
+    tabs.addEventListener('click', (event) => {
+      const button = event.target.closest('[role="tab"]');
+      if (button) select(button, false);
+    });
+    tabs.addEventListener('keydown', (event) => {
+      const list = $$('[role="tab"]', tabs);
+      const index = list.indexOf(document.activeElement);
+      if (index < 0) return;
+      const keys = { ArrowRight: 1, ArrowLeft: -1, Home: -index, End: list.length - 1 - index };
+      if (!(event.key in keys)) return;
+      event.preventDefault();
+      select(list[(index + keys[event.key] + list.length) % list.length], true);
+    });
+  }
+
+  renderTrackCopy();
+  renderTrackTabs();
   renderFeatured();
   renderArchive();
 
@@ -179,8 +270,8 @@
   const progress = $('.scroll-progress');
   const parallaxItems = $$('[data-parallax]');
   const videoScale = $('[data-video-scale]');
-  const stackCards = $$('[data-stack]');
-  let ticking = false;
+  stackCards = $$('[data-stack]');
+  ticking = false;
 
   function onScroll() {
     ticking = false;
