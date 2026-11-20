@@ -29,6 +29,7 @@
     .sort((a, b) => (a.order ?? 99) - (b.order ?? 99))
     .slice(0, 3);
   const featuredItems = () => (currentTrack ? currentTrack.items : legacyFeatured);
+  const trackIdsOf = (projectId) => tracks.filter((t) => t.items.some((p) => p.id === projectId)).map((t) => t.id);
   // Shared with the scroll effects below; refreshed when a track re-renders the cards.
   let stackCards = [];
   let ticking = false;
@@ -104,7 +105,7 @@
     grid.innerHTML = projects.map((p) => {
       const href = projectHref(p);
       return `
-      <a class="archive-card" href="${escapeHtml(href)}"${linkAttrs(href)} data-category="${escapeHtml(p.category || '')}" data-reveal>
+      <a class="archive-card" href="${escapeHtml(href)}"${linkAttrs(href)} data-category="${escapeHtml(p.category || '')}" data-tracks="${escapeHtml(trackIdsOf(p.id).join(' '))}" data-reveal>
         <div class="archive-thumb">${p.cover ? `<img src="${escapeHtml(p.cover)}" alt="" loading="lazy">` : ''}</div>
         <div class="archive-body">
           <div class="archive-meta"><span>${escapeHtml(p.category || '')}</span><span>${escapeHtml(p.period || '')}</span></div>
@@ -115,10 +116,14 @@
       </a>`;
     }).join('');
 
-    const categories = [...new Set(projects.map((p) => p.category).filter(Boolean))];
-    if (categories.length < 2) return;
-    filters.innerHTML = ['전체', ...categories]
-      .map((c, i) => `<button type="button" class="filter${i === 0 ? ' is-active' : ''}" aria-pressed="${i === 0}" data-filter="${escapeHtml(i === 0 ? '' : c)}">${escapeHtml(c)}</button>`)
+    // With job tracks, filter by track: a per-project category would match only one card each.
+    const byTrack = tracks.length > 1;
+    const options = byTrack
+      ? tracks.map((t) => ({ value: t.id, label: t.label, count: projects.filter((p) => trackIdsOf(p.id).includes(t.id)).length }))
+      : [...new Set(projects.map((p) => p.category).filter(Boolean))].map((c) => ({ value: c, label: c }));
+    if (options.length < 2) return;
+    filters.innerHTML = [{ value: '', label: '전체', count: byTrack ? projects.length : undefined }, ...options]
+      .map((o, i) => `<button type="button" class="filter${i === 0 ? ' is-active' : ''}" aria-pressed="${i === 0}" data-filter="${escapeHtml(o.value)}">${escapeHtml(o.label)}${o.count !== undefined ? ` <span class="filter-count">${o.count}</span>` : ''}</button>`)
       .join('');
     filters.addEventListener('click', (event) => {
       const button = event.target.closest('.filter');
@@ -129,7 +134,8 @@
       });
       const value = button.dataset.filter;
       $$('.archive-card', grid).forEach((card) => {
-        card.hidden = Boolean(value) && card.dataset.category !== value;
+        const match = byTrack ? card.dataset.tracks.split(' ').includes(value) : card.dataset.category === value;
+        card.hidden = Boolean(value) && !match;
       });
     });
   }
@@ -261,6 +267,26 @@
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
     revealTargets.forEach((el) => revealObserver.observe(el));
   }
+  /* ---------- Tech marquee pause (moving content needs a stop control) ---------- */
+  const marqueeToggle = $('.marquee-toggle');
+  if (marqueeToggle) {
+    const wrap = marqueeToggle.closest('.marquee-wrap');
+    const pauseIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>';
+    const playIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5Z"/></svg>';
+    const setPaused = (paused) => {
+      wrap.classList.toggle('is-paused', paused);
+      marqueeToggle.setAttribute('aria-pressed', String(paused));
+      marqueeToggle.setAttribute('aria-label', paused ? '기술 목록 다시 움직이기' : '기술 목록 움직임 멈추기');
+      marqueeToggle.innerHTML = paused ? playIcon : pauseIcon;
+    };
+    if (reduceMotion) marqueeToggle.hidden = true;
+    else {
+      marqueeToggle.hidden = false;
+      setPaused(false);
+      marqueeToggle.addEventListener('click', () => setPaused(!wrap.classList.contains('is-paused')));
+    }
+  }
+
   requestAnimationFrame(() => document.documentElement.classList.add('is-loaded'));
   // The inline head script un-hides everything if this flag never gets set.
   window.__siteReady = true;

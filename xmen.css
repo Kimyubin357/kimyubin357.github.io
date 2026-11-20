@@ -58,3 +58,6 @@
  .xm-metrics{min-width:480px}
 }
 @media print{.xm-steps{grid-template-columns:repeat(3,1fr)}.xm-case details{break-inside:avoid}}
+
+/* v0.5.0 · 03 절 사진은 첫 화면 그림과 같은 장면이라 위쪽만 낮게 보여 반복감을 줄임(누르면 원본) */
+@media (min-width:821px){.xm-steps a{aspect-ratio:4/5}}

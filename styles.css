@@ -552,3 +552,19 @@ figcaption{font-size:14.5px;color:var(--muted);line-height:1.5;margin-top:10px}
 @media (max-width:1100px) and (min-width:821px){
   .cert-grid>li:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 10px)}
 }
+
+/* v0.5.0 · UI/UX 점검 보완 (ui-ux-pro-max 기준) */
+/* 기술 마키: 큰 굵은 글씨 3:1 이상, 멈춤 버튼(움직이는 콘텐츠 정지 수단), 포커스 시에도 정지 */
+.marquee li{color:#7f8a9e}
+.marquee-wrap{position:relative}
+.marquee-wrap.is-paused .marquee-track,.marquee-wrap:focus-within .marquee-track{animation-play-state:paused}
+.marquee-toggle{position:absolute;right:max(16px,calc((100vw - var(--width)) / 2));top:50%;transform:translateY(-50%);width:40px;height:40px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 6px 18px -10px rgba(17,26,46,.35);transition:border-color .2s,background-color .2s}
+.marquee-toggle:hover{border-color:var(--ink)}
+.marquee-toggle[hidden]{display:none}
+.marquee-toggle .icon{width:16px;height:16px}
+@media (max-width:820px){.marquee-toggle{width:36px;height:36px;right:12px}}
+/* 직무별 필터의 개수 표시 */
+.filter-count{display:inline-block;margin-left:4px;font-size:13px;font-weight:700;opacity:.7;font-variant-numeric:tabular-nums}
+/* 작은 글씨 12px 하한, 본문 속 링크 터치 높이 24px 이상 */
+.cert-date small{font-size:12px}
+.video-credit a{display:inline-flex;align-items:center;gap:4px;min-height:24px}

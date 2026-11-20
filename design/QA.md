@@ -226,3 +226,4 @@ GitHub `Kimyubin357/Batteryflow-ML-Platform`의 커밋 `8753ffd187f8fc9b465755e6
 - X-MEN 표가 공통 `tbody tr:first-child` 강조를 물려받던 문제를 페이지 CSS에서 해제했다. 393px에서 주차 표는 행을 세로로 쌓는다.
 - InstaDateMap 테스트 533개: 저장소 `bd781d7`에서 `npm ci` 후 `vitest run`으로 54개 파일 모두 통과(2026-11-20).
 - 확인하지 못한 것: 실제 iPhone Safari, 모션 감소 설정, 인쇄, GitHub Pages 배포본.
+- (추가, 같은 날) ui-ux-pro-max 기준 재점검: 메인·InstaDateMap·X-MEN을 375px·1280px에서 글자 대비, 12px 미만 글자, 24px 미만 조작 요소, 대체 텍스트, 가로 넘침을 스크립트로 검사했다. 남은 문제였던 마키 대비(2.29:1)와 "취득"(11.5px), 영상 원본 링크(높이 23px)를 고친 뒤 대비 미달·작은 조작 요소·가로 넘침 0건. 필터 '서비스 개발 · 운영'은 InstaDateMap·BatteryFlow·부산 약국, '데이터 분석 · AI'는 BatteryFlow·제조 전력·X-MEN을 남긴다. 마키 멈춤 버튼은 누르면 aria-pressed=true와 animation-play-state=paused. 콘솔 오류 0건.
