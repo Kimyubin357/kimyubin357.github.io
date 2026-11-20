@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="김유빈의 데이터 분석·머신러닝 포트폴리오. 제조 데이터 분석·모델 비교와 부산 심야약국 공간 분석을 활용 가능한 화면으로 연결한 프로젝트를 소개합니다.">
+  <meta name="description" content="김유빈의 포트폴리오. 혼자 기획해 운영 중인 웹앱 InstaDateMap, AI Copilot을 붙인 발주 계획 검토 서비스, 공간 분석과 제조 데이터 분석 프로젝트를 직무별로 소개합니다.">
   <meta name="theme-color" content="#FFFFFF">
-  <title>김유빈 | 데이터 분석 · 머신러닝 엔지니어</title>
+  <title>김유빈 | 서비스 개발 · 데이터 분석 포트폴리오</title>
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="preload" href="assets/SUIT-Variable.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="styles.css?v=0.4.8">
+  <link rel="stylesheet" href="styles.css?v=0.5.0">
   <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
-  <script src="projects.js?v=0.4.8" defer></script>
-  <script src="site.js?v=0.4.8" defer onerror="document.documentElement.classList.remove('js')"></script>
+  <script src="projects.js?v=0.5.0" defer></script>
+  <script src="site.js?v=0.5.0" defer onerror="document.documentElement.classList.remove('js')"></script>
 </head>
 <body>
   <a class="skip-link" href="#main">본문 바로가기</a>
@@ -32,12 +32,12 @@
           <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m-7-7 7 7 7-7"/></svg>
         </a>
         <h1 id="hero-title" class="hero-title">
-          <span class="line"><span>분석을,</span></span>
-          <span class="line"><span>사용 가능한</span></span>
-          <span class="line accent"><span>서비스로 연결합니다.</span></span>
+          <span class="line"><span>기획부터 운영까지,</span></span>
+          <span class="line"><span>실제로 쓰이는</span></span>
+          <span class="line accent"><span>서비스를 만듭니다.</span></span>
         </h1>
-        <p class="hero-role" data-reveal data-delay="3">데이터 분석 · 머신러닝 엔지니어 <strong>김유빈</strong></p>
-        <p class="hero-intro" data-reveal data-delay="4">제조 데이터를 분석하고 모델을 비교하며,<br class="desktop-break"> 결과를 활용할 수 있는 API와 대시보드까지 구현합니다.</p>
+        <p class="hero-role" data-reveal data-delay="3"><span id="hero-role-text">웹 서비스 개발 · 운영</span> <strong>김유빈</strong></p>
+        <p class="hero-intro" id="hero-intro" data-reveal data-delay="4">요구사항을 정리해 Next.js·FastAPI·SQL로 구현하고,<br class="desktop-break"> 배포한 서비스를 운영하며 생긴 문제를 고칩니다.</p>
         <div class="actions" data-reveal data-delay="5">
           <a class="button" href="#work">대표 프로젝트 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg></a>
           <a class="button pdf" href="assets/portfolio-problem-solving.pdf" download="김유빈_문제해결_포트폴리오.pdf" type="application/pdf">포트폴리오 PDF <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg></a>
@@ -54,15 +54,18 @@
     </section>
 
     <!-- Tech marquee -->
-    <div class="marquee" aria-label="사용 기술">
+    <div class="marquee-wrap">
+    <div class="marquee" role="region" aria-label="사용 기술">
       <div class="marquee-track">
         <ul>
-          <li>Python</li><li>pandas</li><li>scikit-learn</li><li>PyTorch</li><li>LSTM</li><li>FastAPI</li><li>Dash</li><li>Plotly</li><li>Gemini</li><li>FAISS</li><li>Firebase</li><li>SQL</li>
+          <li>Next.js</li><li>React</li><li>TypeScript</li><li>Supabase</li><li>PostgreSQL</li><li>FastAPI</li><li>Python</li><li>SQL</li><li>Gemini</li><li>FAISS</li><li>Vercel</li><li>Cloud Run</li><li>pandas</li><li>PyTorch</li>
         </ul>
         <ul aria-hidden="true">
-          <li>Python</li><li>pandas</li><li>scikit-learn</li><li>PyTorch</li><li>LSTM</li><li>FastAPI</li><li>Dash</li><li>Plotly</li><li>Gemini</li><li>FAISS</li><li>Firebase</li><li>SQL</li>
+          <li>Next.js</li><li>React</li><li>TypeScript</li><li>Supabase</li><li>PostgreSQL</li><li>FastAPI</li><li>Python</li><li>SQL</li><li>Gemini</li><li>FAISS</li><li>Vercel</li><li>Cloud Run</li><li>pandas</li><li>PyTorch</li>
         </ul>
       </div>
+    </div>
+    <button type="button" class="marquee-toggle" aria-pressed="false" aria-label="기술 목록 움직임 멈추기" hidden></button>
     </div>
 
     <!-- Interview video -->
@@ -102,12 +105,18 @@
       <div class="section-head">
         <p class="eyebrow" data-reveal>Selected Work</p>
         <h2 id="work-title" data-reveal data-delay="1">대표 프로젝트</h2>
-        <p class="section-note" data-reveal data-delay="2">문제에 맞는 데이터와 방법을 선택하고, 결과를 활용할 수 있는 화면으로 연결했습니다.</p>
+        <p class="section-note" id="work-note" data-reveal data-delay="2">기획하고, 만들어 배포한 뒤, 운영하며 고쳐 온 서비스입니다.</p>
       </div>
-      <div class="featured-list" id="featured-list">
-        <p class="noscript-note"><a class="text-link" href="batteryflow.html">BatteryFlow AI 프로젝트 자세히 보기</a></p>
-        <p class="noscript-note"><a class="text-link" href="busan-night-pharmacy.html">부산 심야약국 보행 접근성 지도 자세히 보기</a></p>
-        <p class="noscript-note"><a class="text-link" href="power-forecast.html">제조 전력 예측과 피크 사전경보 자세히 보기</a></p>
+      <div class="track-tabs" id="track-tabs" role="tablist" aria-label="직무별 대표 프로젝트" hidden></div>
+      <div class="track-panel" id="track-panel" role="tabpanel" tabindex="-1">
+        <div class="track-evidence" id="track-evidence" hidden></div>
+        <div class="featured-list" id="featured-list">
+          <p class="noscript-note"><a class="text-link" href="instadatemap.html">InstaDateMap 프로젝트 자세히 보기</a></p>
+          <p class="noscript-note"><a class="text-link" href="batteryflow.html">BatteryFlow AI 프로젝트 자세히 보기</a></p>
+          <p class="noscript-note"><a class="text-link" href="busan-night-pharmacy.html">부산 심야약국 보행 접근성 지도 자세히 보기</a></p>
+          <p class="noscript-note"><a class="text-link" href="power-forecast.html">제조 전력 예측과 피크 사전경보 자세히 보기</a></p>
+          <p class="noscript-note"><a class="text-link" href="xmen.html">X-MEN 동물 X-ray 자세 판별 자세히 보기</a></p>
+        </div>
       </div>
     </section>
 
@@ -118,7 +127,7 @@
           <p class="eyebrow" data-reveal>Archive</p>
           <h2 id="archive-title" data-reveal data-delay="1">전체 프로젝트 <span class="count" id="archive-count"></span></h2>
         </div>
-        <div class="filters" id="archive-filters" role="group" aria-label="분야별 보기"></div>
+        <div class="filters" id="archive-filters" role="group" aria-label="직무별 보기"></div>
       </div>
       <div class="archive-grid" id="archive-grid"></div>
     </section>
@@ -129,38 +138,38 @@
         <div class="about-copy">
           <p class="eyebrow" data-reveal>About</p>
           <h2 id="about-title" data-reveal data-delay="1">결과를 확인하고,<br>쓰이는 곳까지 연결합니다.</h2>
-          <p data-reveal data-delay="2">데이터가 맞는지 먼저 확인하고, 결과를 사람이 쓰는 화면까지 만듭니다. 발주 예측을 계획 검토 서비스로, 약국 운영시간을 시민용 지도로, 기상 시차 검증을 전력 예측 입력 수정으로 연결했습니다.</p>
+          <p data-reveal data-delay="2">필요한 기능을 정하고, 화면과 API, 데이터베이스까지 만들어 배포합니다. 쓰면서 생긴 문제는 원인부터 찾아 고칩니다. 인스타 링크를 둘이 쓰는 지도로, 발주 예측을 계획 검토 서비스로, 약국 운영시간을 시민용 지도로 연결했습니다.</p>
         </div>
         <div class="skills">
           <article class="skill-card" data-reveal data-delay="1">
             <span class="skill-index">01</span>
-            <h3>분석 · 평가</h3>
-            <p>데이터 정리, 시간순 검증, 기준선·모델 비교</p>
-            <ul class="tag-list"><li>Python</li><li>pandas</li><li>scikit-learn</li><li>PyTorch</li></ul>
+            <h3>웹 서비스 구현</h3>
+            <p>화면 설계, API 연동, 실시간 동기화와 알림, 운영 중 오류 수정</p>
+            <ul class="tag-list"><li>Next.js</li><li>React</li><li>TypeScript</li><li>FastAPI</li><li>Dash</li></ul>
           </article>
           <article class="skill-card" data-reveal data-delay="2">
             <span class="skill-index">02</span>
-            <h3>서비스 구현</h3>
-            <p>CSV 예측·계획 비교, 공식 분석 검토 기록</p>
-            <ul class="tag-list"><li>FastAPI</li><li>Dash</li><li>Plotly</li></ul>
+            <h3>데이터베이스 · 인증</h3>
+            <p>스키마와 마이그레이션, SQL 함수 트랜잭션, 행 단위 접근제어, PIN 해시 인증</p>
+            <ul class="tag-list"><li>PostgreSQL</li><li>Supabase</li><li>SQL</li><li>Firestore</li></ul>
           </article>
           <article class="skill-card" data-reveal data-delay="3">
             <span class="skill-index">03</span>
-            <h3>AI · 데이터 연결</h3>
-            <p>문서 검색, 수치 조회, 인증과 분석 자료 연결</p>
-            <ul class="tag-list"><li>Gemini</li><li>FAISS</li><li>Firebase</li></ul>
+            <h3>AI · LLM 연결</h3>
+            <p>LLM 장소 추출 모듈, 문서 검색과 서버 규칙을 나눈 Copilot</p>
+            <ul class="tag-list"><li>Gemini</li><li>Anthropic API</li><li>FAISS</li></ul>
           </article>
           <article class="skill-card" data-reveal>
             <span class="skill-index">04</span>
-            <h3>공간 분석 · 지도</h3>
-            <p>OSM 보행망, 생활인구 격자 배분, 도착 시각 기준 접근성</p>
-            <ul class="tag-list"><li>SciPy</li><li>Shapely</li><li>OSM</li><li>Leaflet</li></ul>
+            <h3>분석 · 평가</h3>
+            <p>데이터 정리, 시간순 검증, 모델 비교, 보행망 공간 분석, 이미지 탐지</p>
+            <ul class="tag-list"><li>Python</li><li>pandas</li><li>scikit-learn</li><li>PyTorch</li><li>YOLO</li></ul>
           </article>
           <article class="skill-card" data-reveal>
             <span class="skill-index">05</span>
-            <h3>배포 · 전달</h3>
-            <p>컨테이너 기반 웹 배포, 정적 자료 지연 로딩, 독립 HTML 공유</p>
-            <ul class="tag-list"><li>Docker</li><li>Cloud Run</li><li>gzip · Cache</li></ul>
+            <h3>배포 · 운영</h3>
+            <p>서버리스·컨테이너 배포, 웹 푸시와 예약 재시도, 자동화 테스트</p>
+            <ul class="tag-list"><li>Vercel</li><li>Cloud Run</li><li>Docker</li><li>Vitest</li></ul>
           </article>
         </div>
       </div>
@@ -191,7 +200,7 @@
           <li data-reveal data-delay="2">
             <span class="edu-mark edu-mark-round"><img src="assets/logo-kunsan.png" alt="국립군산대학교 로고" width="700" height="700" loading="lazy"></span>
             <span class="timeline-date">2019.03 – 2021.02</span>
-            <h3>국립군산대학교 <span class="status muted-status">수료</span></h3>
+            <h3>국립군산대학교 <span class="status muted-status">중퇴</span></h3>
             <p>컴퓨터정보통신공학부 컴퓨터정보공학전공 · 충북대학교로 편입</p>
           </li>
           <li data-reveal data-delay="3">
@@ -225,20 +234,29 @@
           </li>
           <li class="cert-card" data-reveal data-delay="2">
             <div class="cert-frame">
-              <span class="cert-label">국가기술자격</span>
-              <h3>컴퓨터활용능력 <small>1급</small></h3>
-              <p class="cert-issuer">대한상공회의소</p>
-              <p class="cert-desc">스프레드시트·데이터베이스 실무, 데이터 처리와 분석</p>
-              <div class="cert-foot"><p class="cert-date"><small>취득</small><time datetime="2021-07">2021.07</time></p><span class="cert-seal" aria-hidden="true">합격</span></div>
-            </div>
-          </li>
-          <li class="cert-card" data-reveal data-delay="3">
-            <div class="cert-frame">
               <span class="cert-label">국가공인</span>
               <h3>리눅스마스터 <small>2급</small></h3>
               <p class="cert-issuer">한국정보통신진흥협회 (KAIT)</p>
               <p class="cert-desc">리눅스 시스템 운영·관리, 네트워크 및 서비스 설정</p>
               <div class="cert-foot"><p class="cert-date"><small>취득</small><time datetime="2026-07-03">2026.07.03</time></p><span class="cert-seal" aria-hidden="true">합격</span></div>
+            </div>
+          </li>
+          <li class="cert-card" data-reveal data-delay="3">
+            <div class="cert-frame">
+              <span class="cert-label">국제 인증</span>
+              <h3>AI-901 <small>Azure AI Fundamentals</small></h3>
+              <p class="cert-issuer">Microsoft</p>
+              <p class="cert-desc">AI 개념과 책임 있는 AI 원칙, Azure AI 서비스 기초</p>
+              <div class="cert-foot"><p class="cert-date"><small>취득</small><time datetime="2026-11-10">2026.11.10</time></p><span class="cert-seal" aria-hidden="true">합격</span></div>
+            </div>
+          </li>
+          <li class="cert-card" data-reveal data-delay="4">
+            <div class="cert-frame">
+              <span class="cert-label">국가기술자격</span>
+              <h3>컴퓨터활용능력 <small>1급</small></h3>
+              <p class="cert-issuer">대한상공회의소</p>
+              <p class="cert-desc">스프레드시트·데이터베이스 실무, 데이터 처리와 분석</p>
+              <div class="cert-foot"><p class="cert-date"><small>취득</small><time datetime="2021-07">2021.07</time></p><span class="cert-seal" aria-hidden="true">합격</span></div>
             </div>
           </li>
         </ul>
@@ -251,7 +269,7 @@
     <div class="container">
       <p class="eyebrow light" data-reveal>Contact</p>
       <h2 data-reveal data-delay="1">함께 해결할 문제를<br class="mobile-break"> 기다립니다.</h2>
-      <p class="contact-lead" data-reveal data-delay="2">제조 현장의 데이터를 이해하고, 활용 가능한 결과로 연결하고 싶습니다.</p>
+      <p class="contact-lead" data-reveal data-delay="2">현업의 요구를 이해하고, 실제로 쓰이는 서비스로 연결하고 싶습니다.</p>
       <a class="email-link" href="mailto:kimyubin357@gmail.com" data-reveal data-delay="3">kimyubin357@gmail.com <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
       <div class="footer-bottom"><span>© 김유빈</span><a href="https://github.com/Kimyubin357" target="_blank" rel="noopener noreferrer">GitHub <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a></div>
     </div>

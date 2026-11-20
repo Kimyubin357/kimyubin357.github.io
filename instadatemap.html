@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="InstaDateMap. 인스타 게시물 링크를 붙여 넣으면 Gemini와 카카오 장소 검색으로 위치를 찾아 둘만의 지도에 저장하는 커플용 웹앱을 혼자 기획해 3일 만에 배포하고 운영하고 있습니다.">
+  <title>InstaDateMap | 김유빈 포트폴리오</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/SUIT-Variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css?v=0.5.0">
+  <link rel="stylesheet" href="instadatemap.css?v=0.5.0">
+  <script>document.documentElement.classList.add('js');setTimeout(function(){if(!window.__siteReady)document.documentElement.classList.remove('js')},3000)</script>
+  <script src="projects.js?v=0.5.0" defer></script>
+  <script src="site.js?v=0.5.0" defer onerror="document.documentElement.classList.remove('js')"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">본문 바로가기</a>
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <header class="site-header"><div class="container header-inner">
+    <a class="brand" href="./" aria-label="김유빈 포트폴리오 처음으로">김유빈<span aria-hidden="true"></span></a>
+    <nav aria-label="주 메뉴"><a href="./#interview">인터뷰</a><a href="./#work">프로젝트</a><a href="./#about">소개</a><a href="./#contact">연락</a></nav>
+  </div></header>
+  <main class="case container idm-case" id="main">
+    <a class="text-link back-link" href="./#work"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> 포트폴리오로 돌아가기</a>
+    <article>
+      <header class="case-header">
+        <p class="eyebrow" data-reveal>Case Study · Web Service</p>
+        <h1 data-reveal data-delay="1">InstaDateMap</h1>
+        <p class="case-headline" data-reveal data-delay="2">인스타 링크 하나를,<br>둘이 함께 쓰는 지도의 핀으로.</p>
+        <p class="case-subline" data-reveal data-delay="2">DM에 쌓이기만 하던 데이트 장소를, 상대도 바로 보는 지도로 옮겼습니다.</p>
+        <ul class="case-meta" aria-label="프로젝트 정보" data-reveal data-delay="3"><li>2026.10.21 시작 · 10.24 운영 배포</li><li>개인 프로젝트</li><li>웹 서비스</li><li>기획 · 구현 · 배포 · 운영</li></ul>
+        <dl class="case-roles" aria-label="본인·AI 역할">
+          <div><dt>본인</dt><dd>문제 정의와 기능 명세, 자동 저장 기준, 화면 흐름, 데이터 보호 방식, 배포와 운영, 실사용 검증</dd></div>
+          <div><dt>AI 지원</dt><dd>구현 코드 작성과 수정 (Claude Code·Codex). 명세에 맞는지는 테스트와 실기기로 직접 확인</dd></div>
+        </dl>
+        <ul class="case-stats" aria-label="핵심 수치 요약">
+          <li><span>기획에서 운영 배포까지</span><strong>3일</strong><p>10월 21일 첫 커밋<br>10월 24일 운영 배포</p></li>
+          <li><span>실제 사용</span><strong>47곳</strong><p>두 사람이 모아 쓰는 장소<br>2026.11.20 운영 데이터</p></li>
+          <li><span>자동화 테스트</span><strong>533개 통과</strong><p>추출·저장·API·인증·동기화<br>커밋 81개 시점에 다시 실행</p></li>
+        </ul>
+        <div class="case-actions">
+          <a class="button ghost" href="https://github.com/Kimyubin357/InstaDateMap" target="_blank" rel="noopener noreferrer">GitHub에서 코드 보기 <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 18 18 6M6 6h12v12"/></svg></a>
+        </div>
+        <p class="section-note">두 사람만 쓰는 지도라 PIN으로 잠겨 있어 라이브 링크 대신 운영 화면을 실었습니다.</p>
+      </header>
+      <figure data-reveal="scale">
+        <a class="idm-cover" href="assets/instadatemap/cover.jpg" target="_blank" rel="noopener" aria-label="운영 화면 세 장 크게 보기">
+          <img src="assets/instadatemap/cover.jpg" alt="Gemini가 게시물에서 찾은 장소를 확인하는 화면, 서울을 구 단위로 묶은 지도, 장소 상세와 상태 4종을 보여 주는 휴대폰 화면 세 장" width="1600" height="1000" fetchpriority="high">
+        </a>
+        <figcaption class="case-cover-caption">운영 화면, iPhone 15 세로 크기(2026.11.20). 링크에서 찾은 장소 확인 · 구 단위로 묶은 지도 · 장소 상세와 상태 4종. 상대 이름은 “여자친구”로 바꿨습니다.</figcaption>
+      </figure>
+
+      <section class="case-section" id="overview" aria-labelledby="problem-title" data-reveal>
+        <h2 id="problem-title"><span class="step-number">01</span> 가고 싶은 곳이 DM 대화 속에 쌓이기만 했습니다.</h2>
+        <div class="case-content">
+          <p>여자친구와 인스타에서 가고 싶은 곳을 발견하면 게시물 링크를 DM으로 주고받는 것이 전부였습니다. 링크는 대화 속에 묻혀 <strong>어느 동네인지 지도로 볼 수 없었고, 가고 싶은 곳과 다녀온 곳도 구분되지 않았습니다.</strong></p>
+          <p>목표는 하나로 잡았습니다. 링크 하나만 넣으면 두 사람의 지도에 장소가 꽂히고, 상대도 바로 알 수 있게 하는 것입니다.</p>
+          <div class="idm-before-after">
+            <article><p class="eyebrow">Before</p><h3>DM 대화방</h3><p>게시물 링크만 쌓이고, 어디인지는 하나씩 열어 봐야 압니다.</p></article>
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+            <article><p class="eyebrow">After</p><h3>둘이 같이 보는 지도</h3><p>링크를 붙여 넣으면 핀이 꽂히고 상대 휴대폰에 알림이 갑니다.</p></article>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="features-title">
+        <h2 id="features-title" data-reveal><span class="step-number">02</span> 담고, 보고, 같이 쓰고, 지키는 앱입니다.</h2>
+        <div class="case-content">
+          <div class="idm-features">
+            <article data-reveal><p class="eyebrow">담기</p><h3>링크 하나 또는 직접 검색</h3><ul><li>인스타 게시물·릴스 주소를 붙여 넣으면 장소를 찾아 저장</li><li>장소가 여러 곳이면 확인 화면에서 직접 고르기</li><li>링크 없이 카카오 장소 검색으로 추가</li></ul></article>
+            <article data-reveal data-delay="1"><p class="eyebrow">보기</p><h3>지역으로 묶은 지도와 리스트</h3><ul><li>축소하면 도 → 시 → 구 → 동 이름으로 묶고, 확대하면 상호명 핀</li><li>리스트에서 상태·분류 필터, 최근 저장순·가까운 순 정렬</li><li>저장한 장소를 모음으로 묶기</li></ul></article>
+            <article data-reveal><p class="eyebrow">같이 쓰기</p><h3>상태, 메모, 알림, 실시간 동기화</h3><ul><li>상태 4종: 가고 싶음 · 또 갈래 · 다녀옴 · 별로</li><li>같이 고치는 메모와 저장한 사람 표시</li><li>상대가 장소나 메모를 남기면 휴대폰 알림, 화면은 실시간 갱신</li></ul></article>
+            <article data-reveal data-delay="1"><p class="eyebrow">지키기</p><h3>둘만 여는 지도</h3><ul><li>사귄 날짜로 만든 여섯 자리 PIN, 해시로만 저장하고 시도 횟수 제한</li><li>모든 테이블에 행 단위 접근제어</li><li>지운 장소는 휴지통에서 복구</li></ul></article>
+          </div>
+          <div class="idm-phones">
+            <figure><a href="assets/instadatemap/add-progress.jpg" target="_blank" rel="noopener" aria-label="링크 저장 진행 화면 크게 보기"><img src="assets/instadatemap/add-progress.jpg" alt="게시물 내용 가져오기, 장소 정보 읽기, 지도에서 위치 확인하기, 우리 지도에 저장하기 네 단계를 보여 주는 저장 진행 화면" width="590" height="1278" loading="lazy"></a><figcaption><strong>담기</strong>실제 처리 단계를 그대로 표시</figcaption></figure>
+            <figure><a href="assets/instadatemap/map-district.jpg" target="_blank" rel="noopener" aria-label="구 단위 지도 크게 보기"><img src="assets/instadatemap/map-district.jpg" alt="서울을 마포구 3, 영등포구 5, 서초구 4처럼 구 이름과 장소 수로 묶은 지도" width="590" height="1278" loading="lazy"></a><figcaption><strong>보기</strong>구 이름과 장소 수로 묶은 지도</figcaption></figure>
+            <figure><a href="assets/instadatemap/place-detail.jpg" target="_blank" rel="noopener" aria-label="장소 상세 크게 보기"><img src="assets/instadatemap/place-detail.jpg" alt="주소, 분류, 발견한 사람, 상태 4종 버튼, 카카오맵 열기와 주소 복사가 있는 장소 상세" width="590" height="1278" loading="lazy"></a><figcaption><strong>같이 쓰기</strong>발견한 사람과 상태 4종</figcaption></figure>
+            <figure><a href="assets/instadatemap/list.jpg" target="_blank" rel="noopener" aria-label="리스트 화면 크게 보기"><img src="assets/instadatemap/list.jpg" alt="저장한 장소 47곳을 필터와 최근 저장순으로 보여 주는 리스트 화면" width="590" height="1278" loading="lazy"></a><figcaption><strong>리스트</strong>필터 · 정렬 · 모음</figcaption></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section" id="pipeline" aria-labelledby="pipeline-title">
+        <h2 id="pipeline-title" data-reveal><span class="step-number">03</span> 확실할 때만 자동으로 저장하게 했습니다.</h2>
+        <div class="case-content" data-reveal>
+          <p>링크가 핀이 되기까지 네 단계를 거칩니다. 가장 신경 쓴 것은 <strong>잘못된 곳이 지도에 꽂히지 않는 것</strong>이었습니다. 엉뚱한 지점이 저장되면 둘 다 그 장소를 믿고 찾아가게 되기 때문입니다.</p>
+          <div class="flow-row" aria-label="게시물 읽기, LLM 장소 추출, 카카오 후보 대조, 저장 또는 확인 화면"><span>게시물 글 · 위치 태그</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg><span>Gemini로 장소 이름 추출</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg><span>카카오 후보와 대조</span><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7"/></svg><span>저장 또는 확인 화면</span></div>
+          <ul class="idm-points">
+            <li><strong>추출:</strong> 게시물 글과 위치 태그에서 LLM이 장소 이름·지점·주소·지역 힌트를 뽑습니다. 추출 모듈을 분리해 Gemini 대신 Anthropic 모델로도 바꿀 수 있습니다.</li>
+            <li><strong>대조:</strong> 카카오 장소 검색 후보의 이름, 지역, 주소, 지점명을 추출 결과와 하나씩 맞춰 봅니다.</li>
+            <li><strong>저장 기준:</strong> 장소가 하나이고 이름·지역·주소가 모두 맞을 때만 바로 저장합니다. 여러 곳이거나 하나라도 어긋나면 확인 화면에서 사람이 고릅니다.</li>
+            <li><strong>저장 후:</strong> 지도로 돌아와 새 장소에 NEW 표시를 붙이고, 상대 기기에 알림을 보냅니다.</li>
+          </ul>
+        </div>
+        <div class="idm-phones three">
+          <figure><a href="assets/instadatemap/add-progress-3.jpg" target="_blank" rel="noopener" aria-label="진행 화면 크게 보기"><img src="assets/instadatemap/add-progress-3.jpg" alt="게시물 내용 가져오기와 장소 정보 읽기를 마치고 지도에서 위치를 확인하는 단계" width="590" height="1278" loading="lazy"></a><figcaption><strong>① 분석</strong>글을 읽고 위치를 찾는 중</figcaption></figure>
+          <figure><a href="assets/instadatemap/confirm.jpg" target="_blank" rel="noopener" aria-label="확인 화면 크게 보기"><img src="assets/instadatemap/confirm.jpg" alt="캡션에서 찾은 숙성회 화도와 카카오 후보가 체크되어 있고, 위치 태그 Seoul, South Korea는 후보가 없어 꺼져 있는 확인 화면" width="590" height="1278" loading="lazy"></a><figcaption><strong>② 확인</strong>후보가 둘이라 사람이 고름</figcaption></figure>
+          <figure><a href="assets/instadatemap/saved.jpg" target="_blank" rel="noopener" aria-label="저장 후 지도 크게 보기"><img src="assets/instadatemap/saved.jpg" alt="숙성회 화도 핀에 NEW 표시가 붙고 장소를 저장했어요 안내와 1/47 카드가 뜬 지도" width="590" height="1278" loading="lazy"></a><figcaption><strong>③ 저장</strong>NEW 핀과 47번째 장소</figcaption></figure>
+        </div>
+        <p class="section-note">2026.11.20 실제 릴스 링크 한 건을 등록한 순서입니다. 이 사례에서 발견한 문제는 05에 적었습니다.</p>
+      </section>
+
+      <section class="case-section" id="map" aria-labelledby="map-title">
+        <h2 id="map-title" data-reveal><span class="step-number">04</span> 핀이 겹쳐 읽히지 않는 지도를, 지역 이름으로 묶었습니다.</h2>
+        <div class="case-content" data-reveal>
+          <p>장소가 늘자 같은 동네의 핀이 겹쳐 지도를 읽을 수 없었습니다. 처음에는 숫자 원으로 묶었지만 숫자만으로는 <strong>어디에 몇 곳이 있는지</strong>가 보이지 않는다는 피드백을 받았습니다.</p>
+          <p>다시 설계할 때는 기능과 상황만 적은 명세를 먼저 쓰고, 그 명세로 시안 A와 B를 따로 만들었습니다. <strong>두 시안이 같은 답을 낸 여섯 가지부터 적용하고</strong>, 갈리는 항목은 직접 골랐습니다. 숫자 원 대신 “영등포구 5” 같은 지역 이름표를 쓰고, 이름표를 누르면 다음 단계로 확대하는 방식이 그렇게 정해졌습니다.</p>
+          <p>단계 경계는 부동산 지도 서비스 두 곳의 확대 단계별 묶음 방식을 비교한 뒤 정했습니다. 저장 장소가 수십 곳 규모라 구로 바로 나누면 카드가 흩어져, 시 단계를 따로 두었습니다.</p>
+          <ul class="idm-tiers" aria-label="확대 단계별 묶음">
+            <li>도<span>64–128km</span></li><li>시<span>8–32km</span></li><li>구<span>1–4km</span></li><li>동<span>더 확대</span></li><li>상호명 핀<span>충분히 확대</span></li>
+          </ul>
+        </div>
+        <div class="idm-phones">
+          <figure><a href="assets/instadatemap/map-province.jpg" target="_blank" rel="noopener" aria-label="도 단계 지도 크게 보기"><img src="assets/instadatemap/map-province.jpg" alt="전국 지도에서 서울 26, 부산 1, 제주 1처럼 도 단위로 묶은 화면" width="590" height="1278" loading="lazy"></a><figcaption><strong>도</strong>서울 26 · 부산 1 · 제주 1</figcaption></figure>
+          <figure><a href="assets/instadatemap/map-district.jpg" target="_blank" rel="noopener" aria-label="구 단계 지도 크게 보기"><img src="assets/instadatemap/map-district.jpg" alt="서울을 구 단위로 나눈 지도" width="590" height="1278" loading="lazy"></a><figcaption><strong>구</strong>누르면 다음 단계로 확대</figcaption></figure>
+          <figure><a href="assets/instadatemap/region-list.jpg" target="_blank" rel="noopener" aria-label="동 단계 목록 크게 보기"><img src="assets/instadatemap/region-list.jpg" alt="문래동 4곳을 누르자 그 동네 장소 목록이 열린 화면" width="590" height="1278" loading="lazy"></a><figcaption><strong>동</strong>그 동네 장소 목록</figcaption></figure>
+          <figure><a href="assets/instadatemap/name-pins.jpg" target="_blank" rel="noopener" aria-label="상호명 핀 크게 보기"><img src="assets/instadatemap/name-pins.jpg" alt="태양슈퍼, 로우라입, 틈틈틈 상호명 핀과 장소 미리보기 카드" width="590" height="1278" loading="lazy"></a><figcaption><strong>상호명 핀</strong>카드로 넘겨 보기</figcaption></figure>
+        </div>
+      </section>
+
+      <section class="case-section" id="data" aria-labelledby="data-title">
+        <h2 id="data-title" data-reveal><span class="step-number">05</span> 두 사람의 데이터는 서버와 데이터베이스에서 지켰습니다.</h2>
+        <div class="case-content" data-reveal>
+          <p>브라우저에는 데이터베이스 권한을 주지 않았습니다. 모든 조회와 저장은 Next.js API 라우트 20개를 거치고, 서버만 데이터베이스에 접근합니다.</p>
+          <table class="idm-table">
+            <tbody>
+              <tr><th scope="row">스키마와 마이그레이션</th><td>Supabase(PostgreSQL). 기본 스키마 뒤에 접근 제한, 동기화, 알림, 링크 작업, 휴지통, 메모 알림, 모음까지 마이그레이션 10단계로 쌓았습니다.</td></tr>
+              <tr><th scope="row">한 번에 저장</th><td>장소, 저장한 사람, 원본 게시물 연결을 SQL 함수 한 트랜잭션으로 저장합니다. 같은 카카오 장소면 새로 만들지 않고 저장 기록만 더합니다.</td></tr>
+              <tr><th scope="row">접근 제어</th><td>모든 테이블에 행 단위 접근제어(RLS)를 걸고 서버 키만 접근합니다. 변경 요청은 Origin을 검사합니다.</td></tr>
+              <tr><th scope="row">PIN과 세션</th><td>PIN은 salt를 붙인 scrypt 해시로만 저장합니다. 15분 동안 IP별 5회, 보드 전체 30회 실패하면 잠시 막습니다. 세션은 HttpOnly 쿠키, DB에는 그 해시만 둡니다.</td></tr>
+              <tr><th scope="row">실시간 동기화</th><td>DB 트리거가 보드 변경 번호를 올리면 서버가 그 번호만 브라우저로 보냅니다. 목록은 ETag가 같으면 다시 받지 않고, 마지막 목록은 기기에 보관해 화면을 비우지 않습니다.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="case-section" id="trouble" aria-labelledby="trouble-title">
+        <h2 id="trouble-title" data-reveal><span class="step-number">06</span> 쓰면서 생긴 문제는 원인부터 찾아 고쳤습니다.</h2>
+        <div class="idm-issues">
+          <article data-reveal><span class="eyebrow">01 · 지도 조작</span><h3>지역 이름표를 눌러도 지도가 그대로이거나 오히려 축소됐습니다.</h3><dl><div><dt>원인</dt><dd>이름표를 누르면 “그 지역 장소가 모두 보이게” 범위를 맞추게 되어 있었습니다. 서울처럼 장소가 넓게 퍼진 지역은 이미 다 보이거나, 다 넣으려면 더 넓게 봐야 했습니다.</dd></div><div><dt>해결</dt><dd>이름이 실제로 바뀌는 다음 단계까지는 반드시 확대하도록 바꿨습니다. 이름만 같은 단계(서울 도 → 서울 시)는 건너뛰고, 한곳에 몰려 있어도 상호명 핀 단계보다 깊이 들어가지 않습니다.</dd></div><div><dt>확인</dt><dd>393×852 모의 지도에서 서울을 세 가지 확대 단계에서 눌러 모두 구 단계로 들어가는지 확인했고, 자동화 테스트를 통과했습니다.</dd></div></dl></article>
+          <article data-reveal><span class="eyebrow">02 · 두 사람이 동시에</span><h3>같은 링크나 같은 메모를 둘이 동시에 고치면 한쪽이 사라질 수 있었습니다.</h3><dl><div><dt>원인</dt><dd>메모는 마지막에 저장한 쪽이 앞의 저장을 덮었고, 같은 링크를 두 기기가 동시에 다시 분석하면 열려 있던 후보가 낡은 값이 될 수 있었습니다.</dd></div><div><dt>해결</dt><dd>링크는 먼저 시작한 작업이 소유하고 25초마다 갱신하며, 끊기면 90초 뒤 풀립니다. 메모는 원본 버전을 비교해, 충돌하면 덮어쓰지 않고 저장된 내용과 내 초안을 위아래로 보여 줍니다.</dd></div><div><dt>확인</dt><dd>운영 DB 마이그레이션과 배포까지 적용한 뒤 운영 반영 기록에 남겼습니다(2026.10.24).</dd></div></dl></article>
+          <article data-reveal><span class="eyebrow">03 · 직접 써 보다 발견</span><h3>이름과 주소가 다 맞는데도 자동 저장되지 않았습니다.<span class="open">남은 과제</span></h3><dl><div><dt>현상</dt><dd>03의 숙성회 화도는 카카오 후보와 이름, 주소가 모두 맞았는데도 확인 화면으로 갔습니다.</dd></div><div><dt>원인</dt><dd>위치 태그에서 넓은 지역 이름을 거르는 목록이 한글(서울, 부산 등)만 담고 있어 “Seoul, South Korea”가 장소 후보로 남았습니다. 후보가 둘이 되면 자동 저장하지 않습니다.</dd></div><div><dt>판단</dt><dd>잘못 저장된 것은 아니고 한 번 더 누르는 불편입니다. 영문 지역 이름을 걸러 내는 수정과 테스트를 다음 작업으로 잡았습니다.</dd></div></dl></article>
+        </div>
+      </section>
+
+      <section class="case-section service-section" aria-labelledby="next-title">
+        <h2 id="next-title" data-reveal><span class="step-number">07</span> 아직 남은 과제도 숨기지 않고 적어 둡니다.</h2>
+        <div class="case-content" data-reveal>
+          <ul class="idm-points">
+            <li><strong>가로 화면:</strong> 세로 휴대폰 중심으로 만들어, 짧은 가로 화면에서 알림과 지도 버튼이 겹칩니다. 다음 화면 설계는 가로 모드부터 시작합니다.</li>
+            <li><strong>등록 화면 재설계:</strong> 확인 화면에서 지도 후보가 없는 장소를 체크하면 저장 대상이 0곳이 되는 문제를 재현해 두었습니다. 버튼 문구가 아니라 “이름 찾음 / 지도 연결 필요 / 제외” 상태를 나누는 문제라 화면부터 다시 설계합니다.</li>
+            <li><strong>영상 속 장소:</strong> 릴스 자막과 음성에서 장소를 뽑는 기능은 아직 없습니다.</li>
+          </ul>
+        </div>
+      </section>
+
+      <div class="disclosures" data-reveal>
+        <details><summary>기술 구성과 테스트</summary><div>
+          <ol>
+            <li><strong>화면:</strong> Next.js 16, React 19, TypeScript. 홈 화면에 추가해 앱처럼 쓰는 PWA, 카카오 지도 SDK.</li>
+            <li><strong>서버:</strong> Next.js API 라우트 20개. 장소 추출은 Gemini 기본, 환경 변수로 Anthropic 선택. 카카오 장소 검색 REST API.</li>
+            <li><strong>데이터:</strong> Supabase(PostgreSQL), 마이그레이션 10단계, SQL 함수, RLS, Realtime. 기기 쪽은 IndexedDB 캐시.</li>
+            <li><strong>알림과 예약 작업:</strong> Web Push(VAPID), 보내지 못한 알림은 예약 작업으로 다시 시도.</li>
+            <li><strong>테스트:</strong> Vitest 54개 파일, 533개 테스트. DB 함수는 PGlite로 실제 SQL을 실행해 검사합니다. 2026.11.20에 최신 커밋(bd781d7)에서 다시 실행해 모두 통과했습니다.</li>
+            <li><strong>배포:</strong> Vercel(Node.js 24). DB 마이그레이션을 먼저 적용한 뒤 앱을 배포하는 순서를 문서로 고정했습니다.</li>
+          </ol>
+          <div class="evidence-links"><a href="https://github.com/Kimyubin357/InstaDateMap" target="_blank" rel="noopener noreferrer">GitHub 저장소</a><a href="https://github.com/Kimyubin357/InstaDateMap/blob/main/docs/redesign/map-home-compare.md" target="_blank" rel="noopener noreferrer">지도 시안 A·B 비교 기록</a><a href="https://github.com/Kimyubin357/InstaDateMap/blob/main/docs/deployment-2026-10-24.md" target="_blank" rel="noopener noreferrer">운영 반영 기록</a></div>
+        </div></details>
+        <details><summary>해석 범위와 프로젝트 정보</summary><div>
+          <ol>
+            <li><strong>사용 규모:</strong> 두 사람이 실제로 쓰는 앱입니다. 불특정 다수의 트래픽이나 부하를 검증한 서비스가 아닙니다.</li>
+            <li><strong>수치 기준:</strong> 장소 47곳은 2026.11.20 운영 화면, 테스트 533개와 커밋 81개는 같은 날 저장소 기준입니다.</li>
+            <li><strong>화면:</strong> 상대 이름은 “여자친구”로 바꿔 캡처했습니다. 위치는 공개된 가게 주소만 보입니다.</li>
+            <li><strong>AI 사용 범위:</strong> 코드는 AI 코딩 도구로 작성했습니다. 기능 명세, 자동 저장 기준, 시안 비교와 선택, 테스트 결과와 실기기 확인은 직접 했습니다.</li>
+          </ol>
+        </div></details>
+      </div>
+    </article>
+    <div class="case-footer"><a class="text-link" href="./#work"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4m7-7-7 7 7 7"/></svg> 포트폴리오로 돌아가기</a><span>운영 화면·수치 기준 2026.11.20</span></div>
+  </main>
+</body>
+</html>

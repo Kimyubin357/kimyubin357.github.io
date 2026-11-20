@@ -150,6 +150,22 @@ nav a.is-active{background:var(--ink);color:white}
 /* ---------- Featured work ---------- */
 .work-section{padding-block:130px 60px}
 .featured-list{display:grid;gap:40px}
+.track-tabs{display:inline-flex;flex-wrap:wrap;gap:6px;padding:6px;margin:-24px 0 28px;border-radius:999px;background:var(--soft);border:1px solid var(--line)}
+.track-tabs[hidden]{display:none}
+.track-tabs [role="tab"]{font:inherit;font-size:16px;font-weight:750;line-height:1.4;min-height:46px;padding:10px 24px;border-radius:999px;border:0;background:transparent;color:var(--muted);cursor:pointer;transition:background .25s,color .25s,box-shadow .25s}
+.track-tabs [role="tab"]:hover{color:var(--ink)}
+.track-tabs [role="tab"][aria-selected="true"]{background:var(--ink);color:white;box-shadow:0 10px 24px -14px rgba(17,26,46,.7)}
+.track-panel:focus{outline:none}
+.track-evidence{margin-bottom:44px;padding:26px 30px;border:1px solid var(--line);border-radius:24px}
+.track-evidence[hidden]{display:none}
+.track-evidence-title{font-size:14px;font-weight:750;color:var(--blue);margin-bottom:8px}
+.track-evidence ul{display:grid}
+.track-evidence li{display:grid;grid-template-columns:260px minmax(0,1fr);gap:24px;align-items:baseline;padding-block:13px;border-top:1px solid var(--line);font-size:15.5px;line-height:1.6}
+.track-evidence strong{font-weight:750}
+.track-evidence a,.track-evidence li>span{color:var(--muted)}
+.track-evidence a .icon{display:inline-block;width:15px;height:15px;vertical-align:-2px;margin-left:2px;color:var(--blue);transition:transform .25s var(--ease)}
+.track-evidence a:hover{color:var(--blue)}
+.track-evidence a:hover .icon{transform:translateX(3px)}
 .feature-card{--stack:0;position:sticky;top:calc(var(--header) + 24px)}
 .feature-card:last-child{position:relative;top:auto}
 .feature-inner{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:48px;align-items:center;padding:28px;border-radius:32px;background:var(--soft);border:1px solid var(--line);transform:scale(calc(1 - var(--stack) * .05));filter:brightness(calc(1 - var(--stack) * .12));transform-origin:50% 0;transition:box-shadow .3s}
@@ -394,6 +410,11 @@ figcaption{font-size:14.5px;color:var(--muted);line-height:1.5;margin-top:10px}
   .interview figcaption{font-size:13.5px}
   .work-section{padding-block:90px 40px}
   .section-head{margin-bottom:36px}
+  .track-tabs{display:flex;margin:-12px 0 20px}
+  .track-tabs [role="tab"]{flex:1 1 0;font-size:15px;padding:10px 12px}
+  .track-evidence{padding:18px 18px 8px;margin-bottom:32px;border-radius:18px}
+  .track-evidence ul{grid-template-columns:1fr}
+  .track-evidence li{grid-template-columns:1fr;gap:2px;font-size:15px}
   .feature-card{position:relative;top:auto}
   .feature-inner{padding:16px;border-radius:24px;transform:none;filter:none}
   .feature-media{border-radius:14px}
@@ -521,3 +542,29 @@ figcaption{font-size:14.5px;color:var(--muted);line-height:1.5;margin-top:10px}
   .demo-row dt{grid-column:1/-1;font-size:13px}
 }
 .nowrap{white-space:nowrap}
+
+/* v0.5.0 · 자격증 5개: 넓은 화면 5열, 2열 구간의 마지막 카드는 가운데 */
+@media (min-width:1101px){
+  .cert-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:16px}
+  .cert-frame{padding:28px 14px 16px}
+  .cert-card h3{font-size:22px}
+}
+@media (max-width:1100px) and (min-width:821px){
+  .cert-grid>li:last-child:nth-child(odd){grid-column:1/-1;justify-self:center;width:calc(50% - 10px)}
+}
+
+/* v0.5.0 · UI/UX 점검 보완 (ui-ux-pro-max 기준) */
+/* 기술 마키: 큰 굵은 글씨 3:1 이상, 멈춤 버튼(움직이는 콘텐츠 정지 수단), 포커스 시에도 정지 */
+.marquee li{color:#7f8a9e}
+.marquee-wrap{position:relative}
+.marquee-wrap.is-paused .marquee-track,.marquee-wrap:focus-within .marquee-track{animation-play-state:paused}
+.marquee-toggle{position:absolute;right:max(16px,calc((100vw - var(--width)) / 2));top:50%;transform:translateY(-50%);width:40px;height:40px;display:grid;place-items:center;border-radius:50%;border:1px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;box-shadow:0 6px 18px -10px rgba(17,26,46,.35);transition:border-color .2s,background-color .2s}
+.marquee-toggle:hover{border-color:var(--ink)}
+.marquee-toggle[hidden]{display:none}
+.marquee-toggle .icon{width:16px;height:16px}
+@media (max-width:820px){.marquee-toggle{width:36px;height:36px;right:12px}}
+/* 직무별 필터의 개수 표시 */
+.filter-count{display:inline-block;margin-left:4px;font-size:13px;font-weight:700;opacity:.7;font-variant-numeric:tabular-nums}
+/* 작은 글씨 12px 하한, 본문 속 링크 터치 높이 24px 이상 */
+.cert-date small{font-size:12px}
+.video-credit a{display:inline-flex;align-items:center;gap:4px;min-height:24px}

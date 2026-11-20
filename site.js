@@ -11,10 +11,28 @@
 
   /* ---------- Projects (data from projects.js) ---------- */
   const projects = (window.PORTFOLIO_PROJECTS || []).slice();
-  const featured = projects
+  const projectById = new Map(projects.map((p) => [p.id, p]));
+  // Each track picks up to three projects and may override their card copy.
+  const tracks = (window.PORTFOLIO_TRACKS || [])
+    .map((t) => ({
+      ...t,
+      items: (t.projects || [])
+        .map((ref) => (projectById.has(ref.id) ? { ...projectById.get(ref.id), ...ref } : null))
+        .filter(Boolean)
+        .slice(0, 3),
+    }))
+    .filter((t) => t.items.length);
+  const requestedTrack = new URLSearchParams(window.location.search).get('track');
+  let currentTrack = tracks.find((t) => t.id === requestedTrack) || tracks[0] || null;
+  const legacyFeatured = projects
     .filter((p) => p.featured)
     .sort((a, b) => (a.order ?? 99) - (b.order ?? 99))
     .slice(0, 3);
+  const featuredItems = () => (currentTrack ? currentTrack.items : legacyFeatured);
+  const trackIdsOf = (projectId) => tracks.filter((t) => t.items.some((p) => p.id === projectId)).map((t) => t.id);
+  // Shared with the scroll effects below; refreshed when a track re-renders the cards.
+  let stackCards = [];
+  let ticking = false;
   const projectHref = (p) => p.link || p.github || '#';
   const isExternal = (href) => /^https?:/.test(href);
   const linkAttrs = (href) => (isExternal(href) ? ' target="_blank" rel="noopener noreferrer"' : '');
@@ -37,15 +55,17 @@
       </div>`;
   const tags = (list = []) => `<ul class="tag-list">${list.map((t) => `<li>${escapeHtml(t)}</li>`).join('')}</ul>`;
 
-  function renderFeatured() {
+  function renderFeatured({ reveal = true } = {}) {
     const list = $('#featured-list');
+    const featured = featuredItems();
     if (!list || !featured.length) return;
+    const revealAttr = reveal ? ' data-reveal' : '';
     try {
       const markup = featured.map((p, i) => {
         const href = projectHref(p);
         const meta = [p.period, p.team].filter(Boolean).map(escapeHtml).join(' · ');
         return `
-      <article class="feature-card" style="--i:${i}" data-stack data-reveal>
+      <article class="feature-card" style="--i:${i}" data-stack${revealAttr}>
         <div class="feature-inner">
           <a class="feature-media" href="${escapeHtml(href)}"${linkAttrs(href)} tabindex="-1" aria-hidden="true">
             ${p.cover ? `<img src="${escapeHtml(p.cover)}" alt="${escapeHtml(p.coverAlt || '')}" loading="lazy">` : ''}
@@ -76,7 +96,7 @@
 
   function renderArchive() {
     const section = $('#archive');
-    if (!section || projects.length <= featured.length) return;
+    if (!section || projects.length <= featuredItems().length) return;
     section.hidden = false;
     const grid = $('#archive-grid');
     const filters = $('#archive-filters');
@@ -85,7 +105,7 @@
     grid.innerHTML = projects.map((p) => {
       const href = projectHref(p);
       return `
-      <a class="archive-card" href="${escapeHtml(href)}"${linkAttrs(href)} data-category="${escapeHtml(p.category || '')}" data-reveal>
+      <a class="archive-card" href="${escapeHtml(href)}"${linkAttrs(href)} data-category="${escapeHtml(p.category || '')}" data-tracks="${escapeHtml(trackIdsOf(p.id).join(' '))}" data-reveal>
         <div class="archive-thumb">${p.cover ? `<img src="${escapeHtml(p.cover)}" alt="" loading="lazy">` : ''}</div>
         <div class="archive-body">
           <div class="archive-meta"><span>${escapeHtml(p.category || '')}</span><span>${escapeHtml(p.period || '')}</span></div>
@@ -96,10 +116,14 @@
       </a>`;
     }).join('');
 
-    const categories = [...new Set(projects.map((p) => p.category).filter(Boolean))];
-    if (categories.length < 2) return;
-    filters.innerHTML = ['전체', ...categories]
-      .map((c, i) => `<button type="button" class="filter${i === 0 ? ' is-active' : ''}" aria-pressed="${i === 0}" data-filter="${escapeHtml(i === 0 ? '' : c)}">${escapeHtml(c)}</button>`)
+    // With job tracks, filter by track: a per-project category would match only one card each.
+    const byTrack = tracks.length > 1;
+    const options = byTrack
+      ? tracks.map((t) => ({ value: t.id, label: t.label, count: projects.filter((p) => trackIdsOf(p.id).includes(t.id)).length }))
+      : [...new Set(projects.map((p) => p.category).filter(Boolean))].map((c) => ({ value: c, label: c }));
+    if (options.length < 2) return;
+    filters.innerHTML = [{ value: '', label: '전체', count: byTrack ? projects.length : undefined }, ...options]
+      .map((o, i) => `<button type="button" class="filter${i === 0 ? ' is-active' : ''}" aria-pressed="${i === 0}" data-filter="${escapeHtml(o.value)}">${escapeHtml(o.label)}${o.count !== undefined ? ` <span class="filter-count">${o.count}</span>` : ''}</button>`)
       .join('');
     filters.addEventListener('click', (event) => {
       const button = event.target.closest('.filter');
@@ -110,11 +134,84 @@
       });
       const value = button.dataset.filter;
       $$('.archive-card', grid).forEach((card) => {
-        card.hidden = Boolean(value) && card.dataset.category !== value;
+        const match = byTrack ? card.dataset.tracks.split(' ').includes(value) : card.dataset.category === value;
+        card.hidden = Boolean(value) && !match;
       });
     });
   }
 
+  /* ---------- Job tracks (tabs above the featured cards) ---------- */
+  function renderTrackCopy() {
+    if (!currentTrack) return;
+    const role = $('#hero-role-text');
+    const intro = $('#hero-intro');
+    const note = $('#work-note');
+    if (role && currentTrack.role) role.textContent = currentTrack.role;
+    if (intro && currentTrack.intro) intro.innerHTML = currentTrack.intro;
+    if (note && currentTrack.note) note.textContent = currentTrack.note;
+    const evidence = $('#track-evidence');
+    if (evidence) {
+      const rows = currentTrack.evidence || [];
+      evidence.hidden = !rows.length;
+      evidence.innerHTML = rows.length ? `
+        <p class="track-evidence-title">${escapeHtml(currentTrack.label)}에서 보여 드릴 역량</p>
+        <ul>${rows.map((r) => {
+          const proof = r.href
+            ? `<a href="${escapeHtml(r.href)}">${escapeHtml(r.proof)} ${arrow}</a>`
+            : `<span>${escapeHtml(r.proof)}</span>`;
+          return `<li><strong>${escapeHtml(r.need)}</strong>${proof}</li>`;
+        }).join('')}</ul>` : '';
+    }
+  }
+
+  function renderTrackTabs() {
+    const tabs = $('#track-tabs');
+    if (!tabs || tracks.length < 2) return;
+    tabs.hidden = false;
+    tabs.innerHTML = tracks.map((t) => {
+      const selected = t === currentTrack;
+      return `<button type="button" role="tab" id="track-tab-${escapeHtml(t.id)}" aria-controls="track-panel" aria-selected="${selected}" tabindex="${selected ? 0 : -1}" data-track="${escapeHtml(t.id)}">${escapeHtml(t.label)}</button>`;
+    }).join('');
+    $('#track-panel')?.setAttribute('aria-labelledby', `track-tab-${currentTrack.id}`);
+    const select = (button, focus) => {
+      const next = tracks.find((t) => t.id === button.dataset.track);
+      if (!next || next === currentTrack) return;
+      currentTrack = next;
+      $$('[role="tab"]', tabs).forEach((b) => {
+        const on = b === button;
+        b.setAttribute('aria-selected', String(on));
+        b.tabIndex = on ? 0 : -1;
+      });
+      if (focus) button.focus();
+      $('#track-panel')?.setAttribute('aria-labelledby', button.id);
+      renderTrackCopy();
+      renderFeatured({ reveal: false });
+      stackCards = $$('[data-stack]');
+      requestTick();
+      // Keep the address shareable: ?track=data opens this tab first next time.
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('track', currentTrack.id);
+        window.history.replaceState(null, '', url);
+      } catch (error) { /* file:// or blocked history — the tab still switches */ }
+    };
+    tabs.addEventListener('click', (event) => {
+      const button = event.target.closest('[role="tab"]');
+      if (button) select(button, false);
+    });
+    tabs.addEventListener('keydown', (event) => {
+      const list = $$('[role="tab"]', tabs);
+      const index = list.indexOf(document.activeElement);
+      if (index < 0) return;
+      const keys = { ArrowRight: 1, ArrowLeft: -1, Home: -index, End: list.length - 1 - index };
+      if (!(event.key in keys)) return;
+      event.preventDefault();
+      select(list[(index + keys[event.key] + list.length) % list.length], true);
+    });
+  }
+
+  renderTrackCopy();
+  renderTrackTabs();
   renderFeatured();
   renderArchive();
 
@@ -170,6 +267,26 @@
     }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
     revealTargets.forEach((el) => revealObserver.observe(el));
   }
+  /* ---------- Tech marquee pause (moving content needs a stop control) ---------- */
+  const marqueeToggle = $('.marquee-toggle');
+  if (marqueeToggle) {
+    const wrap = marqueeToggle.closest('.marquee-wrap');
+    const pauseIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5v14M15 5v14"/></svg>';
+    const playIcon = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l10-6.5-10-6.5Z"/></svg>';
+    const setPaused = (paused) => {
+      wrap.classList.toggle('is-paused', paused);
+      marqueeToggle.setAttribute('aria-pressed', String(paused));
+      marqueeToggle.setAttribute('aria-label', paused ? '기술 목록 다시 움직이기' : '기술 목록 움직임 멈추기');
+      marqueeToggle.innerHTML = paused ? playIcon : pauseIcon;
+    };
+    if (reduceMotion) marqueeToggle.hidden = true;
+    else {
+      marqueeToggle.hidden = false;
+      setPaused(false);
+      marqueeToggle.addEventListener('click', () => setPaused(!wrap.classList.contains('is-paused')));
+    }
+  }
+
   requestAnimationFrame(() => document.documentElement.classList.add('is-loaded'));
   // The inline head script un-hides everything if this flag never gets set.
   window.__siteReady = true;
@@ -179,8 +296,8 @@
   const progress = $('.scroll-progress');
   const parallaxItems = $$('[data-parallax]');
   const videoScale = $('[data-video-scale]');
-  const stackCards = $$('[data-stack]');
-  let ticking = false;
+  stackCards = $$('[data-stack]');
+  ticking = false;
 
   function onScroll() {
     ticking = false;

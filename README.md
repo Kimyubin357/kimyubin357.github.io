@@ -2,7 +2,7 @@
 
 프로젝트를 계속 추가할 수 있는 정적 포트폴리오 사이트. 기존 Dash·FastAPI·Firebase 실행과 독립적이다.
 
-현재 버전은 **0.4.8 (2026-11-05)**이다. BatteryFlow AI·부산 심야약국·제조 전력 예측을 대표 프로젝트로 소개한다. 포트폴리오 공개 주소는 https://kimyubin357.github.io/ 이며, 연결된 대시보드와 별도의 GitHub Pages 사이트다.
+현재 버전은 **0.5.0 (2026-11-20)**이다. 대표 프로젝트를 직무 트랙 탭(서비스 개발·운영 / 데이터 분석·AI)으로 나눠 소개하고, 프로젝트는 InstaDateMap·BatteryFlow AI·부산 심야약국·제조 전력 예측·X-MEN 다섯 개다. 포트폴리오 공개 주소는 https://kimyubin357.github.io/ 이며, 연결된 대시보드와 별도의 GitHub Pages 사이트다.
 
 버전의 기준은 `VERSION`이다. 릴리스 시 이 파일, HTML의 CSS·JS `?v=` 값, 이 문서와 `design/SPEC.md`의 현재 버전을 함께 갱신한다. `design/QA.md`는 버전별 검증 이력을 보존한다. 구현 기준은 [SPEC](design/SPEC.md), 검증 결과는 [QA](design/QA.md), 수치 출처는 [근거 자료 안내](evidence/README.md)에 정리했다.
 
@@ -16,9 +16,9 @@ Windows에서 이 폴더의 `start.cmd`를 더블 클릭한다. Python 3이 있�
 
 ## 구성과 수정 위치
 
-- `projects.js`: **프로젝트 목록.** 항목을 추가하면 메인에 자동 표시된다. `featured: true` + `order`인 항목(최대 3개)은 상단 "대표 프로젝트"에 큰 카드로, 대표가 아닌 프로젝트가 생기면 "전체 프로젝트" 그리드(분야 필터 포함)가 자동으로 나타난다.
+- `projects.js`: **프로젝트 목록과 직무 트랙.** `PORTFOLIO_PROJECTS`의 항목은 "전체 프로젝트" 그리드(분야 필터 포함)에 자동 표시된다. `PORTFOLIO_TRACKS`는 대표 프로젝트 탭이며 트랙마다 프로젝트 3개, 카드 문구, 표지 직함·소개, 요구 역량 → 근거 줄을 정한다. 주소에 `?track=dev`/`?track=data`를 붙이면 그 탭이 먼저 열린다(기본은 첫 트랙).
 - `project-template.html`: 새 프로젝트 상세 페이지 템플릿. 복사 후 TODO를 채우고 `projects.js`의 `link`로 연결한다.
-- `index.html`: 히어로·SBS 인터뷰·대표 프로젝트·소개/기술·학력/자격증·연락처. 학력은 부트캠프·충북대(편입·졸업)·군산대(수료)·삼일상업고(졸업) 순의 가로 타임라인이며 로고는 `assets/logo-ls.png`, `logo-cbnu.png`, `logo-kunsan.png`, `logo-samil.png`(2026-10-13 사용자 제공)이다. 자격증은 상장 형태 카드(정보처리기사·SQLD·컴퓨터활용능력 1급·리눅스마스터 2급, 취득일은 사용자 제공 자격증 PDF의 합격일과 이력서)이며, 학점·주소·연락처는 넣지 않고, 자격증 원본 파일(자격번호·생년월일 포함)은 사이트에 넣지 않는다.
+- `index.html`: 히어로·SBS 인터뷰·대표 프로젝트·소개/기술·학력/자격증·연락처. 학력은 부트캠프·충북대(편입·졸업)·군산대(중퇴)·삼일상업고(졸업) 순의 가로 타임라인이며 로고는 `assets/logo-ls.png`, `logo-cbnu.png`, `logo-kunsan.png`, `logo-samil.png`(2026-10-13 사용자 제공)이다. 자격증은 상장 형태 카드(정보처리기사·SQLD·리눅스마스터 2급·AI-901·컴퓨터활용능력 1급, 취득일은 사용자 제공 자격증 PDF의 합격일과 이력서)이며, 학점·주소·연락처는 넣지 않고, 자격증 원본 파일(자격번호·생년월일 포함)은 사이트에 넣지 않는다.
 - `batteryflow.html`: BatteryFlow 상세 사례.
 - `busan-night-pharmacy.html`: 부산 심야약국 상세 사례. 전후 지도 전환은 `busan-night-pharmacy.js`, 페이지 전용 스타일은 `busan-night-pharmacy.css`.
 - `assets/busan-night-pharmacy/`, `evidence/busan-night-pharmacy/`: 실제 캡처 5장과 독립적인 공개용 수치 근거.
@@ -159,3 +159,15 @@ BatteryFlow 저장소 main(`ef7e35c`)과 라이브 서비스(Cloud Run, 2026-11-
 ## v0.4.8 문제 해결 포트폴리오 PDF 다운로드 · 2026-11-05
 
 첫 화면의 "대표 프로젝트 보기"와 "GitHub" 사이에 "포트폴리오 PDF" 버튼을 넣었다. A4 4쪽 문제 해결 포트폴리오(`assets/portfolio-problem-solving.pdf`)를 `김유빈_문제해결_포트폴리오.pdf` 이름으로 내려받는다. 버튼은 PDF를 뜻하는 빨강(`#c62828`, 흰 글씨 대비 5.62:1)으로 채웠다. PDF의 수치는 `evidence/`의 원자료(`ranking_audit.json`, `batteryflow-v3/plan_comparison.json`, `power-forecast/analysis_summary.json`, `metrics.json`)와 대조했다.
+
+## v0.5.0 직무 트랙 탭과 InstaDateMap·X-MEN 추가 · 2026-11-20
+
+LS ITC 채용연계형 인턴(시스템 개발 및 운영) 지원에 맞춰 첫 화면과 대표 프로젝트를 다시 구성했다.
+
+- 표지: "기획부터 운영까지, 실제로 쓰이는 서비스를 만듭니다." 직함 줄과 소개 문장은 선택한 트랙에 따라 바뀐다. 기술 마키·소개 문단·기술 카드 5개에 Next.js·React·TypeScript·Supabase(PostgreSQL)·Vercel을 반영했다.
+- 대표 프로젝트: 탭 두 개. 서비스 개발·운영(InstaDateMap, BatteryFlow, 부산 심야약국) / 데이터 분석·AI(BatteryFlow, 제조 전력 예측, X-MEN). 같은 프로젝트도 트랙마다 카드 문구가 다르다. 탭 아래 "요구 역량 → 근거" 다섯 줄은 상세 페이지의 해당 위치로 연결한다. 탭은 ←/→·Home·End 키로 이동하고, 바꾸면 주소의 `?track=`도 바뀐다.
+- `instadatemap.html`·`instadatemap.css`: 운영 중인 커플용 장소 지도 웹앱. 캡처 14장(`assets/instadatemap/`)은 2026-11-20 운영 앱을 iPhone 15 세로 크기(393×852)로 찍었고 상대 이름은 "여자친구"로 바꿨다. 사용자 허락을 받아 실제 릴스 링크 1건을 등록해 분석·확인·저장 화면을 찍었다(장소 47곳). 테스트 533개는 같은 날 저장소 최신 커밋 `bd781d7`에서 다시 실행해 통과를 확인했다.
+- `xmen.html`·`xmen.css`: 수업 팀 프로젝트(2024.09–12). 사진 4장(`assets/xmen/`)은 팀 중간·기말 발표 자료에서 추출했고 환자 이름·번호·날짜 등 촬영 정보를 잘라 냈다. 수치는 볼트의 `프로젝트/X-MEN.md`와 발표·주간 보고서 표를 따른다.
+- 다운로드 PDF(`assets/portfolio-problem-solving.pdf`)를 볼트 `증빙/포트폴리오.pdf`(v4, A4 5쪽, 2026-11-19)로 교체했다. 사람인 첨부본과 같은 파일이다. 01 InstaDateMap, 02 Copilot 순위 오류, 03 BatteryFlow 평가 보정, 04 X-MEN.
+- 자료 간 정합성 정리(2026-11-20): BatteryFlow 03 절의 Copilot 예시를 PDF와 같은 7일 이동평균 기준(Part 92 +533.20 → Part 60 −387.20 → Part 66 −387.20)으로 바꾸고 XGBoost 상위 3개는 주석으로 남겼다. 저장소 시드(107개 부품)로 다시 계산한 값과 2026-11-20 라이브 Copilot 답변이 같다. 근거는 `evidence/batteryflow-v3/ranking_2021-11-01_ma7.json`. 군산대 상태를 이력서와 같은 "중퇴"로, 제조 전력 팀 표기를 "경진대회 · 3인 팀"으로 바꿨다("점프업"은 팀 이름이라 LS JUMP-UP 과정으로 오해될 수 있음). 자격증에 AI-901(2026-11-10)을 추가하고 볼트 중요도 순으로 정렬했으며, 넓은 화면에서는 5열로 놓는다.
+- UI/UX 점검(2026-11-20, ui-ux-pro-max 스킬의 접근성·터치·반응형·모션 기준): 기술 마키 글자 대비 2.29:1 → 3.48:1(25.6px 굵은 글씨 기준 3:1 이상), 마키 멈춤 버튼 추가(움직이는 콘텐츠 정지 수단, 포커스가 들어오면 정지, 모션 감소 설정에서는 숨김), 전체 프로젝트 필터를 프로젝트별 분야 6개(각 1건)에서 직무 트랙 2개(각 3건, 개수 표시)로 변경, 자격증 "취득" 글자 11.5 → 12px, SBS "원본 영상 보기" 링크 높이 24px. X-MEN 03 절 사진은 첫 화면 그림과 같은 장면이라 데스크톱에서 4:5로 낮췄다. InstaDateMap의 "iPhone 공유 시트 단축어" 항목은 되돌린 기능이라(볼트 기록 2026-11-19) "여러 곳이면 확인 화면에서 고르기"로 바꿨다.
